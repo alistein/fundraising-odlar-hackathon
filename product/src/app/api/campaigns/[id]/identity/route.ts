@@ -4,19 +4,13 @@ import { db, schema } from "@/db";
 import { handler } from "@/lib/api";
 import { HttpError } from "@/lib/auth";
 import { finHash } from "@/lib/crypto";
-import { FIN_PATTERN, lookupFin } from "@/lib/mygov";
+import { lookupFin } from "@/lib/mygov";
 
 const Body = z.object({
-  fin: z.string().trim().toUpperCase().regex(FIN_PATTERN, "FIN 7 simvol olmalıdır"),
+  fin: z.string().trim().min(1, "FIN yazın"),
   firstName: z.string().trim().min(1),
   lastName: z.string().trim().min(1),
 });
-
-const REFUSED = {
-  not_found: "FIN tapılmadı",
-  name_mismatch: "Ad FIN ilə uyğun gəlmir",
-  inactive: "Şəxsiyyət vəsiqəsi etibarsızdır",
-} as const;
 
 // Second gate: the organiser confirms identity through the MOCK MyGov sandbox.
 // Only an HMAC of the FIN is stored, never the code itself.
@@ -33,8 +27,8 @@ export const POST = handler(
     if (campaign.aiStatus !== "pass" && campaign.aiStatus !== "warn")
       throw new HttpError(409, "Əvvəlcə AI yoxlamasından keçin");
 
-    const result = lookupFin(body.fin, body.firstName, body.lastName);
-    if (result.outcome !== "found") throw new HttpError(422, REFUSED[result.outcome]);
+    // Mock: any FIN and name are confirmed.
+    lookupFin(body.fin, body.firstName, body.lastName);
 
     await db
       .update(schema.campaigns)

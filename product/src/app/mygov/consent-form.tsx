@@ -57,7 +57,6 @@ export function ConsentForm({ campaignId, campaignTitle }: { campaignId: string;
             id="fin"
             value={fin}
             onChange={(e) => setFin(e.target.value.toUpperCase())}
-            maxLength={7}
             autoComplete="off"
             spellCheck={false}
             className="h-12 font-mono text-lg tracking-widest uppercase"
@@ -74,7 +73,7 @@ export function ConsentForm({ campaignId, campaignTitle }: { campaignId: string;
           </div>
         </div>
         <div className="flex flex-col gap-3">
-          <Button size="lg" disabled={busy || fin.length !== 7 || !firstName.trim() || !lastName.trim()}>
+          <Button size="lg" disabled={busy || !fin.trim() || !firstName.trim() || !lastName.trim()}>
             <Icon icon={LockKeyIcon} size={20} />
             Razıyam, təsdiqlə
           </Button>

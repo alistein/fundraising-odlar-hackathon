@@ -247,3 +247,7 @@ Append-only. Format: `## [YYYY-MM-DD] ingest|query|decision|lint | Title`.
 - Live DB pushed and reseeded. Full creator flow verified in the browser: details → clean invoice → AI gate pass → MyGov (`3QW9L4T` / Rəşad Hüseynov) → live with AI and MyGov badges. Gate also verified to fail on no documents and on a copied story; MyGov refuses before the AI gate.
 - Decision (same day): the creator does **not** collect a card number; payouts go through Safefund. Card field removed from the form and API.
 - Test campaigns removed by a reseed; live DB is back to the five demo campaigns.
+
+## [2026-11-17] decision | Mock MyGov accepts any value
+- The mock MyGov sandbox now confirms any FIN and name (no synthetic registry, no "not found", "name mismatch" or "inactive" refusals). The consent screen only needs the three fields filled in. Still nothing leaves the server; only an HMAC of the FIN is stored.
+- Supersedes the four-person FIN table in the SAFEFUN-8 entry above.

@@ -98,7 +98,7 @@ Everything in the API table above stays as is.
 
 | `lib/checker/document.ts` | `inspectDocument()`: file type by magic bytes; editing-software trace in PDF Producer/Creator or image EXIF/XMP; AI-generation marks; PDF modified after creation; PDF re-saved on top (extra `%%EOF`) |
 | `lib/checker/pipeline.ts` | `runCheck()`: the five steps, emitted as they finish, and `score()` |
-| `lib/mygov.ts` | **Mock** MyGov sandbox: synthetic FIN registry (`lookupFin`) and per-campaign identity status (`campaigns.identity_verified_at`, FIN stored as HMAC only). `users.mygov_verified_at` is no longer read |
+| `lib/mygov.ts` | **Mock** MyGov sandbox: confirms any FIN and name (`lookupFin`) and per-campaign identity status (`campaigns.identity_verified_at`, FIN stored as HMAC only). `users.mygov_verified_at` is no longer read |
 | `lib/checker/origin.ts` | `classifyOrigin()`: camera / scan / screenshot / digital from grain, light and aspect ratio; no model |
 | `detector/server.py`, `lib/checker/detector.ts` | Self-hosted AI-image detector (open SigLIP classifier, local Python service on :8790) and its client; used only for photo-like pictures |
 | `lib/checker/identifiers.ts` | Check digits for ОГРН, ИНН, IBAN and card numbers; pure arithmetic |
