@@ -1,0 +1,116 @@
+/*
+ * Safefund mascot moods. transform + opacity only.
+ * idle: blinks · thinking: looks side to side · happy: closed eyes, one hop · alert: wide eyes, "o", one shake
+ */
+.mascot * {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.mascot .m-body {
+  transform-origin: 50% 100%;
+}
+
+/* Default visibility */
+.mascot .m-eyes-happy,
+.mascot .m-mouth {
+  opacity: 0;
+}
+.mascot .m-eyes-open,
+.mascot .m-mouth,
+.mascot .m-eyes-happy {
+  transition: opacity 120ms ease-out;
+}
+.mascot[data-mood="idle"] .m-mouth-smile,
+.mascot[data-mood="thinking"] .m-mouth-flat,
+.mascot[data-mood="happy"] .m-mouth-big,
+.mascot[data-mood="alert"] .m-mouth-o {
+  opacity: 1;
+}
+
+/* idle + thinking: blink */
+.mascot[data-mood="idle"] .m-blink,
+.mascot[data-mood="thinking"] .m-blink {
+  animation: m-blink 4.8s infinite;
+}
+.mascot[data-mood="idle"] .m-shine,
+.mascot[data-mood="thinking"] .m-shine {
+  animation: m-shine 4.8s infinite;
+}
+@keyframes m-blink {
+  0%, 93%, 100% { transform: scaleY(1); }
+  95.5% { transform: scaleY(0.08); }
+}
+@keyframes m-shine {
+  0%, 93%, 98%, 100% { opacity: 1; }
+  94%, 97% { opacity: 0; }
+}
+
+/* thinking: eyes scan left and right */
+.mascot[data-mood="thinking"] .m-look {
+  transform-origin: center;
+  animation: m-look 1.8s cubic-bezier(0.77, 0, 0.175, 1) infinite;
+}
+@keyframes m-look {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-9px); }
+  65% { transform: translateX(9px); }
+}
+
+/* happy: eyes close into arches, one hop */
+.mascot[data-mood="happy"] .m-eyes-open {
+  opacity: 0;
+}
+.mascot[data-mood="happy"] .m-eyes-happy {
+  opacity: 1;
+}
+.mascot[data-mood="happy"] .m-body {
+  animation: m-hop 520ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+.mascot[data-mood="happy"] .m-cheeks {
+  animation: m-glow 520ms ease-out;
+}
+@keyframes m-hop {
+  0% { transform: translateY(0) scale(1, 1); }
+  18% { transform: translateY(0) scale(1.06, 0.92); }
+  45% { transform: translateY(-10%) scale(0.96, 1.05); }
+  75% { transform: translateY(0) scale(1.03, 0.97); }
+  100% { transform: translateY(0) scale(1, 1); }
+}
+@keyframes m-glow {
+  0% { transform: scale(1); }
+  45% { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+
+/* alert: eyes widen, one short shake */
+.mascot[data-mood="alert"] .m-blink {
+  transform: scale(1.18);
+  transition: transform 120ms ease-out;
+}
+.mascot[data-mood="alert"] .m-body {
+  animation: m-shake 380ms cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+@keyframes m-shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-5%) rotate(-4deg); }
+  45% { transform: translateX(4%) rotate(3deg); }
+  70% { transform: translateX(-2%) rotate(-1deg); }
+}
+
+/* Press feedback where the mascot is a link */
+a:active > .mascot {
+  transform: scale(0.94);
+}
+a > .mascot {
+  transition: transform 100ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mascot .m-body,
+  .mascot .m-blink,
+  .mascot .m-shine,
+  .mascot .m-look,
+  .mascot .m-cheeks {
+    animation: none !important;
+  }
+}

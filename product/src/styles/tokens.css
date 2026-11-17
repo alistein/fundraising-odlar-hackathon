@@ -1,0 +1,92 @@
+/*
+ * Design tokens — shadcn variable names, values derived from gofundme.com
+ * (read from the live site 2026-11-17). Plain CSS: paste into the pitch
+ * artifact as-is. The app is light-only; the dark set exists for the pitch.
+ */
+:root {
+  --background: #ffffff;
+  --foreground: #232323;
+  --card: #ffffff;
+  --card-foreground: #232323;
+  --popover: #ffffff;
+  --popover-foreground: #232323;
+
+  --primary: #274a34;
+  --primary-hover: #1b3625;
+  --primary-foreground: #ffffff;
+  --secondary: #f4f2ec;
+  --secondary-foreground: #232323;
+  --muted: #f8f6f2;
+  --muted-foreground: #6f6f6f;
+  --accent: #f4f2ec;
+  --accent-foreground: #232323;
+
+  --lime: #ccf88e;
+  --lime-foreground: #274a34;
+  --warning: #fdefc3;
+  --warning-foreground: #6a4a00;
+  --destructive: #c8321f;
+  --destructive-soft: #fdebe8;
+
+  --border: #e6e5e1;
+  --input: #b7b7b6;
+  --ring: #274a34;
+
+  --progress-from: #acf86c;
+  --progress-to: #4a9d44;
+
+  --radius: 0.75rem;
+  --shadow-soft: 0 1px 2px rgb(35 35 35 / 0.1);
+  --shadow-medium: 0 2px 6px rgb(35 35 35 / 0.1);
+  --shadow-strong: 0 6px 14px rgb(35 35 35 / 0.1);
+
+  /* Nunito Sans: warm, rounded humanist sans, the open stand-in for GoFundMe Sans */
+  --font-ui: var(--font-nunito, "Nunito Sans"), -apple-system, system-ui, "Segoe UI", sans-serif;
+  --font-code: var(--font-geist-mono, ui-monospace), "SF Mono", Menlo, monospace;
+
+  --tracking-display: -0.02em;
+  --tracking-heading: -0.01em;
+  --leading-heading: 1.2;
+
+  /* Mascot — identical in light and dark */
+  --mascot-face: #ccf88e;
+  --mascot-ink: #274a34;
+  --mascot-cheek: #acf86c;
+  --mascot-shine: #ffffff;
+
+  --ease-default: cubic-bezier(0.3, 0.01, 0, 1);
+  --dur-press: 100ms;
+  --dur-fast: 250ms;
+  --dur-base: 500ms;
+}
+
+.dark,
+:root[data-theme="dark"] {
+  --background: #111411;
+  --foreground: #f4f2ec;
+  --card: #1a1e1a;
+  --card-foreground: #f4f2ec;
+  --popover: #1a1e1a;
+  --popover-foreground: #f4f2ec;
+  --primary: #ccf88e;
+  --primary-hover: #b9ec74;
+  --primary-foreground: #1b3625;
+  --secondary: #232823;
+  --secondary-foreground: #f4f2ec;
+  --muted: #1a1e1a;
+  --muted-foreground: #a6a9a3;
+  --accent: #232823;
+  --accent-foreground: #f4f2ec;
+  --lime: #ccf88e;
+  --lime-foreground: #1b3625;
+  --warning: #3b2f0c;
+  --warning-foreground: #f6d274;
+  --destructive: #ff8a7a;
+  --destructive-soft: #3a1712;
+  --border: #2c322c;
+  --input: #4a524a;
+  --ring: #ccf88e;
+  --shadow-soft: 0 1px 2px rgb(0 0 0 / 0.4);
+  --shadow-medium: 0 2px 6px rgb(0 0 0 / 0.4);
+  --shadow-strong: 0 6px 14px rgb(0 0 0 / 0.5);
+}
