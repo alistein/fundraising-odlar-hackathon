@@ -241,7 +241,7 @@ export function CheckForm() {
                 aria-label="Şəkil və ya sənəd"
                 disabled={busy}
                 onClick={() => fileInput.current?.click()}
-                className={ICON_BUTTON}
+                className={cn(ICON_BUTTON, "border-2 border-primary text-primary")}
               >
                 <Icon icon={File01Icon} size={22} />
               </Button>
