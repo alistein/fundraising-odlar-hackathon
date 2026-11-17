@@ -9,7 +9,7 @@
 // Steps are emitted as they finish so the page can show real progress.
 // Only step 5 can make something trustworthy; the others can only lower trust.
 import { db, schema } from "@/db";
-import { checkOrganiserIdentity } from "@/lib/mygov";
+import { campaignIdentity } from "@/lib/mygov";
 import { sha256 } from "@/lib/crypto";
 import { campaignOf, findDocumentByCode, findDocumentsByHash, fingerprint } from "@/lib/documents";
 import { readFile, rereadIdentifiers, searchWeb, webSearchEnabled } from "./ai";
@@ -149,10 +149,10 @@ async function webStep(
 async function mygovStep(campaign: CampaignRef | null): Promise<Step> {
   if (!campaign)
     return { id: "mygov", status: "skip", findings: ["Təşkilatçı qeydiyyatdan keçməyib"] };
-  const { verified } = await checkOrganiserIdentity(campaign.organiserId);
+  const { verified } = await campaignIdentity(campaign.id);
   return verified
     ? { id: "mygov", status: "pass", findings: ["Təşkilatçının şəxsiyyəti təsdiqlənib"] }
-    : { id: "mygov", status: "warn", findings: ["Təşkilatçının şəxsiyyəti təsdiqlənməyib"] };
+    : { id: "mygov", status: "warn", findings: ["Təşkilatçı MyGov ilə təsdiqlənməyib"] };
 }
 
 // ── Runner ──────────────────────────────────────────────────────────────────

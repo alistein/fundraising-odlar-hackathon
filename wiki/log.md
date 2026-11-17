@@ -205,3 +205,10 @@ Append-only. Format: `## [YYYY-MM-DD] ingest|query|decision|lint | Title`.
 - Home page: checker first, then a category grid (6 columns desktop, 3 tablet, 2 phone). Categories: Xərçəng, Ürək, Transplantasiya, Uşaqlar, Əməliyyat, Reabilitasiya.
 - A card opens `/campaigns?kateqoriya=<slug>`; the campaigns page gets a chip filter and an empty state.
 - No schema change: categories are matched from title, diagnosis and clinic name by keyword (`lib/categories.ts`), so a campaign can sit in several. Seed has no cancer campaign, so Xərçəng shows the empty state.
+
+## [2026-11-17] decision | Mock MyGov identity gate (SAFEFUN-8)
+- `POST /api/mock/mygov`: synthetic FIN registry with four people; outcomes found / not_found / name_mismatch / inactive. Nothing leaves the server.
+- Campaign page: "MyGov ilə təsdiqlə" → mock consent screen `/mygov?kampaniya=<id>` (FIN, Ad, Soyad) → `POST /api/campaigns/[id]/identity`. Stores `identity_verified_at` and an HMAC of the FIN; badge "MyGov" on the campaign.
+- Checker MyGov step now reads the campaign's identity status. Seed confirms the three verified campaigns (FIN `5AZ7K2P`, Aysel Məmmədova); SF-3307 and SF-2210 start unconfirmed.
+- Live DB pushed and reseeded. Demo: check `4169 7388 1234 5678` (MyGov warn) → confirm SF-3307 with `5AZ7K2P` / Aysel / Məmmədova → recheck (MyGov pass). Wrong name → "Ad FIN ilə uyğun gəlmir".
+- Note: SF-3307 was confirmed during testing; reseed before the demo to reset it.

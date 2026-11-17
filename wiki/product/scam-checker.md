@@ -114,7 +114,7 @@ Every check, text or file, runs the same five steps in order and ends in one sco
 | 1 | AI check | Model reads the appeal for pressure tactics, or looks at the file for signs it was generated; content-credential (C2PA) marks | Slightly |
 | 2 | Edit traces | Editing-software metadata, modified-after-creation, compression history, camera noise, the model's visible-edit observations | Slightly |
 | 3 | Similar posts online | Our memory of past checks (serial card, same story with several cards) plus a live public web search for the same patient and condition | Slightly |
-| 4 | MyGov **(demo)** | Whether the campaign's organiser is an identity-verified person. **Simulated**: answers from a flag in our own database, no request goes to MyGov | Yes |
+| 4 | MyGov **(demo)** | Whether the campaign's organiser is an identity-verified person. **Simulated**: reads the campaign's identity status, set through the mock consent screen (`/mygov`); no request goes to MyGov | Yes |
 | 5 | Clinic registry | Campaign confirmed by the clinic, official payment route, clinic-confirmed document or code | **Yes — the only step that can make something trusted** |
 
 Each step ends as pass, info, warn, fail or skip (not applicable).

@@ -4,6 +4,7 @@ import {
   File01Icon,
   Hospital01Icon,
   HourglassIcon,
+  IdentityCardIcon,
 } from "@hugeicons/core-free-icons";
 import { desc, eq } from "drizzle-orm";
 import Link from "next/link";
@@ -11,6 +12,7 @@ import { notFound } from "next/navigation";
 import { Icon } from "@/components/icon";
 import { StatusBadge } from "@/components/status-badge";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { UserAvatar } from "@/components/user-avatar";
 import { Progress } from "@/components/ui/progress";
 import { db, schema } from "@/db";
@@ -65,6 +67,12 @@ export default async function CampaignPage({ params }: PageProps<"/campaigns/[id
       <article className="min-w-0">
         <div className="flex items-center gap-2">
           <StatusBadge status={c.status} />
+          {c.identityVerifiedAt && (
+            <Badge variant="verified">
+              <Icon icon={IdentityCardIcon} size={14} />
+              MyGov
+            </Badge>
+          )}
           {c.code && <Badge className="font-mono">{c.code}</Badge>}
         </div>
         <h1 className="display mt-4 text-3xl sm:text-5xl">{c.title}</h1>
@@ -157,6 +165,14 @@ export default async function CampaignPage({ params }: PageProps<"/campaigns/[id
               <Icon icon={HourglassIcon} size={20} />
               Klinika təsdiqi gözlənilir
             </p>
+          )}
+          {!c.identityVerifiedAt && c.status !== "rejected" && (
+            <Button asChild variant="outline" size="lg" className="mt-3 w-full">
+              <Link href={`/mygov?kampaniya=${c.id}`}>
+                <Icon icon={IdentityCardIcon} size={20} />
+                MyGov ilə təsdiqlə
+              </Link>
+            </Button>
           )}
         </div>
       </aside>

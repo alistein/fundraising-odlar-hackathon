@@ -5,7 +5,7 @@ config({ path: ".env.local" });
 async function main() {
   const { db, schema } = await import("./index");
   const { appendLedgerEntry } = await import("../lib/ledger");
-  const { routeHash } = await import("../lib/crypto");
+  const { finHash, routeHash } = await import("../lib/crypto");
   const { storyTokens } = await import("../lib/checker/text");
 
   await db.delete(schema.appeals);
@@ -27,6 +27,9 @@ async function main() {
     { id: "donor-1", name: "Rəşad (donor)", role: "donor" },
   ]);
 
+  // Organiser identity confirmed through the mock MyGov (synthetic FIN of "Aysel Məmmədova", lib/mygov.ts).
+  const identity = { identityVerifiedAt: new Date(), identityFinHash: finHash("5AZ7K2P") };
+
   // Synthetic card numbers, used only as demo identifiers.
   const LEYLA_CARD = "4169738812345678";
   const SERIAL_CARD = "5522091144556677";
@@ -45,6 +48,7 @@ async function main() {
       organiserId: "org-1",
       clinicId: "clinic-1",
       status: "verified",
+      ...identity,
       confirmedCostQepik: 2_500_000,
       confirmedAt: new Date(),
     },
@@ -61,6 +65,7 @@ async function main() {
       organiserId: "org-1",
       clinicId: "clinic-1",
       status: "verified",
+      ...identity,
       confirmedCostQepik: 3_200_000,
       confirmedAt: new Date(),
     },
@@ -77,6 +82,7 @@ async function main() {
       organiserId: "org-1",
       clinicId: "clinic-2",
       status: "verified",
+      ...identity,
       confirmedCostQepik: 4_000_000,
       confirmedAt: new Date(),
       closedAt: new Date(),

@@ -59,6 +59,9 @@ export const campaigns = pgTable("campaigns", {
   // The one personal card the organiser declared, as an HMAC (never the number itself).
   declaredRouteHash: text("declared_route_hash"),
   declaredRouteLast4: text("declared_route_last4"),
+  // Organiser identity confirmed through the MOCK MyGov service. Only an HMAC of the FIN is kept.
+  identityVerifiedAt: timestamp("identity_verified_at", { withTimezone: true }),
+  identityFinHash: text("identity_fin_hash"),
   closedAt: timestamp("closed_at", { withTimezone: true }),
   createdAt: timestamp("created_at", { withTimezone: true })
     .notNull()

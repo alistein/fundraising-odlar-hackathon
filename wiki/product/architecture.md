@@ -46,6 +46,8 @@ Stack, code layout and API surface of the MVP in `product/`. Scaffolded 2026-11-
 | `GET /api/ledger` | public | Working |
 | `GET /api/ledger/verify` | public | Working |
 | `GET /api/stats` | public | Working |
+| `POST /api/mock/mygov` | public, mock | Working |
+| `POST /api/campaigns/[id]/identity` | public (auth mocked) | Working |
 | `POST /api/campaigns/[id]/documents` | the campaign's organiser | Working (branch `checker`) — forgery signals, reuse check, AES-256-GCM, ciphertext stored |
 | `GET /api/documents/[id]` | the campaign's clinic only | Working (branch `checker`) — decrypts per request |
 | `POST /api/documents/[id]/confirm` | the campaign's clinic only | Working (branch `checker`) — issues the `SD-` code |
@@ -94,7 +96,7 @@ Everything in the API table above stays as is.
 
 | `lib/checker/document.ts` | `inspectDocument()`: file type by magic bytes; editing-software trace in PDF Producer/Creator or image EXIF/XMP; AI-generation marks; PDF modified after creation; PDF re-saved on top (extra `%%EOF`) |
 | `lib/checker/pipeline.ts` | `runCheck()`: the five steps, emitted as they finish, and `score()` |
-| `lib/mygov.ts` | **Simulated** MyGov identity check (reads `users.mygov_verified_at`, set by the seed) |
+| `lib/mygov.ts` | **Mock** MyGov sandbox: synthetic FIN registry (`lookupFin`) and per-campaign identity status (`campaigns.identity_verified_at`, FIN stored as HMAC only). `users.mygov_verified_at` is no longer read |
 | `lib/checker/origin.ts` | `classifyOrigin()`: camera / scan / screenshot / digital from grain, light and aspect ratio; no model |
 | `detector/server.py`, `lib/checker/detector.ts` | Self-hosted AI-image detector (open SigLIP classifier, local Python service on :8790) and its client; used only for photo-like pictures |
 | `lib/checker/identifiers.ts` | Check digits for ОГРН, ИНН, IBAN and card numbers; pure arithmetic |

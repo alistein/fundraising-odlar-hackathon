@@ -36,3 +36,8 @@ export function routeHash(value: string): string {
   const clean = value.replace(/[^0-9a-z]/gi, "").toUpperCase();
   return createHmac("sha256", key()).update(`route:${clean}`).digest("hex");
 }
+
+// Keyed hash of a personal ID code (FIN). The code itself is never stored.
+export function finHash(fin: string): string {
+  return createHmac("sha256", key()).update(`fin:${fin.trim().toUpperCase()}`).digest("hex");
+}
