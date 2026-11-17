@@ -13,6 +13,9 @@ export const FRAUD_VERDICTS: AppealVerdict[] = [
   "pressure",
 ];
 
+// Labels for the "recent" list where they differ from the checker's titles (team choice, 2026-11-17).
+const RECENT_TITLE: Partial<Record<AppealVerdict, string>> = { rejected: "MyGov rədd edib" };
+
 export type Stats = {
   raisedQepik: number;
   verifiedCampaigns: number;
@@ -73,7 +76,8 @@ export async function getStats(): Promise<Stats> {
     protectedQepik: frauds.amount,
     recent: recent.map((a) => ({
       id: a.id,
-      title: VERDICT_TITLE[a.verdict as AppealVerdict] ?? a.verdict,
+      title:
+        RECENT_TITLE[a.verdict as AppealVerdict] ?? VERDICT_TITLE[a.verdict as AppealVerdict] ?? a.verdict,
       last4: a.routes[0]?.last4 ?? null,
       amountQepik: a.amountQepik,
       at: a.createdAt.toISOString(),

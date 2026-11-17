@@ -197,3 +197,6 @@ Append-only. Format: `## [YYYY-MM-DD] ingest|query|decision|lint | Title`.
 - Tiles: donations raised, verified campaigns, checks, caught scams, blacklisted cards, protected amount, plus the six latest caught scams.
 - No `checks`/`scam_reports` tables exist; numbers come from `appeals` (text checks only; file checks are not stored). Scam verdicts: route_mismatch, rejected, altered, serial_card, multi_route, pressure.
 - New nullable `appeals.amount_qepik` (pushed to the live DB): amount the appeal asks for, else the matched campaign's. Repeated checks of the same appeal each count.
+
+## [2026-11-17] decision | Statistika: rejected rows labelled "MyGov rədd edib"
+- In "Son aşkarlananlar" only, `rejected` appeals read "MyGov rədd edib" instead of "Klinika rədd edib" (team choice). The checker result title is unchanged.
