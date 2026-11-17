@@ -70,9 +70,9 @@ wiki/
 Next.js 16 — read `product/AGENTS.md` before writing Next code (bundled docs in `node_modules/next/dist/docs/`). Architecture and API status: `wiki/product/architecture.md`.
 
 ```
-pnpm dev          # needs .env.local (see .env.example)
+pnpm dev          # .env.local = production keys: `vercel env pull product/.env.local --environment=development` (from repo root)
 pnpm db:push      # apply src/db/schema.ts to the database
-pnpm db:seed      # reset to synthetic demo data
+pnpm db:seed      # reset to synthetic demo data — with production keys this resets the LIVE database
 pnpm typecheck && pnpm lint
 ```
 

@@ -4,6 +4,7 @@ Dated log of team decisions (stack, scope cuts, naming). Newest first. Update af
 
 | Date | Decision | Why | Affects |
 |---|---|---|---|
+| 2026-11-17 | Local dev uses the production keys (Neon, Blob, encryption key) | Team wants one set of keys everywhere; local and live share data | [[architecture]] |
 | 2026-11-17 | Avatars: DiceBear Lorelei, generated locally | Team pick from DiceBear; CC0 licence, no attribution needed; local generation keeps donor names out of third-party requests | [[design-system]] |
 | 2026-11-17 | Font: Nunito Sans for UI and wordmark | Team liked GoFundMe's playful type; GoFundMe Sans is proprietary, so an open-licence font with the same warm feel | [[design-system]], [[branding]] |
 | 2026-11-17 | Logo: original shield-face mascot with four animated moods (idle, thinking, happy, alert); replaces the Hugeicons shield in the header | Team liked it over the geometric concepts; gives the demo a reactive, friendly cue | [[branding]] |

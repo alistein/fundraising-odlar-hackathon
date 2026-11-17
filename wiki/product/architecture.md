@@ -70,8 +70,8 @@ See [[mvp-scope]], [[threat-model]], [[decisions]].
 | Production URL | https://safefund.vercel.app — public since 2026-11-17; Vercel protection still covers preview and per-deployment URLs |
 | Database | Neon Postgres `safefund-db`, free plan, Frankfurt, via Vercel Marketplace; env vars `DATABASE_URL` (+ `_UNPOOLED`, `PG*`) set for all environments. Schema pushed and seeded 2026-11-17. |
 | Blob | Private store `safefund-docs`, Frankfurt; `BLOB_READ_WRITE_TOKEN` set for all environments |
-| Encryption | `FILE_ENCRYPTION_KEY` (sensitive) for production and preview only; local dev uses its own key from `.env.local` |
+| Encryption | `FILE_ENCRYPTION_KEY`, one key shared by production, preview and development (non-sensitive so it can be pulled). Rotated 2026-11-17 before any file was encrypted. |
 
-To run against the cloud database locally: `vercel env pull product/.env.local` from the repo root — but production and local then share the same data.
+**Local uses production keys (decided 2026-11-17):** `product/.env.local` is pulled with `vercel env pull product/.env.local --environment=development` from the repo root, so local dev talks to the live Neon database and Blob store with the same encryption key. Anything done locally shows up on the live site. The old local-Postgres env is kept in `product/.env.local.local-postgres`. After pulling, restart `pnpm dev` (the DB pool is cached).
 
 Tested on production 2026-11-17: pages and APIs return 200, a test donation was appended and the chain verified, an unverified campaign refused a donation.

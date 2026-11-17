@@ -53,3 +53,6 @@ Append-only. Format: `## [YYYY-MM-DD] ingest|query|decision|lint | Title`.
 
 ## [2026-11-17] decision | Production URL made public
 - safefund.vercel.app opened to the public; previews stay protected. Submission checklist updated.
+
+## [2026-11-17] decision | Local dev on production keys
+- Rotated FILE_ENCRYPTION_KEY to one pullable key for all environments; pulled env into product/.env.local; updated architecture, decisions, CLAUDE.md.
