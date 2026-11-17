@@ -269,4 +269,4 @@ Append-only. Format: `## [YYYY-MM-DD] ingest|query|decision|lint | Title`.
 - After "Razıyam, təsdiqlə" the consent screen plays four simulated MyGov steps: secure connection → identity card found (FIN masked to the last 2 characters) → name check → confirmation sent to Safefund (the only real call). A failure marks the step red with a retry button.
 - Success opens a modal "MyGov tərəfindən təsdiqləndi" with the happy mascot, the campaign title and "Kampaniya canlıdır" (or "AI nəticəsi yoxlanılır" when the AI gate failed); "Kampaniyaya keç" goes to the campaign.
 - shadcn Dialog added and aligned to the tokens (Hugeicons close icon, foreground scrim). Identity API now also returns `live`.
-- Tested on Leyla (SF-3307), which is now confirmed until the next reseed.
+- Tested on Leyla (SF-3307); live DB reseeded afterwards, so Leyla is waiting for MyGov again.
