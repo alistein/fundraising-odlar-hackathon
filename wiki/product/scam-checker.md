@@ -35,7 +35,7 @@ One box on the home page. Accepts any of:
 | Suspicious | No registry match and scam signals present, or a document flagged | thinking, yellow face |
 | Scam | Clone of a verified campaign with swapped payment details, or a blacklisted identifier | alert, red face |
 
-Mascot face colour per verdict decided 2026-11-17 (SAFEFUN-9); the header logo stays green. Every verdict lists its reasons, and for a clone it links the original verified campaign.
+Mascot face colour per verdict decided 2026-11-17 (SAFEFUN-9) and built the same day: the result card shows a large mascot coloured by report tone (mapping in [[branding]]); the header logo stays green. Every verdict lists its reasons, and for a clone it links the original verified campaign.
 
 ## Where the ground truth comes from
 

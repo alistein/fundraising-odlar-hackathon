@@ -5,6 +5,8 @@ import { cn } from "@/lib/utils";
 import "@/styles/mascot.css";
 
 export type MascotMood = "idle" | "happy" | "thinking" | "alert";
+/** Face colour. Brand lime everywhere except a check result. */
+export type MascotTone = "safe" | "warning" | "danger";
 
 const EVENT = "safefund:mood";
 
@@ -29,12 +31,14 @@ export function Mascot({
   mood = "idle",
   size = 32,
   listen = false,
+  tone = "safe",
   className,
 }: {
   mood?: MascotMood;
   size?: number;
   /** React to setMascotMood() calls anywhere on the page. */
   listen?: boolean;
+  tone?: MascotTone;
   className?: string;
 }) {
   const [override, setOverride] = useState<MascotMood | null>(null);
@@ -64,16 +68,23 @@ export function Mascot({
       height={size}
       aria-hidden
       data-mood={current}
+      data-tone={tone}
       // key restarts the one-shot hop/shake each time the mood changes
       key={current}
       className={cn("mascot shrink-0", className)}
     >
       <g className="m-body">
         <path d={OUTER} fill="var(--mascot-face)" />
+        <path className="m-tone m-tone-warning" d={OUTER} fill="var(--mascot-face-warning)" />
+        <path className="m-tone m-tone-danger" d={OUTER} fill="var(--mascot-face-danger)" />
         <path d={OUTER + INNER} fill="var(--mascot-ink)" fillRule="evenodd" />
-        <g className="m-cheeks" fill="var(--mascot-cheek)">
-          <ellipse cx="78" cy="152" rx="16" ry="9" />
-          <ellipse cx="178" cy="152" rx="16" ry="9" />
+        <g className="m-cheeks">
+          {(["", "-warning", "-danger"] as const).map((t) => (
+            <g key={t} className={t && `m-tone m-tone${t}`} fill={`var(--mascot-cheek${t})`}>
+              <ellipse cx="78" cy="152" rx="16" ry="9" />
+              <ellipse cx="178" cy="152" rx="16" ry="9" />
+            </g>
+          ))}
         </g>
         <g className="m-look">
           <g className="m-eyes-open">

@@ -10,6 +10,16 @@
   transform-origin: 50% 100%;
 }
 
+/* Tone: face colour crossfades over the lime base */
+.mascot .m-tone {
+  opacity: 0;
+  transition: opacity var(--dur-base) var(--ease-default);
+}
+.mascot[data-tone="warning"] .m-tone-warning,
+.mascot[data-tone="danger"] .m-tone-danger {
+  opacity: 1;
+}
+
 /* Default visibility */
 .mascot .m-eyes-happy,
 .mascot .m-mouth {

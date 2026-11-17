@@ -176,3 +176,13 @@ Append-only. Format: `## [YYYY-MM-DD] ingest|query|decision|lint | Title`.
 
 ## [2026-11-17] query | Problem scene slide
 - Added an animated scene slide before the 200k AZN case: donors → family (click 1), scammer intercepts, family gets 0 manat (click 2). Synced presentation/pitch-deck.
+
+## [2026-11-17] decision | Profile switcher removed from the MVP
+- Header no longer offers demo profiles (Qonaq, organiser, clinics, donor); everyone browses as a guest. Organiser and clinic pages still open by URL.
+
+## [2026-11-17] decision | Live database migrated and reseeded
+- Ran `db:push` and `db:seed` on the production database after the checker merge (tables `appeals` and campaign codes were missing, so `/api/check` failed). All prior live data replaced with synthetic demo data.
+
+## [2026-11-17] decision | Mascot result faces built (SAFEFUN-9)
+- Yellow and coral face tokens; result card shows a large mascot whose colour and mood follow the report tone. Header logo stays lime.
+- Checked with SF-4821, 4169 7388 1234 5678 and SF-2210 at desktop and phone width, light and dark. Updated branding, scam-checker.

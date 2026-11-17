@@ -20,7 +20,7 @@ import Link from "next/link";
 import { useRef, useState } from "react";
 import { toast } from "sonner";
 import { Icon } from "@/components/icon";
-import { Mascot, type MascotMood, setMascotMood } from "@/components/mascot";
+import { Mascot, type MascotMood, type MascotTone, setMascotMood } from "@/components/mascot";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -47,11 +47,11 @@ const STATUS: Record<StepStatus, { icon: IconData; chip: string }> = {
   skip: { icon: MinusSignIcon, chip: "bg-muted text-muted-foreground" },
 };
 
-const TONE: Record<Tone, { chip: string; mood: MascotMood; notify: (m: string) => void }> = {
-  ok: { chip: "bg-lime text-lime-foreground", mood: "happy", notify: toast.success },
-  neutral: { chip: "bg-secondary text-secondary-foreground", mood: "thinking", notify: toast.message },
-  warn: { chip: "bg-warning text-warning-foreground", mood: "alert", notify: toast.warning },
-  danger: { chip: "bg-destructive-soft text-destructive", mood: "alert", notify: toast.error },
+const TONE: Record<Tone, { face: MascotTone; mood: MascotMood; notify: (m: string) => void }> = {
+  ok: { face: "safe", mood: "happy", notify: toast.success },
+  neutral: { face: "warning", mood: "thinking", notify: toast.message },
+  warn: { face: "warning", mood: "alert", notify: toast.warning },
+  danger: { face: "danger", mood: "alert", notify: toast.error },
 };
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
@@ -188,16 +188,15 @@ export function CheckForm() {
         >
           {report && (
             <header className="mb-8 animate-in duration-500 fade-in slide-in-from-bottom-1">
-              <div className="flex items-center gap-4">
-                <span
-                  className={cn(
-                    "grid size-20 shrink-0 place-items-center rounded-full",
-                    TONE[report.tone].chip,
-                  )}
-                >
-                  <span className="display text-3xl tabular-nums">{report.score}</span>
-                </span>
-                <h2 className="display text-2xl sm:text-3xl">{report.title}</h2>
+              <div className="flex items-center gap-4 sm:gap-5">
+                <Mascot
+                  size={88}
+                  tone={TONE[report.tone].face}
+                  mood={TONE[report.tone].mood}
+                  className="animate-in duration-500 zoom-in-75 max-sm:size-16"
+                />
+                <h2 className="display min-w-0 flex-1 text-2xl sm:text-3xl">{report.title}</h2>
+                <span className="display shrink-0 text-3xl tabular-nums">{report.score}</span>
               </div>
               <Progress value={report.score} max={100} className="mt-5" />
             </header>

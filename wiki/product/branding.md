@@ -19,6 +19,8 @@ Kit in `brand/logo/kit/` (usage rules in its `README.md`): colour, one-colour, b
 | Face lime | `#ccf88e` | `--mascot-face` |
 | Ink green | `#274a34` | `--mascot-ink` |
 | Cheek lime | `#acf86c` | `--mascot-cheek` |
+| Face / cheek yellow (check result only) | `#ffd75e` / `#ffbe3d` | `--mascot-face-warning` / `--mascot-cheek-warning` |
+| Face / cheek coral (check result only) | `#ff8f7e` / `#ff6a57` | `--mascot-face-danger` / `--mascot-cheek-danger` |
 
 ## Mascot moods
 
@@ -30,6 +32,19 @@ Component: `product/src/components/mascot.tsx`; preview page `/kit`.
 | thinking | Flat mouth, eyes scan | Verify page while typing |
 | happy | Closed smiling eyes, one hop | After donating, creating a campaign, clinic confirming; clinic empty state |
 | alert | Wide eyes, "o" mouth, one shake | Errors, clinic rejecting, broken ledger chain |
+
+## Result faces (built 2026-11-17, SAFEFUN-9)
+
+`<Mascot tone="safe|warning|danger" />` recolours the face only on the checker's result card; the header logo and every other mascot stay lime. Colour crossfades with opacity. Preview at `/kit`.
+
+| Report tone | Face | Mood |
+|---|---|---|
+| ok (score ≥ 80) | lime | happy |
+| neutral (60–79) | yellow | thinking |
+| warn (40–59) | yellow | alert |
+| danger (< 40) | coral | alert |
+
+Demo inputs: `SF-4821` → lime, `4169 7388 1234 5678` → yellow, `SF-2210` → coral.
 
 The header mascot listens to `setMascotMood()`, so any action on the page makes it react for 1.6 s. For the demo, the alert mood is the cue for caught fraud.
 

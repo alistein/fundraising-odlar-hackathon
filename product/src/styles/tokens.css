@@ -53,6 +53,11 @@
   --mascot-ink: #274a34;
   --mascot-cheek: #acf86c;
   --mascot-shine: #ffffff;
+  /* Check result faces: neutral (sun yellow) and fraud (coral red) */
+  --mascot-face-warning: #ffd75e;
+  --mascot-cheek-warning: #ffbe3d;
+  --mascot-face-danger: #ff8f7e;
+  --mascot-cheek-danger: #ff6a57;
 
   --ease-default: cubic-bezier(0.3, 0.01, 0, 1);
   --dur-press: 100ms;
