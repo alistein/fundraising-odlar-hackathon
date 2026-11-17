@@ -24,6 +24,7 @@ Stack, code layout and API surface of the MVP in `product/`. Scaffolded 2026-11-
 | `db/seed.ts` | Synthetic demo data (2 clinics, 4 users, 2 campaigns, 2 donations) |
 | `lib/auth.ts` | Mock session, `requireRole()` |
 | `lib/ledger.ts` | Hash-chain append and `verifyChain()` |
+| `lib/categories.ts` | Category list and keyword matching for the home grid and campaign filter |
 | `lib/stats.ts` | `getStats()`: platform totals for `/stats` and `GET /api/stats` |
 | `lib/crypto.ts` | AES-256-GCM file encryption, `sha256()` |
 | `lib/campaigns.ts` | Campaign queries with raised total |

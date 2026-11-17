@@ -200,3 +200,8 @@ Append-only. Format: `## [YYYY-MM-DD] ingest|query|decision|lint | Title`.
 
 ## [2026-11-17] decision | Statistika: rejected rows labelled "MyGov rədd edib"
 - In "Son aşkarlananlar" only, `rejected` appeals read "MyGov rədd edib" instead of "Klinika rədd edib" (team choice). The checker result title is unchanged.
+
+## [2026-11-17] decision | Home categories and campaign filter (SAFEFUN-7)
+- Home page: checker first, then a category grid (6 columns desktop, 3 tablet, 2 phone). Categories: Xərçəng, Ürək, Transplantasiya, Uşaqlar, Əməliyyat, Reabilitasiya.
+- A card opens `/campaigns?kateqoriya=<slug>`; the campaigns page gets a chip filter and an empty state.
+- No schema change: categories are matched from title, diagnosis and clinic name by keyword (`lib/categories.ts`), so a campaign can sit in several. Seed has no cancer campaign, so Xərçəng shows the empty state.
