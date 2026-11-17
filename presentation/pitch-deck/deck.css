@@ -106,5 +106,19 @@ section.dark .source { color: var(--mute-dark); }
 .step .when { font-size: 28px; font-weight: 800; color: var(--mute); }
 .step .when.now { color: var(--forest); }
 
+/* Scene: donors → scammer */
+.scene { position: relative; width: 1664px; height: 560px; }
+.scene .label { position: absolute; font-size: 32px; font-weight: 800; color: var(--forest); text-align: center; }
+.scene .layer { position: absolute; left: 0; top: 0; width: 1664px; height: 560px; }
+.scene .thief { position: absolute; left: 712px; top: 318px; width: 240px; height: 242px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.scene .thief p { font-size: 32px; font-weight: 900; color: var(--scam); }
+.scene .empty { position: absolute; left: 1290px; top: 90px; width: 374px; height: 300px; background: rgba(248, 246, 242, 0.82); border-radius: 32px; display: flex; align-items: center; justify-content: center; }
+.scene .empty p { font-size: 48px; font-weight: 900; color: var(--scam); }
+.captions { position: relative; width: 1664px; height: 64px; }
+.captions .cap { position: absolute; left: 0; top: 0; width: 1664px; font-size: 44px; font-weight: 700; color: var(--mute); text-align: center; }
+/* The first flow hides once the next step arrives */
+.handoff.fragment.visible { opacity: 0; }
+.handoff.fragment.visible.current-fragment { opacity: 1; }
+
 /* Tables (backup) */
 table { font-size: 30px; color: var(--ink); width: 1664px; }

@@ -13,6 +13,13 @@ Documented cases of medical-fundraising fraud, used as evidence on the problem s
 | Feyruz Qəhrəmanov (b. 2002): card linked to a sick-child page | ~10,000 AZN | Donors | Not stated | xeberaz.info |
 | Elməddin Babayev, 23 (Naxçıvan): fake female profiles; posted disabled children as "his own" | Not stated | Donors | Not stated | lent.az |
 
+**Fit with Safefund (re-read 2026-11-17):**
+
+| Case | What it was | Which stage stops it |
+|---|---|---|
+| Həsənov (~200k AZN) | Fake Instagram appeals with other people's sick babies, his own cards | **Tool (MVP)**: clones, card blacklist, scam signals. Leads the problem slide |
+| Seidova (~1M AZN) | Medical-travel intermediary (Urmedhelp, My Doc Tour) promised transplants in Türkiye and kept the money. The article doesn't mention public appeals, card numbers or how families paid | **Clinic verification + paying the clinic directly** (last roadmap stage). Not a donation-post scam: don't present it as one |
+
 **The pattern:** a photo of a sick child, an emotional story, and **a personal card number**. This is exactly the input the [[scam-checker]] is built for. Since the transfer limits, appeals spread across more cards, so donors see unfamiliar card numbers more often ([[card-transfer-limits]]).
 
 ## Region and global

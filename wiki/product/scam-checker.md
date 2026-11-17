@@ -31,11 +31,11 @@ One box on the home page. Accepts any of:
 
 | Verdict | When | Mascot mood |
 |---|---|---|
-| Verified | Link or account belongs to a campaign in the registry (MVP: seeded; later identity- and clinic-checked) | happy |
-| Suspicious | No registry match and scam signals present, or a document flagged | thinking |
-| Scam | Clone of a verified campaign with swapped payment details, or a blacklisted identifier | alert |
+| Verified | Link or account belongs to a campaign in the registry (MVP: seeded; later identity- and clinic-checked) | happy, green face |
+| Suspicious | No registry match and scam signals present, or a document flagged | thinking, yellow face |
+| Scam | Clone of a verified campaign with swapped payment details, or a blacklisted identifier | alert, red face |
 
-Every verdict lists its reasons, and for a clone it links the original verified campaign.
+Mascot face colour per verdict decided 2026-11-17 (SAFEFUN-9); the header logo stays green. Every verdict lists its reasons, and for a clone it links the original verified campaign.
 
 ## Where the ground truth comes from
 

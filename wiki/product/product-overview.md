@@ -12,7 +12,8 @@ An AI scam and forgery detector for donation appeals in Azerbaijan, backed by a 
 
 Medical fundraising in Azerbaijan runs on social media posts and a personal card number. A donor cannot tell a real appeal from a fake, cloned or forged one, and nobody can see where the money went.
 
-- ~1M AZN stolen from parents of 36 thalassemia patients in one case → [[fraud-cases]]
+- ~200,000 AZN collected on Instagram with other people's sick babies' photos and the scammer's own cards (MIA, Dec 2025) → [[fraud-cases]]
+- A medical-travel middleman took ~1M AZN from 36 thalassemia families; 3 children died. This is the case for clinic verification, not a donation-post scam → [[fraud-cases]]
 - Since 1 Aug 2026 a personal card accepts 5 incoming transfers/day, 20,000 AZN/month → [[card-transfer-limits]]
 
 ## Why now

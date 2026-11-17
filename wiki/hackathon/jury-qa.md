@@ -6,7 +6,7 @@ Prepared answers for the 2-minute Q&A on business, market, GTM and evidence. Kee
 
 | Question | Answer | Page |
 |---|---|---|
-| Is this a real problem or one case? | A pattern. 36 children, 1M AZN, 3 deaths in the thalassemia case; a man arrested in Dec 2025 had collected ~200k AZN with sick infants' photos on Instagram; at least four more detentions for the same scheme. | [[fraud-cases]] |
+| Is this a real problem or one case? | A pattern. A man arrested in Dec 2025 had collected ~200k AZN on Instagram with other people's sick babies' photos and his own cards; at least four more detentions for the same scheme. | [[fraud-cases]] |
 | How big is fraud in Azerbaijan? | Official MIA figure: 22.4M AZN stolen in 16,804 cyber-fraud cases in 2024, plus 10,000+ others. Charity fraud isn't even counted separately — nobody measures it. | [[fraud-statistics]] |
 | Why now? | Since August each card takes only 5 incoming transfers a day and 20k AZN a month. Collections are spreading across more cards, and donors can't tell which are real. | [[card-transfer-limits]] |
 | And globally? | $442B lost to scams a year (GASA 2025); 64% of scams finish within a day, so the check has to happen before the transfer. | [[fraud-statistics]] |
@@ -44,6 +44,7 @@ Prepared answers for the 2-minute Q&A on business, market, GTM and evidence. Kee
 | Question | Answer | Page |
 |---|---|---|
 | What if you flag a real family as a scam? | A verdict always shows reasons; when unsure it says "suspicious", not "scam"; reports are reviewed before a card is blacklisted; families can get verified to clear it. | [[scam-checker]] |
+| Would Safefund have stopped the 1M AZN thalassemia case? | Not the link checker: that was a medical-travel middleman, not a social post. Our last stage would, because the clinic confirms the patient and is paid directly, so no middleman holds the money. That's why it's on the roadmap. | [[fraud-cases]], [[roadmap]] |
 | What stops a clinic colluding? (clinic stage) | The clinic is paid directly and is identifiable; payouts sit on a public, tamper-evident ledger; amounts are checked against typical treatment costs. | [[threat-model]] |
 
 Sources: [[market-research-2026-11-17]], [[icnl-crowdfunding-2018]], [[idea-brief]]

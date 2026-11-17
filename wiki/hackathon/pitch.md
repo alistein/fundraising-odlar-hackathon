@@ -4,7 +4,7 @@ Required format: 5 minutes pitch/demo + 2 minutes Q&A, 18 Nov 10:30–13:00. Sec
 
 | Part | Time | Organiser's prompt | Our content |
 |---|---|---|---|
-| Problem | 45 s | What problem do you solve? | Donation scams are social engineering: fake, cloned and forged "help this child" appeals. One case took about 1M AZN from 36 families. Since August the card limit pushes collections onto new cards, and donors cannot tell which are real. |
+| Problem | 45 s | What problem do you solve? | Donation scams are social engineering: fake, cloned and forged "help this child" appeals. One Instagram scammer collected about 200k AZN with other people's sick babies' photos. Since August the card limit pushes collections onto new cards, and donors cannot tell which are real. |
 | Solution | 45 s | How does it work? | Safefund checks any appeal in seconds: AI extracts the claims, matches them against clinic-verified campaigns and a scam blacklist, and tests documents for forgery. Verified campaigns pay the clinic directly on a tamper-evident ledger. |
 | Product demo | 2 min | Live demo of the working part | Paste a real campaign → verified. Paste a clone with a swapped card → scam, original shown. Upload a forged invoice → flagged. Then 20 s on how a campaign earns verification and the ledger tamper check. |
 | Target user | 30 s | Who will use it? | Donors first; then families raising money, clinics, charities and banks. |
@@ -21,7 +21,7 @@ Full slide text and speaker script: [[deck]] (2026-11-17). The content column ab
 - Demo is a **pre-recorded video** (decided 2026-11-17); keep the live app open for a Q&A check. See [[deck]].
 - The demo is 40% of the talk time and maps to 45 pts of criteria 3 and 4 — rehearse it in Sprint III, with cached verdicts as a fallback if the AI call is slow. See [[judging-criteria]], [[scam-checker]].
 - Put the threat table on a slide. See [[threat-model]].
-- Problem-slide numbers: 36 children, 3 deaths, 1M AZN; ~200k AZN Instagram case (Dec 2025); 22.4M AZN / 16,804 cyber-fraud cases in 2024 (MIA). See [[fraud-cases]], [[fraud-statistics]].
+- Problem-slide numbers: ~200k AZN Instagram case (Dec 2025); thalassemia case (1M AZN, 3 deaths) moved to the Future slide as the reason for clinic verification; 22.4M AZN / 16,804 cyber-fraud cases in 2024 (MIA). See [[fraud-cases]], [[fraud-statistics]].
 - Impact slide: [[business-model]], [[go-to-market]], [[market-global]]. Q&A prep: [[jury-qa]].
 - Technical check is 10:00–10:30 on the day. See [[schedule]].
 

@@ -108,6 +108,20 @@ section.dark .source { color: var(--mute-dark); }
 .step .when { font-size: 28px; font-weight: 800; color: var(--mute); }
 .step .when.now { color: var(--forest); }
 
+/* Scene: donors → scammer */
+.scene { position: relative; width: 1664px; height: 560px; }
+.scene .label { position: absolute; font-size: 32px; font-weight: 800; color: var(--forest); text-align: center; }
+.scene .layer { position: absolute; left: 0; top: 0; width: 1664px; height: 560px; }
+.scene .thief { position: absolute; left: 712px; top: 318px; width: 240px; height: 242px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.scene .thief p { font-size: 32px; font-weight: 900; color: var(--scam); }
+.scene .empty { position: absolute; left: 1290px; top: 90px; width: 374px; height: 300px; background: rgba(248, 246, 242, 0.82); border-radius: 32px; display: flex; align-items: center; justify-content: center; }
+.scene .empty p { font-size: 48px; font-weight: 900; color: var(--scam); }
+.captions { position: relative; width: 1664px; height: 64px; }
+.captions .cap { position: absolute; left: 0; top: 0; width: 1664px; font-size: 44px; font-weight: 700; color: var(--mute); text-align: center; }
+/* The first flow hides once the next step arrives */
+.handoff.fragment.visible { opacity: 0; }
+.handoff.fragment.visible.current-fragment { opacity: 1; }
+
 /* Tables (backup) */
 table { font-size: 30px; color: var(--ink); width: 1664px; }
 </style></head><body><section id="cover" class="center" data-transition="fade">
@@ -116,18 +130,73 @@ table { font-size: 30px; color: var(--ink); width: 1664px; }
 <p class="lead rise" style="--i:3">İanə etməzdən əvvəl yoxlayın</p>
 <aside>Bu slayd ekranda olarkən səhnəyə çıxın. Burada danışmağa ehtiyac yoxdur, birbaşa problemlə başlayın.</aside>
 </section>
-<section id="case" class="dark footed" data-transition="fade">
-<p class="eyebrow rise" style="--i:0">BAKI, 2023</p>
-<div class="stack">
-<div class="stat rise" style="--i:1"><p class="big">36</p><p class="big-label">talassemiyalı uşağın ailəsi aldadıldı</p></div>
-<div class="stat fragment"><p class="big">1 000 000</p><p class="big-label">manat ödənildi, amma əməliyyat edilmədi</p></div>
-<div class="stat fragment"><p class="big hi">3</p><p class="big-label">uşaq gözləyərkən dünyasını dəyişdi</p></div>
+<section id="scene" data-transition="fade">
+<h2 class="rise" style="--i:0">Kömək yolda oğurlanır</h2>
+<div class="scene rise" style="--i:1">
+<svg aria-label="Solda üç ianəçi, sağda xəstə uşağın ailəsi, aralarında pul yolu" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1664 560" width="1664" height="560">
+<line x1="440" y1="210" x2="1300" y2="210" stroke="#274A34" stroke-width="4" stroke-dasharray="4 18" stroke-linecap="round" opacity="0.35"/>
+<g fill="#274A34">
+<circle cx="110" cy="150" r="30"/><path d="M60 270v-40a50 50 0 0 1 100 0v40z"/>
+<circle cx="250" cy="150" r="30"/><path d="M200 270v-40a50 50 0 0 1 100 0v40z"/>
+<circle cx="390" cy="150" r="30"/><path d="M340 270v-40a50 50 0 0 1 100 0v40z"/>
+<circle cx="1400" cy="150" r="30"/><path d="M1350 270v-40a50 50 0 0 1 100 0v40z"/>
+<circle cx="1530" cy="185" r="22"/><path d="M1495 270v-26a35 35 0 0 1 70 0v26z"/>
+</g>
+<path fill="#C8321F" d="M1530 132c-9-14-30-10-30 6c0 14 30 30 30 30s30-16 30-30c0-16-21-20-30-6z"/>
+</svg>
+<p class="label" style="left:40px; top:300px; width:420px">İanəçilər</p>
+<p class="label" style="left:1300px; top:300px; width:340px">Xəstə uşağın ailəsi</p>
+<div class="layer fragment handoff" data-fragment-index="1">
+<svg aria-label="Pul ianəçilərdən ailəyə axır" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1664 560" width="1664" height="560">
+<g fill="#CCF88E" stroke="#274A34" stroke-width="4">
+<circle cx="450" cy="210" r="16"><animateMotion dur="2.4s" begin="0s" repeatCount="indefinite" path="M0 0 L840 0"/><animate attributeName="opacity" values="0;1;1;0" dur="2.4s" begin="0s" repeatCount="indefinite"/></circle>
+<circle cx="450" cy="210" r="16"><animateMotion dur="2.4s" begin="0.6s" repeatCount="indefinite" path="M0 0 L840 0"/><animate attributeName="opacity" values="0;1;1;0" dur="2.4s" begin="0.6s" repeatCount="indefinite"/></circle>
+<circle cx="450" cy="210" r="16"><animateMotion dur="2.4s" begin="1.2s" repeatCount="indefinite" path="M0 0 L840 0"/><animate attributeName="opacity" values="0;1;1;0" dur="2.4s" begin="1.2s" repeatCount="indefinite"/></circle>
+<circle cx="450" cy="210" r="16"><animateMotion dur="2.4s" begin="1.8s" repeatCount="indefinite" path="M0 0 L840 0"/><animate attributeName="opacity" values="0;1;1;0" dur="2.4s" begin="1.8s" repeatCount="indefinite"/></circle>
+</g>
+</svg>
 </div>
-<p class="source">Mənbə: JAM News, 2 iyul 2024; cinayət işi 2023-cü ilin fevralında açılıb, Bakı Ağır Cinayətlər Məhkəməsi</p>
-<aside>2023-cü ildə talassemiyadan əziyyət çəkən 36 uşağın valideynləri Türkiyədə sümük iliyi köçürülməsi üçün təxminən bir milyon manat ödədi. [klik] Bu əməliyyatlar heç vaxt baş tutmadı. [klik] Həmin uşaqlardan üçü növbə gözləyərkən dünyasını dəyişdi.</aside>
+<div class="layer fragment" data-fragment-index="2">
+<svg aria-label="Pul yolda dələduzun kartına yönəlir" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1664 560" width="1664" height="560">
+<path d="M450 210Q760 210 832 380" fill="none" stroke="#C8321F" stroke-width="4" stroke-dasharray="4 18" stroke-linecap="round" opacity="0.5"/>
+<g fill="#CCF88E" stroke="#274A34" stroke-width="4">
+<circle cx="450" cy="210" r="16"><animateMotion dur="2s" begin="0s" repeatCount="indefinite" path="M0 0Q310 0 382 170"/><animate attributeName="opacity" values="0;1;1;0" dur="2s" begin="0s" repeatCount="indefinite"/></circle>
+<circle cx="450" cy="210" r="16"><animateMotion dur="2s" begin="0.5s" repeatCount="indefinite" path="M0 0Q310 0 382 170"/><animate attributeName="opacity" values="0;1;1;0" dur="2s" begin="0.5s" repeatCount="indefinite"/></circle>
+<circle cx="450" cy="210" r="16"><animateMotion dur="2s" begin="1s" repeatCount="indefinite" path="M0 0Q310 0 382 170"/><animate attributeName="opacity" values="0;1;1;0" dur="2s" begin="1s" repeatCount="indefinite"/></circle>
+<circle cx="450" cy="210" r="16"><animateMotion dur="2s" begin="1.5s" repeatCount="indefinite" path="M0 0Q310 0 382 170"/><animate attributeName="opacity" values="0;1;1;0" dur="2s" begin="1.5s" repeatCount="indefinite"/></circle>
+</g>
+</svg>
+</div>
+<div class="thief fragment" data-fragment-index="2">
+<svg aria-label="Dələduz kartla" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" width="240" height="180">
+<path fill="#C8321F" d="M120 20c-30 0-48 22-48 46c0 20 14 36 48 36s48-16 48-36c0-24-18-46-48-46z"/>
+<rect x="96" y="56" width="48" height="14" rx="7" fill="#1B3625"/>
+<path fill="#C8321F" d="M60 178v-38a60 60 0 0 1 120 0v38z"/>
+<rect x="150" y="116" width="72" height="46" rx="8" fill="#CCF88E" stroke="#1B3625" stroke-width="4"/>
+<rect x="150" y="128" width="72" height="8" fill="#1B3625"/>
+</svg>
+<p>Dələduz</p>
+</div>
+<div class="empty fragment" data-fragment-index="2"><p>0 manat</p></div>
+</div>
+<div class="captions">
+<p class="cap fragment handoff" data-fragment-index="1">İnsanlar xəstə uşağa kömək etmək üçün pul göndərir</p>
+<p class="cap fragment" data-fragment-index="2">Amma pul ailəyə yox, <b class="red">dələduzun kartına</b> gedir</p>
+</div>
+<aside>Gəlin bunu sadə şəkildə görək. Solda ianəçilər, sağda isə xəstə uşağın ailəsidir. [klik] İnsanlar Instagram-da müraciəti görür və uşağa kömək etmək üçün pul göndərir. [klik] Amma kart nömrəsi dələduza məxsusdur. Pul yolda onun kartına gedir, ailə isə heç nə almır. Real hadisəyə baxaq.</aside>
+</section>
+<section id="case" class="dark footed" data-transition="fade">
+<p class="eyebrow rise" style="--i:0">INSTAGRAM, 2025</p>
+<div class="stack">
+<p class="big rise" style="--i:1">200 000 manat</p>
+<p class="big-label fragment">xəstə körpələrin foto və videoları ilə toplandı</p>
+<p class="big-label fragment"><span class="hi">Pul ailələrə yox, dələduzun öz kartına getdi</span></p>
+</div>
+<p class="source">Mənbə: Daxili İşlər Nazirliyi, mia.az, 16 dekabr 2025</p>
+<aside>Keçən dekabrda polis 30 yaşlı bir şəxsi saxladı. O, Instagram-da “Zəhra balama yardım”, “Əli üçün yardım” kimi səhifələr açmışdı. [klik] Bu səhifələrdə müalicəyə ehtiyacı olan xəstə körpələrin foto və videolarını paylaşır, təcili kömək lazım olduğunu yazırdı. İnsanlar 1 manatdan 500 manata qədər pul köçürürdü və cəmi təxminən 200 000 manat toplandı. [klik] Amma pul uşaqların ailələrinə deyil, onun öz kartlarına gedirdi və o, bu pulu şəxsi ehtiyaclarına xərcləyirdi.</aside>
 </section>
 <section id="pattern" class="footed" data-transition="fade">
-<h2 class="rise" style="--i:0">Bu, tək bir hadisə deyil</h2>
+<h2 class="rise" style="--i:0">Hər saxta müraciət eyni cür qurulur</h2>
 <div class="row" style="align-items:center; gap:96px">
 <div class="post rise" style="--i:1">
 <div class="who"><div class="avatar"></div><p class="handle">zehra_ucun_yardim</p></div>
@@ -139,11 +208,11 @@ table { font-size: 30px; color: var(--ink); width: 1664px; }
 <div class="note fragment" data-fragment-index="1"><div class="tag">1</div><p>Oğurlanmış foto</p></div>
 <div class="note fragment" data-fragment-index="2"><div class="tag">2</div><p>Təcili hekayə</p></div>
 <div class="note fragment" data-fragment-index="3"><div class="tag">3</div><p>Şəxsi kart nömrəsi</p></div>
-<p class="lead fragment" data-fragment-index="4">Bir nəfər bu üsulla Instagram-da təxminən <b class="red">200 000 manat</b> toplayıb</p>
+<p class="lead fragment" data-fragment-index="4">İanəçinin bunu yoxlamaq imkanı <b class="red">yoxdur</b></p>
 </div>
 </div>
-<p class="source">Nümunə post uydurmadır; hadisə: Daxili İşlər Nazirliyi, mia.az, 16 dekabr 2025</p>
-<aside>Bu, tək bir hadisə deyil. Hər saxta müraciət eyni üç hissədən ibarətdir. [klik] Başqasının xəstə uşağının fotosu. [klik] Təcili və kədərli hekayə. [klik] Və şəxsi kart nömrəsi. [klik] Keçən dekabrda polis bu üsulla Instagram-da təxminən 200 000 manat toplamış bir şəxsi saxladı. İanəçinin isə bunu yoxlamaq imkanı yoxdur.</aside>
+<p class="source">Nümunə post uydurmadır</p>
+<aside>Bu, tək bir hadisə deyil. Polis eyni üsulla pul toplayan başqa şəxsləri də saxlayıb. Hər saxta müraciət eyni üç hissədən ibarətdir. [klik] Başqasının xəstə uşağının fotosu. [klik] Təcili və kədərli hekayə. [klik] Və şəxsi kart nömrəsi. [klik] İanəçinin isə bunun real olub-olmadığını yoxlamaq imkanı yoxdur.</aside>
 </section>
 <section id="scale" class="footed" data-transition="fade">
 <p class="eyebrow rise" style="--i:0">AZƏRBAYCAN, 2024</p>
@@ -224,9 +293,9 @@ table { font-size: 30px; color: var(--ink); width: 1664px; }
 <p class="source">Mənbə: Global Anti-Scam Alliance və Feedzai, Global State of Scams 2025</p>
 <aside>Azərbaycan başlanğıc bazarımızdır, çünki burada bir bankla bazarın böyük hissəsini əhatə etmək mümkündür. [klik] Eyni dələduzluq, yəni uşaq fotosu və kart nömrəsi, Qazaxıstanda və Özbəkistanda da geniş yayılıb. [klik] Yoxlama aləti istənilən dildə işləyir, ona görə də dünyanın hər yerində banklar və platformalar üçün API-yə çevrilə bilər. [klik] Dünyada insanlar hər il dələduzlara 442 milyard dollar itirir.</aside>
 </section>
-<section id="roadmap" data-transition="fade">
+<section id="roadmap" class="footed" data-transition="fade">
 <h2 class="rise" style="--i:0">Növbəti addımlarımız belədir</h2>
-<div style="position:relative; width:1664px; margin-top:auto; margin-bottom:auto">
+<div style="position:relative; width:1664px; margin-top:auto">
 <div class="track" style="position:absolute; left:0; top:17px; width:1664px"></div>
 <div class="steps">
 <div class="step rise" style="--i:1"><div class="dot now"></div><p class="when now">İNDİ, MVP</p><h3>Yoxlama aləti</h3></div>
@@ -235,7 +304,9 @@ table { font-size: 30px; color: var(--ink); width: 1664px; }
 <div class="step fragment"><div class="dot"></div><p class="when">SONUNCU</p><h3>Klinika təsdiqi</h3></div>
 </div>
 </div>
-<aside>Növbəti addımımız [klik] tam platformadır və onun ilk versiyası artıq MVP ilə birlikdə işləyir. [klik] Sonra FİN kod və myGov vasitəsilə şəxsiyyət yoxlamasını əlavə edəcəyik ki, hər təşkilatçının real şəxs olduğu təsdiqlənsin. [klik] Ən sonda isə klinikalar diaqnozu təsdiq edəcək və pulu birbaşa özləri qəbul edəcək.</aside>
+<p class="lead fragment" style="margin-bottom:auto">2023-cü ildə 36 talassemiyalı uşağın ailəsi vasitəçi şirkətə 1 mln manat ödədi, <b class="red">3 uşaq əməliyyatı gözləyərkən dünyasını dəyişdi</b></p>
+<p class="source">Mənbə: JAM News, 2 iyul 2024; cinayət işi 2023-cü ilin fevralında açılıb</p>
+<aside>Növbəti addımımız [klik] tam platformadır və onun ilk versiyası artıq MVP ilə birlikdə işləyir. [klik] Sonra FİN kod və myGov vasitəsilə şəxsiyyət yoxlamasını əlavə edəcəyik ki, hər təşkilatçının real şəxs olduğu təsdiqlənsin. [klik] Ən sonda klinikalar diaqnozu və məbləği təsdiq edəcək və pulu birbaşa özləri qəbul edəcək. [klik] Bu addım niyə vacibdir? 2023-cü ildə 36 talassemiyalı uşağın ailəsi Türkiyədə sümük iliyi köçürülməsi vədi ilə vasitəçi şirkətə təxminən 1 milyon manat ödədi. Əməliyyatlar baş tutmadı və 3 uşaq gözləyərkən dünyasını dəyişdi. Pul birbaşa klinikaya getsəydi və klinika xəstəni təsdiq etsəydi, bu mümkün olmazdı.</aside>
 </section>
 <section id="close" class="center" data-transition="fade">
 <div class="pop" style="--i:0"><svg aria-label="Safefund maskotu" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256"><path fill="#ccf88e" d="M128 26C176 26 214 40 220 62C228 92 226 150 204 186C186 214 158 232 128 232C98 232 70 214 52 186C30 150 28 92 36 62C42 40 80 26 128 26Z"/><path fill="#274a34" fill-rule="evenodd" d="M128 26C176 26 214 40 220 62C228 92 226 150 204 186C186 214 158 232 128 232C98 232 70 214 52 186C30 150 28 92 36 62C42 40 80 26 128 26ZM128 38C84 38 52 50 47 66C40 93 42 146 62 179C78 205 102 220 128 220C154 220 178 205 194 179C214 146 216 93 209 66C204 50 172 38 128 38Z"/><g fill="#acf86c"><ellipse cx="78" cy="152" rx="16" ry="9"/><ellipse cx="178" cy="152" rx="16" ry="9"/></g><path fill="#274a34" d="M83 124a13 13 0 1 0 26 0a13 13 0 1 0 -26 0ZM147 124a13 13 0 1 0 26 0a13 13 0 1 0 -26 0ZM106 160A22 22 0 0 0 150 160A6.0 6.0 0 0 0 138 160A10 10 0 0 1 118 160A6.0 6.0 0 0 0 106 160Z"/><path fill="#ffffff" d="M96 119a4 4 0 1 0 8 0a4 4 0 1 0 -8 0ZM160 119a4 4 0 1 0 8 0a4 4 0 1 0 -8 0Z"/></svg></div>

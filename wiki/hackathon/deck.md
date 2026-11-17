@@ -2,7 +2,9 @@
 
 Slide text and speaker script for the 18 Nov pitch, following the organisers' format: 5 min talk and demo, then 2 min Q&A. Each slide gives the on-screen text (short) and what to say (timed at ~140 words/min). Draft, 2026-11-17.
 
-**Slides:** https://claude.ai/artifact/Li9v6gMuq5oXNTkm9X28cv (private until shared; 13 slides + 3 backup, click-by-click reveals, app tokens and mascot). **Slides and speaker notes are in Azerbaijani** (2026-11-17); the English text below is the reference version.
+**Slides:** https://claude.ai/artifact/Li9v6gMuq5oXNTkm9X28cv (private until shared; 14 slides + 3 backup, problem opens with an animated scene: donors' money flowing to a family, then diverted to a scammer's card; click-by-click reveals, app tokens and mascot). **Slides and speaker notes are in Azerbaijani** (2026-11-17); the English text below is the reference version.
+
+> **Case fit (2026-11-17):** the Instagram case (Həsənov, ~200k AZN) is exactly what the Tool catches, so it leads the problem. The thalassemia case (Seidova, ~1M AZN) was a fake medical-travel intermediary, not a donation post; only clinic verification and paying the clinic directly would stop it, so it sits on the Future slide. See [[fraud-cases]].
 
 Format and criteria: [[pitch]], [[judging-criteria]]. Evidence: [[fraud-cases]], [[fraud-statistics]]. Stages: [[roadmap]].
 
@@ -34,16 +36,16 @@ Format and criteria: [[pitch]], [[judging-criteria]]. Evidence: [[fraud-cases]],
 
 **On screen**
 
-> **36 children. 1,000,000 AZN. 3 deaths.**
-> A sick child's photo + a personal card number = the perfect scam.
+> **200,000 AZN** collected with sick babies' photos on Instagram; the money went to the scammer's own card.
+> A sick child's photo + an urgent story + a personal card number = the perfect scam.
 >
 > 22.4M AZN stolen in 16,804 cyber-fraud cases in 2024 — MIA
 > Charity fraud isn't even counted.
 
 **Say**
 
-> "In 2023, the parents of 36 children with thalassemia paid about one million manat for bone-marrow transplants in Türkiye. The transplants never happened, and three of those children died waiting.
-> It isn't one case. Last December police detained a man who had collected almost 200,000 manat on Instagram with photos of other people's sick babies and his own card number.
+> "Last December police detained a man who had opened Instagram pages like 'Help for my baby Zahra', posted photos and videos of other people's sick babies, and collected almost 200,000 manat on his own cards.
+> It isn't one case: police have detained others for the same scheme.
 > This is social engineering. A photo, a sad story, a card number — and the donor has no way to check. The Interior Ministry counted 22 million manat lost to cyber fraud in 2024, and donation scams aren't even counted separately.
 > And since August, each card takes only five transfers a day, so appeals are spreading across even more unfamiliar cards."
 
@@ -135,7 +137,7 @@ All demo data is synthetic ([[rules]]). If the Platform part runs long, cut the 
 
 **Say**
 
-> "Next: the full platform, then identity checks through FIN code and myGov, so every organiser is a verified real person. And finally clinics confirming the diagnosis and receiving the money directly."
+> "Next: the full platform, then identity checks through FIN code and myGov, so every organiser is a verified real person. And finally clinics confirming the diagnosis and receiving the money directly. Why that matters: in 2023, 36 families of children with thalassemia paid a middleman company about one million manat for transplants in Türkiye that never happened, and three children died waiting. If the money had gone straight to a clinic that confirmed the patient, that couldn't have happened."
 
 ---
 

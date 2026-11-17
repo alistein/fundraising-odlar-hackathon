@@ -5,7 +5,7 @@ Strengths, weaknesses, opportunities and threats from the idea brief — raw mat
 ## Strengths
 
 - **Clear "why now":** the transfer limit removed the existing channel. → [[card-transfer-limits]]
-- **Proven local harm:** about 1M AZN and 3 children's deaths in one case; ~200k AZN in another (Dec 2025); 22.4M AZN cyber fraud in 2024 (MIA). → [[fraud-cases]], [[fraud-statistics]]
+- **Proven local harm:** ~200k AZN in fake Instagram appeals (Dec 2025); a 1M AZN medical-intermediary fraud with 3 children's deaths (clinic-verification case); 22.4M AZN cyber fraud in 2024 (MIA). → [[fraud-cases]], [[fraud-statistics]]
 - **Trust by design:** the organiser never holds the funds, removing the fraud opportunity.
 - **Simple story:** everyone has seen a "help this child" post and wondered whether it was real.
 - **Buildable in a day:** campaign page, clinic confirmation, public ledger, verify check.

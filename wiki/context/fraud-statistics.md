@@ -12,7 +12,7 @@ Aggregate fraud numbers for slides and Q&A. Azerbaijan first, then global. Indiv
 | Cyber fraud losses | >6M AZN | Jan–Apr 2025 | MIA, via JAM News | Official, second-hand |
 | Forecast cyber-fraud losses | up to 40M AZN | 2025 | Azerbaijan Cybersecurity Organizations Association (ACOA) | Expert estimate |
 | Largest single fake medical appeal found | ~200,000 AZN | Dec 2025 | MIA | Official |
-| Largest medical-fraud case | ~1M AZN, 36 children, 3 deaths | Opened 2023 | JAM News | Press |
+| Largest medical-fraud case (intermediary, not a donation post) | ~1M AZN, 36 children, 3 deaths | Opened 2023 | JAM News | Press |
 
 **Not available:** the MIA does not report charity or donation fraud as its own category. Theft statistics by bank are not published (JAM News). Our pitch line is that **nobody measures this** — which is part of the problem.
 
@@ -44,7 +44,7 @@ Biggest 2024 MIA sub-categories, as context for social engineering:
 
 ## How to use on slides
 
-- Lead with the human number: **36 children, 3 deaths, 1M AZN**.
+- Lead with the case the Tool catches: **~200k AZN on Instagram, the scammer's own card**. Use the thalassemia case (36 children, 3 deaths, 1M AZN) only for clinic verification ([[fraud-cases]]).
 - Then scale: **22.4M AZN, 16,804 cases in one year** — "and charity fraud isn't even counted separately".
 - Global: **$442B a year; 64% of scams finish within a day** — the checker must answer in seconds, before the transfer.
 

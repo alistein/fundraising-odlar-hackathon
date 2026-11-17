@@ -169,3 +169,10 @@ Append-only. Format: `## [YYYY-MM-DD] ingest|query|decision|lint | Title`.
 - Branch `checker` merged with the team's roadmap, deck and research work. Conflicts in log, decisions and open-questions kept both sides.
 - Open questions: dropped "team confirms the pivot" (the roadmap decisions adopt it) and "AI provider" (Anthropic, built); kept the Vercel key item.
 - Production needs `ANTHROPIC_API_KEY`, `db:push` and `db:seed` before the deployed checker works.
+## [2026-11-17] lint | Case fit re-checked
+- Re-read sources: Həsənov (~200k AZN, Instagram) fits the Tool exactly; Seidova (~1M AZN) was a medical-travel intermediary with no stated donation posts, stopped only by clinic verification.
+- Deck: problem slide now leads with the Instagram case; thalassemia case moved to the roadmap slide as the reason for clinic verification.
+- Updated fraud-cases (fit table), product-overview, pitch, deck, jury-qa (new Q), fraud-statistics, swot, judging-criteria.
+
+## [2026-11-17] query | Problem scene slide
+- Added an animated scene slide before the 200k AZN case: donors → family (click 1), scammer intercepts, family gets 0 manat (click 2). Synced presentation/pitch-deck.
