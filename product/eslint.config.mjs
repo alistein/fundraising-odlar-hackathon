@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Python environment and model weights of the local detector service.
+    "detector/**",
   ]),
 ]);
 

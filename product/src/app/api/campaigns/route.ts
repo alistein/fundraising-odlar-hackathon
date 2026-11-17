@@ -1,9 +1,11 @@
+import { randomInt } from "node:crypto";
 import { eq } from "drizzle-orm";
 import { z } from "zod";
 import { db, schema } from "@/db";
 import { handler } from "@/lib/api";
 import { HttpError, requireRole } from "@/lib/auth";
 import { listCampaigns } from "@/lib/campaigns";
+import { routeHash } from "@/lib/crypto";
 import { aznToQepik } from "@/lib/money";
 
 export const GET = handler(async () => Response.json({ campaigns: await listCampaigns() }));
@@ -16,6 +18,12 @@ const Body = z.object({
   diagnosis: z.string().min(2).max(200),
   targetAzn: z.number().positive().max(10_000_000),
   clinicId: z.string().min(1),
+  // Optional: the one personal card the organiser collects on until the clinic confirms.
+  declaredCard: z
+    .string()
+    .transform((v) => v.replace(/\D/g, ""))
+    .refine((v) => v === "" || v.length === 16, "Kart nömrəsi 16 rəqəm olmalıdır")
+    .optional(),
 });
 
 // Organiser opens a campaign. It starts "pending" and cannot collect until the clinic confirms.
@@ -37,6 +45,13 @@ export const POST = handler(async (req: Request) => {
       targetQepik: aznToQepik(body.targetAzn),
       clinicId: clinic.id,
       organiserId: user.id,
+      code: `SF-${randomInt(1000, 10000)}`,
+      ...(body.declaredCard
+        ? {
+            declaredRouteHash: routeHash(body.declaredCard),
+            declaredRouteLast4: body.declaredCard.slice(-4),
+          }
+        : {}),
     })
     .returning();
   return Response.json({ campaign }, { status: 201 });

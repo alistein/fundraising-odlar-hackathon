@@ -9,9 +9,10 @@ Unresolved items. Move a row to "Resolved" with the answer and date when settled
 | Clash check for "Safefund" (existing companies, domains) | Before pitch | Open |
 | Which track(s) to declare — brief proposes 1 and 3 → [[tracks]] | 22:00 submission | Open |
 | Whole team confirms the checker-first pivot → [[decisions]] | Before Sprint II work | Open |
-| AI provider and API key for claim extraction and document checks → [[scam-checker]] | Sprint II | Open |
+| Add `ANTHROPIC_API_KEY` to Vercel env before deploying the checker (tested live locally 2026-11-17) → [[scam-checker]] | Before submission | Open |
 | How the document check actually detects edit / reuse / AI generation in the MVP — proposed: hash reuse, metadata, AI verdict → [[scam-checker]] | Sprint III | Proposed |
 | Who reviews scam reports before a card is blacklisted (false-report abuse) | Before pitch | Open |
+| MyGov step is simulated: is there a real MyGov / ASAN login integration we could name, and what does it take? | Before pitch | Open |
 | Rewrite the submission problem and solution statements for the pivot → [[schedule]], [[pitch]] | 22:00 submission | Open |
 
 ## From the idea brief (pitch and Q&A)

@@ -4,13 +4,13 @@ The threats the product defends against and the control for each — the core of
 
 | Threat | Control in the product | Layer | Status |
 |---|---|---|---|
-| Cloned campaign | Similarity match against verified campaigns; a copy with a swapped card or link is flagged and the original shown | Checker | Not built |
-| Scam appeal (never verified) | AI extraction and scam-language signals; blacklist of reported cards, IBANs and links | Checker | Not built |
-| Forged documents | Checks for edited, reused or AI-generated medical certificates and invoices | Checker | Not built |
+| Cloned campaign | Similarity match against verified campaigns; a copy with a swapped card or link is flagged and the original shown | Checker | Working on branch `checker` |
+| Scam appeal (never verified) | Memory of past checks: one card in several stories, one story with several cards. AI names the pressure tactics in an unregistered appeal | Checker | Working on branch `checker` |
+| Forged documents | Reuse hash, editing-software trace, modified-after-creation, re-save trace, AI-generation marks; AI vision reads visible edits and checks name and amount against the campaign; pixel forensics mark pasted areas; only a clinic-confirmed file (code `SD-…`) is ever shown as genuine | Checker | Working on branch `checker` |
 | Fake campaign | Clinic-side confirmation before a campaign goes live; organiser identity check | Registry | Working (identity mocked) |
 | Diverted funds | Direct payout to the clinic; organiser has no access to the money | Registry | Working (test payments) |
 | Altered records | Tamper-evident ledger of donations and payouts | Registry | Working |
-| Data exposure | Medical files encrypted and visible only to the verifying clinic | Registry | Helper exists, not wired |
+| Data exposure | Medical files encrypted and visible only to the verifying clinic | Registry | Working on branch `checker` |
 
 "Scam appeal" is new with the pivot; the other six are from the idea brief.
 

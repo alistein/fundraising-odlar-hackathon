@@ -45,7 +45,7 @@ Items 1–3 are new work; 4–5 already work.
 
 ## Progress (2026-11-17)
 
-Working and deployed at https://safefund.vercel.app: must-work items 4 and 5. Not built: items 1–3 (checker, clone detection, document check), file upload and encryption wiring, payout entries. Details: [[architecture]].
+Working and deployed at https://safefund.vercel.app: must-work items 4 and 5. Working on branch `checker`, local only: items 1 and 2 (checker with clone, stale, altered, serial-card and multi-route verdicts). Also on that branch: item 3 (document forgery check with encrypted upload and clinic-only download). AI layer (appeal reading, screenshots, document vision) works there too, tested live locally. Not built: payout entries. Details: [[architecture]].
 
 Stack and other build choices: [[decisions]]. Checker design: [[scam-checker]].
 

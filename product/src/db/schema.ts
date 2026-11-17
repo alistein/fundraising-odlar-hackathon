@@ -33,6 +33,8 @@ export const users = pgTable("users", {
   name: text("name").notNull(),
   role: roleEnum("role").notNull(),
   clinicId: text("clinic_id").references(() => clinics.id),
+  // Identity confirmed through MyGov. SIMULATED in this demo: set by the seed.
+  mygovVerifiedAt: timestamp("mygov_verified_at", { withTimezone: true }),
 });
 
 export const campaigns = pgTable("campaigns", {
@@ -52,6 +54,12 @@ export const campaigns = pgTable("campaigns", {
   status: campaignStatusEnum("status").notNull().default("pending"),
   confirmedCostQepik: integer("confirmed_cost_qepik"),
   confirmedAt: timestamp("confirmed_at", { withTimezone: true }),
+  // Short public code (SF-4821) that official posts carry.
+  code: text("code"), // not UNIQUE: drizzle-kit push would offer to truncate the live table
+  // The one personal card the organiser declared, as an HMAC (never the number itself).
+  declaredRouteHash: text("declared_route_hash"),
+  declaredRouteLast4: text("declared_route_last4"),
+  closedAt: timestamp("closed_at", { withTimezone: true }),
   createdAt: timestamp("created_at", { withTimezone: true })
     .notNull()
     .defaultNow(),
@@ -70,6 +78,10 @@ export const documents = pgTable("documents", {
   authTag: text("auth_tag").notNull(),
   checkStatus: docCheckEnum("check_status").notNull().default("pending"),
   checkSignals: jsonb("check_signals").$type<string[]>().notNull().default([]),
+  // Set when the campaign's clinic vouches for this exact file. The code (SD-482913)
+  // is what a donor types or scans to check it.
+  code: text("code"),
+  confirmedAt: timestamp("confirmed_at", { withTimezone: true }),
   createdAt: timestamp("created_at", { withTimezone: true })
     .notNull()
     .defaultNow(),
@@ -87,6 +99,19 @@ export const ledgerEntries = pgTable("ledger_entries", {
   createdAt: text("created_at").notNull(), // ISO string, hashed verbatim
   prevHash: text("prev_hash").notNull(),
   hash: text("hash").notNull(),
+});
+
+// Memory of every checked appeal. Payment identifiers are stored as HMACs only.
+export type AppealRoute = { kind: "card" | "iban"; hash: string; last4: string };
+export const appeals = pgTable("appeals", {
+  id: id(),
+  tokens: jsonb("tokens").$type<string[]>().notNull().default([]), // story fingerprint
+  routes: jsonb("routes").$type<AppealRoute[]>().notNull().default([]),
+  matchedCampaignId: text("matched_campaign_id").references(() => campaigns.id),
+  verdict: text("verdict").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true })
+    .notNull()
+    .defaultNow(),
 });
 
 export type User = typeof users.$inferSelect;

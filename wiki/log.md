@@ -63,3 +63,50 @@ Append-only. Format: `## [YYYY-MM-DD] ingest|query|decision|lint | Title`.
 - Rewrote product-overview, product-flow, threat-model (added "scam appeal", status column), mvp-scope (sprints II–III re-planned), pitch, tracks.
 - Updated judging-criteria, swot, architecture (planned changes), decisions, open-questions, index.
 - Wiki only: no code changed; checker, clone detection and document check are still unbuilt.
+
+## [2026-11-17] decision | Checker core built (branch `checker`)
+- Rules-based scam checker, appeal memory, campaign codes and declared card; home page is now the checker. Local only, not merged or deployed.
+- Trust ladder adopted: declared level lets an organiser bind one card before clinic confirmation.
+- Updated scam-checker (definitions, rules, demo inputs, limits), architecture, mvp-scope.
+
+## [2026-11-17] decision | Document forgery check built (branch `checker`)
+- Upload with reuse and metadata signals, AES-256-GCM storage, clinic-only download, public document check, synthetic sample invoices.
+- Updated scam-checker, architecture, threat-model, mvp-scope. Local only; Vercel Blob path untested.
+
+## [2026-11-17] decision | AI layer written (branch `checker`)
+- Provider: Anthropic. Model reads appeals, screenshots and documents; rules keep deciding. Key-gated with rules fallback.
+- Fallback verified; live model behaviour not tested (no key). Updated scam-checker, architecture, open-questions.
+
+## [2026-11-17] decision | AI layer tested live
+- 11 synthetic cases pass locally in 2.5–5 s each; fixed the AI gate so non-Latin (Russian) appeals reach the model.
+- Results table and its limits recorded in scam-checker; added image demo files.
+
+## [2026-11-17] decision | AI-generated document passed the first check; fixed
+- Cause: messenger-stripped metadata plus a vision prompt that did not look for generation tells. Added clinic-registry check, missing-metadata note, sharper prompt, whole-file C2PA scan; unregistered documents now read "not verified" in a warning tone.
+- Recorded in scam-checker with the limit that remains.
+
+## [2026-11-17] decision | Clinic-confirmed document codes and pixel forensics (branch `checker`)
+- Clinic confirms an exact file → `SD-` code, proof page with QR, code and file lookup in the checker.
+- Compression-history and camera-noise checks with a heatmap; plain ELA tried and dropped (stamp false alarms).
+- Recorded results and limits in scam-checker; updated architecture, threat-model.
+
+## [2026-11-17] decision | Five-step pipeline, score, stepped loading (branch `checker`)
+- One pipeline for text and files: AI check, edit traces, similar posts online (memory + live web search), MyGov (simulated), clinic registry; 0–100 score with caps.
+- `/api/check` streams steps; home page shows them as they finish. `/api/verify` routes removed.
+- MyGov step is a simulation and is labelled "(demo)" in the UI. Recorded scoring rules and measured scores in scam-checker.
+
+## [2026-11-17] decision | Step 1: measured origin instead of "looks AI"
+- Measured noise, spectrum and compression on 12 files; spectrum did not separate anything after WhatsApp. Built an origin classifier (camera / scan / screenshot / digital) and a two-sources rule for step 1.
+- Recorded rules, the 14-file run, the photographed-generated-page case and the limits in scam-checker.
+
+## [2026-11-17] decision | Step 1 reworked: manipulation, gaps, plausibility, second read
+- Tone no longer fails an appeal by count; registered campaigns are not scored on tone; a second read guards unregistered appeals; quotes shown as evidence.
+- Step 3 reports earlier checks of the same story. 15-case regression recorded in scam-checker with updated scores.
+
+## [2026-11-17] lint | Generated "photo" passed step 1; origin claim corrected
+- A Gemini image was classified "camera" and passed. Camera origin no longer earns points; the earlier 14-file result is marked unreliable.
+- Added check-digit validation of official numbers with a confirming second read; the file now fails on its seal's ОГРН.
+
+## [2026-11-17] decision | Self-hosted AI-image detector
+- Looked at how DeepAI's detector works (closed classifier by TruthScan, one probability, uploads also sent for ad analysis). Team chose to host an open model instead.
+- Added the local detector service and gated it to photo-like pictures after measuring that it calls every rendered page "AI". Results and the missing validation recorded in scam-checker.
