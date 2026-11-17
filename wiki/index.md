@@ -8,6 +8,7 @@ Catalog of every wiki page. Read this first. Schema and conventions live in the 
 - [[roadmap]] — Tool (MVP) → Platform → FIN code / myGov (Azerbaijan only) → clinic verification last
 - [[scam-checker]] — the hero feature: inputs, six-step pipeline, verdicts, ground truth, planned tables, demo data
 - [[product-flow]] — check flow (donor) and registry flow (six steps to "verified"); demo path
+- [[test-data]] — synthetic inputs to try the creator, AI and MyGov gates, clinic reports and the checker by hand
 - [[threat-model]] — seven threats ↔ controls, by layer, with build status
 - [[mvp-scope]] — what gets built per sprint after the pivot, must-work demo list, build order, out of scope
 - [[architecture]] — stack, code layout, API table with working/stub status, security mechanisms, planned pivot changes, deployment

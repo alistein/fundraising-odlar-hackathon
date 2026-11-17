@@ -254,3 +254,6 @@ Append-only. Format: `## [YYYY-MM-DD] ingest|query|decision|lint | Title`.
 
 ## [2026-11-17] decision | Header: logo left, actions right
 - Header now has the logo on the left; Statistika, Kampaniyalar and "Kampaniya yarat" on the right (the create button shrinks to "+" on phones).
+
+## [2026-11-17] query | Test data page
+- Added [[test-data]]: inputs for a passing campaign, AI-gate failures (forged invoice, copied story), demo campaign states, clinic report, link checker. Indexed.
