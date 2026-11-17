@@ -251,3 +251,6 @@ Append-only. Format: `## [YYYY-MM-DD] ingest|query|decision|lint | Title`.
 ## [2026-11-17] decision | Mock MyGov accepts any value
 - The mock MyGov sandbox now confirms any FIN and name (no synthetic registry, no "not found", "name mismatch" or "inactive" refusals). The consent screen only needs the three fields filled in. Still nothing leaves the server; only an HMAC of the FIN is stored.
 - Supersedes the four-person FIN table in the SAFEFUN-8 entry above.
+
+## [2026-11-17] decision | Header: logo left, actions right
+- Header now has the logo on the left; Statistika, Kampaniyalar and "Kampaniya yarat" on the right (the create button shrinks to "+" on phones).

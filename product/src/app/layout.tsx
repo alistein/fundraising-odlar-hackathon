@@ -27,7 +27,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="az" className={`${nunito.variable} ${geistMono.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
         <header className="material sticky top-0 z-50 border-b border-border/70 bg-background/75 backdrop-blur-xl backdrop-saturate-150">
-          <div className="mx-auto grid h-16 max-w-6xl grid-cols-[1fr_auto_1fr] items-center gap-4 px-4 sm:px-6">
+          <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
+            <Link href="/" aria-label="Safefund" className="flex items-center gap-2 text-xl font-bold tracking-tight text-primary">
+              <Mascot size={34} listen />
+              <span className="max-sm:hidden">safefund</span>
+            </Link>
             <nav className="flex items-center gap-1">
               <Button asChild variant="ghost" size="sm">
                 <Link href="/stats">Statistika</Link>
@@ -35,19 +39,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               <Button asChild variant="ghost" size="sm">
                 <Link href="/campaigns">Kampaniyalar</Link>
               </Button>
-            </nav>
-            <Link href="/" aria-label="Safefund" className="flex items-center gap-2 text-xl font-bold tracking-tight text-primary">
-              <Mascot size={34} listen />
-              <span className="max-sm:hidden">safefund</span>
-            </Link>
-            <div className="flex justify-end">
-              <Button asChild size="sm">
-                <Link href="/campaigns/new">
+              <Button asChild size="sm" className="ml-1">
+                <Link href="/campaigns/new" aria-label="Kampaniya yarat">
                   <Icon icon={Add01Icon} size={16} />
                   <span className="max-sm:hidden">Kampaniya yarat</span>
                 </Link>
               </Button>
-            </div>
+            </nav>
           </div>
         </header>
         <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-10 sm:px-6 sm:py-14">{children}</main>
