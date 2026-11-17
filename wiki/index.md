@@ -4,11 +4,12 @@ Catalog of every wiki page. Read this first. Schema and conventions live in the 
 
 ## Product
 
-- [[product-overview]] — one-sentence pitch, problem, why now, users, positioning
-- [[product-flow]] — the six steps from campaign creation to public verification; demo path
-- [[threat-model]] — six threats ↔ six controls, mapped to sprints
-- [[mvp-scope]] — what gets built per sprint, must-work demo list, out of scope
-- [[architecture]] — stack, code layout, API table with working/stub status, security mechanisms
+- [[product-overview]] — checker-first pivot, one-sentence pitch, problem, why now, two layers, users, positioning
+- [[scam-checker]] — the hero feature: inputs, six-step pipeline, verdicts, ground truth, planned tables, demo data
+- [[product-flow]] — check flow (donor) and registry flow (six steps to "verified"); demo path
+- [[threat-model]] — seven threats ↔ controls, by layer, with build status
+- [[mvp-scope]] — what gets built per sprint after the pivot, must-work demo list, build order, out of scope
+- [[architecture]] — stack, code layout, API table with working/stub status, security mechanisms, planned pivot changes, deployment
 - [[branding]] — name (Safefund), mascot logo, kit files and animated moods
 - [[design-system]] — shadcn/ui + GoFundMe-derived tokens + Hugeicons, strict text and interaction rules, skills to use
 - [[swot]] — strengths, weaknesses, opportunities, threats; likely Q&A questions

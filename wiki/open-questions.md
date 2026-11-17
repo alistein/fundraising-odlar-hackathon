@@ -8,8 +8,11 @@ Unresolved items. Move a row to "Resolved" with the answer and date when settled
 |---|---|---|
 | Clash check for "Safefund" (existing companies, domains) | Before pitch | Open |
 | Which track(s) to declare — brief proposes 1 and 3 → [[tracks]] | 22:00 submission | Open |
-| How the document check actually detects edit / reuse / AI generation in the MVP | Sprint II | Open |
-| How clone detection matches a pasted link or card number | Sprint III | Open |
+| Whole team confirms the checker-first pivot → [[decisions]] | Before Sprint II work | Open |
+| AI provider and API key for claim extraction and document checks → [[scam-checker]] | Sprint II | Open |
+| How the document check actually detects edit / reuse / AI generation in the MVP — proposed: hash reuse, metadata, AI verdict → [[scam-checker]] | Sprint III | Proposed |
+| Who reviews scam reports before a card is blacklisted (false-report abuse) | Before pitch | Open |
+| Rewrite the submission problem and solution statements for the pivot → [[schedule]], [[pitch]] | 22:00 submission | Open |
 
 ## From the idea brief (pitch and Q&A)
 
@@ -25,6 +28,7 @@ Unresolved items. Move a row to "Resolved" with the answer and date when settled
 
 | Question | Answer | Date |
 |---|---|---|
+| How clone detection matches a pasted link or card number | Exact match on campaign URL and clinic IBAN, then `pg_trgm` similarity on title and story; blacklist lookup for cards → [[scam-checker]] (design, not built) | 2026-11-17 |
 | Product name | Safefund | 2026-11-17 |
 | Deployment | Vercel + Neon + Blob, auto-deploy from GitHub → [[architecture]] | 2026-11-17 |
 | Logo direction | Shield-face mascot with animated moods → [[branding]] | 2026-11-17 |

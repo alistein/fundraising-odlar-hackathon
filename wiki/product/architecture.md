@@ -61,6 +61,21 @@ Stack, code layout and API surface of the MVP in `product/`. Scaffolded 2026-11-
 
 See [[mvp-scope]], [[threat-model]], [[decisions]].
 
+## Planned for the checker-first pivot (2026-11-17, not built)
+
+The scam checker becomes the product and the home page; design in [[scam-checker]].
+
+| Piece | Change |
+|---|---|
+| `/` | Becomes the checker (today's `/verify` form plus a verdict view); the campaign list moves to its own page |
+| `POST /api/verify` | Replace the 501 stub: AI claim extraction → registry match → `pg_trgm` clone detection → blacklist lookup → verdict with reasons |
+| `POST /api/campaigns/[id]/documents` | Replace the 501 stub: `sha256()` reuse lookup, metadata signals, AI verdict, `encryptFile()`, ciphertext to Blob |
+| Schema | New `scam_reports` and `checks` tables; `pg_trgm` extension on Neon. Campaigns have no card field today — the clinic IBAN and campaign URL are the identifiers to match |
+| Seed | More verified campaigns, clones with swapped cards, blacklisted cards, clean and forged invoices |
+| AI provider | Not chosen; needs an API key in Vercel env → [[open-questions]] |
+
+Everything in the API table above stays as is.
+
 ## Deployment (2026-11-17)
 
 | Piece | Setup |

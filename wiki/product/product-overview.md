@@ -1,38 +1,49 @@
 # Product overview
 
-An anti-fraud and verification layer for medical donation campaigns in Azerbaijan.
+An AI scam and forgery detector for donation appeals in Azerbaijan, backed by a registry of clinic-verified campaigns.
 
-**In one sentence:** a platform where a clinic confirms the patient's diagnosis and cost, donations go straight to the clinic, and every payment is public — so the person running the campaign never touches the money and a fake campaign cannot collect.
+> **Pivot, 2026-11-17:** the scam checker is now the product; the verified-campaign platform is the ground truth behind it. Before the pivot the platform was the product and the checker a side page. Reason and details: [[decisions]].
+
+**In one sentence:** paste any "help this child" post, link, card number or document and learn in seconds whether it is a clinic-verified campaign, a clone or a forgery — because real campaigns are confirmed by the clinic, paid straight to the clinic, and recorded on a public ledger.
 
 **Product name:** Safefund (decided 2026-11-17). Brand and logo: [[branding]].
 
 ## Problem
 
-Medical fundraising in Azerbaijan runs on social media posts and a personal card number. A donor cannot tell a real campaign from a fake one, and nobody can see where the money went.
+Medical fundraising in Azerbaijan runs on social media posts and a personal card number. A donor cannot tell a real appeal from a fake, cloned or forged one, and nobody can see where the money went.
 
 - ~1M AZN stolen from parents of 36 thalassemia patients in one case → [[fraud-cases]]
 - Since 1 Aug 2026 a personal card accepts 5 incoming transfers/day, 20,000 AZN/month → [[card-transfer-limits]]
 
 ## Why now
 
-The transfer limit broke the existing channel: a family collecting for an operation can now accept five donations a day. Families and donors need a replacement whether or not they worry about fraud. The Central Bank's stated goal (transparency, less fraud) is the same goal this product serves.
+The transfer limit broke the existing channel, so collections are moving to new cards, relatives' cards and e-wallets — exactly the confusion scammers exploit. The Central Bank's stated goal (transparency, less fraud) is the same goal this product serves.
+
+## Two layers
+
+| Layer | What it does | Detail |
+|---|---|---|
+| **Scam checker** (hero) | Extracts the claims from an appeal, matches them against the registry and blacklist, detects clones, checks documents for forgery, returns a verdict with reasons | [[scam-checker]] |
+| **Verified registry** (ground truth) | Clinic confirms diagnosis and cost, donations go to the clinic, every payment sits on a tamper-evident ledger | [[product-flow]] |
+
+The checker works from day one without signed clinics or a payment licence; the registry makes it more accurate as campaigns join.
 
 ## Users
 
 | Role | What they do |
 |---|---|
-| Organiser | Family member opening a campaign; proves identity and relation to patient; never receives money |
+| Donor (primary) | Checks an appeal before sending money; donates to verified campaigns; views the ledger |
+| Organiser | Family member opening a campaign to earn the verified badge; never receives money |
 | Clinic | Confirms diagnosis and treatment cost via its own account; receives the payout |
-| Donor | Donates, views the public ledger, verifies a link or card number |
 
-Also in the pitch as targets: charities. Later: corporate giving.
+Also in the pitch as targets: charities, banks (scam-card intelligence). Later: corporate giving.
 
 ## Positioning
 
-Lead with **fraud, identity and forged documents** — not fintech or charity. This is a cybersecurity product: see [[threat-model]] and [[tracks]].
+A **cybersecurity product**: fraud detection and anti-social-engineering, not fintech or charity. Open with a scam being caught, not with a campaign being created. See [[threat-model]] and [[tracks]].
 
 ## Related
 
-[[product-flow]] · [[mvp-scope]] · [[threat-model]] · [[swot]] · [[decisions]]
+[[scam-checker]] · [[product-flow]] · [[mvp-scope]] · [[threat-model]] · [[swot]] · [[decisions]]
 
 Sources: [[idea-brief]]

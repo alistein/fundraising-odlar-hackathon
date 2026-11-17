@@ -56,3 +56,10 @@ Append-only. Format: `## [YYYY-MM-DD] ingest|query|decision|lint | Title`.
 
 ## [2026-11-17] decision | Local dev on production keys
 - Rotated FILE_ENCRYPTION_KEY to one pullable key for all environments; pulled env into product/.env.local; updated architecture, decisions, CLAUDE.md.
+
+## [2026-11-17] decision | Pivot: checker-first
+- Scam and forgery checker becomes the product; verified-campaign platform becomes the registry behind it. Proposed by Emil, team confirmation pending.
+- New page scam-checker (inputs, pipeline, verdicts, planned tables, demo data).
+- Rewrote product-overview, product-flow, threat-model (added "scam appeal", status column), mvp-scope (sprints II–III re-planned), pitch, tracks.
+- Updated judging-criteria, swot, architecture (planned changes), decisions, open-questions, index.
+- Wiki only: no code changed; checker, clone detection and document check are still unbuilt.
