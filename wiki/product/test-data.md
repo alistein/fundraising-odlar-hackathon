@@ -27,7 +27,7 @@ Expected: AI gate passes ("Fırıldaq əlaməti tapılmadı"), MyGov confirms, t
 | Forged document | Upload `forged-invoice.pdf` (or `.png` / `.jpg`, `photo-forged.png`) | Document shows "Şübhəli"; gate fails with the file's signal |
 | Copied story | Use the story of an existing campaign, e.g. "6 yaşlı Əlinin anadangəlmə ürək qüsuru var və təcili açıq ürək əməliyyatına ehtiyacı var. Həkimlər əməliyyatın yaxın aylarda edilməsini məsləhət görür. Ailə xərci təkbaşına ödəyə bilmir." | "Bu hekayə başqa kampaniyada var: Əlinin ürək əməliyyatı üçün yardım" |
 
-The gate runs once per campaign; a failed campaign cannot reach MyGov. ("No documents" is also a fail, but the wizard's button stays disabled until a file is uploaded.)
+The gate runs once per campaign and shows each step. A failed campaign can still go through MyGov, but then stays pending ("AI problem tapıb, yoxlanılır") instead of going live. ("No documents" is also a fail, but the wizard's button stays disabled until a file is uploaded.)
 
 ## 3. Existing demo campaigns
 

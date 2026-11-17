@@ -1,5 +1,6 @@
 import { eq } from "drizzle-orm";
 import { db, schema } from "@/db";
+import { toSteps } from "@/lib/gate";
 import { CampaignWizard } from "./wizard";
 
 // Campaign creator: details → documents → AI gate → MyGov gate → live.
@@ -27,7 +28,7 @@ export default async function NewCampaignPage({ searchParams }: PageProps<"/camp
         id: c.id,
         title: c.title,
         docs,
-        ai: c.aiStatus ? { status: c.aiStatus, signals: c.aiSignals } : null,
+        ai: c.aiStatus && toSteps(c.aiSignals).length ? { status: c.aiStatus, steps: toSteps(c.aiSignals) } : null,
       };
     }
   }

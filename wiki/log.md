@@ -257,3 +257,8 @@ Append-only. Format: `## [YYYY-MM-DD] ingest|query|decision|lint | Title`.
 
 ## [2026-11-17] query | Test data page
 - Added [[test-data]]: inputs for a passing campaign, AI-gate failures (forged invoice, copied story), demo campaign states, clinic report, link checker. Indexed.
+
+## [2026-11-17] decision | AI gate shows its steps; MyGov always reachable
+- The creator's AI gate now reports four steps, revealed one by one like the link checker: Tibbi sənədlər, Sənəd saxtakarlığı (every signal per file), Hekayənin təkrarı, Hekayənin AI oxunuşu (skipped when the model is off).
+- A failed gate no longer dead-ends: "MyGov ilə davam et" is always offered. Both gates passed → live; AI failed + MyGov done → stays pending with "AI problem tapıb, yoxlanılır" and a red AI badge.
+- Steps are stored in `campaigns.ai_signals` (no schema change). Rows from before steps existed re-run the gate.

@@ -23,9 +23,8 @@ export const POST = handler(
     if (!campaign) throw new HttpError(404, "Kampaniya tapılmadı");
     if (campaign.status === "rejected") throw new HttpError(409, "Kampaniya rədd edilib");
     if (campaign.identityVerifiedAt) throw new HttpError(409, "Şəxsiyyət artıq təsdiqlənib");
-    // Gate 2 opens only after gate 1.
-    if (campaign.aiStatus !== "pass" && campaign.aiStatus !== "warn")
-      throw new HttpError(409, "Əvvəlcə AI yoxlamasından keçin");
+    // Gate 2 opens once gate 1 has run, whatever it found.
+    if (!campaign.aiStatus) throw new HttpError(409, "Əvvəlcə AI yoxlamasını başladın");
 
     // Mock: any FIN and name are confirmed.
     lookupFin(body.fin, body.firstName, body.lastName);
@@ -35,8 +34,10 @@ export const POST = handler(
       .set({
         identityVerifiedAt: new Date(),
         identityFinHash: finHash(body.fin),
-        // Passing the MyGov gate is what makes a campaign live (clinics no longer confirm).
-        ...(campaign.status === "pending" ? { status: "verified" as const, confirmedAt: new Date() } : {}),
+        // Both gates passed → live. A failed AI gate keeps it pending for review.
+        ...(campaign.status === "pending" && campaign.aiStatus !== "fail"
+          ? { status: "verified" as const, confirmedAt: new Date() }
+          : {}),
       })
       .where(eq(schema.campaigns.id, id));
     return Response.json({ verified: true });

@@ -68,8 +68,8 @@ export default async function CampaignPage({ params }: PageProps<"/campaigns/[id
       <article className="min-w-0">
         <div className="flex items-center gap-2">
           <StatusBadge status={c.status} />
-          {(c.aiStatus === "pass" || c.aiStatus === "warn") && (
-            <Badge variant="verified">
+          {c.aiStatus && (
+            <Badge variant={c.aiStatus === "fail" ? "destructive" : "verified"}>
               <Icon icon={Robot01Icon} size={14} />
               AI
             </Badge>
@@ -172,15 +172,20 @@ export default async function CampaignPage({ params }: PageProps<"/campaigns/[id
               <Icon icon={Alert02Icon} size={20} />
               Klinika saxta kimi bildirib
             </p>
+          ) : c.identityVerifiedAt && c.aiStatus === "fail" ? (
+            <p className="flex items-center gap-2 rounded-xl bg-warning p-4 font-semibold text-warning-foreground">
+              <Icon icon={Alert02Icon} size={20} />
+              AI problem tapıb, yoxlanılır
+            </p>
           ) : (
             <p className="flex items-center gap-2 rounded-xl bg-warning p-4 font-semibold text-warning-foreground">
               <Icon icon={HourglassIcon} size={20} />
               MyGov təsdiqi gözlənilir
             </p>
           )}
-          {c.status === "pending" && (
+          {c.status === "pending" && !c.identityVerifiedAt && (
             <Button asChild variant="outline" size="lg" className="mt-3 w-full">
-              {c.aiStatus === "pass" || c.aiStatus === "warn" ? (
+              {c.aiStatus ? (
                 <Link href={`/mygov?kampaniya=${c.id}`}>
                   <Icon icon={IdentityCardIcon} size={20} />
                   MyGov ilə təsdiqlə

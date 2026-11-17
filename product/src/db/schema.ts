@@ -61,7 +61,8 @@ export const campaigns = pgTable("campaigns", {
   declaredRouteLast4: text("declared_route_last4"),
   // Gate 1: AI check run when the campaign is created (story, card, documents).
   aiStatus: text("ai_status").$type<"pass" | "warn" | "fail">(),
-  aiSignals: jsonb("ai_signals").$type<string[]>().notNull().default([]),
+  // Gate steps ({ id, status, findings }); older rows may hold plain strings.
+  aiSignals: jsonb("ai_signals").$type<unknown[]>().notNull().default([]),
   aiCheckedAt: timestamp("ai_checked_at", { withTimezone: true }),
   // Organiser identity confirmed through the MOCK MyGov service. Only an HMAC of the FIN is kept.
   identityVerifiedAt: timestamp("identity_verified_at", { withTimezone: true }),

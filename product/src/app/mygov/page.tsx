@@ -9,6 +9,6 @@ export default async function MygovConsent({ searchParams }: PageProps<"/mygov">
   if (!row) notFound();
   const c = row.campaign;
   if (c.status === "rejected" || c.identityVerifiedAt) redirect(`/campaigns/${c.id}`);
-  if (c.aiStatus !== "pass" && c.aiStatus !== "warn") redirect(`/campaigns/new?kampaniya=${c.id}`);
+  if (!c.aiStatus) redirect(`/campaigns/new?kampaniya=${c.id}`);
   return <ConsentForm campaignId={c.id} campaignTitle={c.title} />;
 }

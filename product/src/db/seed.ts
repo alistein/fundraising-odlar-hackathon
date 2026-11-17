@@ -31,7 +31,7 @@ async function main() {
   // Organiser identity confirmed through the mock MyGov (synthetic FIN of "Aysel Məmmədova", lib/mygov.ts).
   const identity = { identityVerifiedAt: new Date(), identityFinHash: finHash("5AZ7K2P") };
   // Gate 1 (AI) passed when these demo campaigns were created.
-  const aiPassed = { aiStatus: "pass" as const, aiSignals: ["Fırıldaq əlaməti tapılmadı"], aiCheckedAt: new Date() };
+  const aiPassed = { aiStatus: "pass" as const, aiSignals: [], aiCheckedAt: new Date() };
 
   // Synthetic card numbers, used only as demo identifiers.
   const LEYLA_CARD = "4169738812345678";
