@@ -22,6 +22,7 @@ import { getSession } from "@/lib/auth";
 import { DocumentConfirm } from "./document-confirm";
 import { DocumentUpload } from "./document-upload";
 import { DonateForm } from "./donate-form";
+import { ReportForm } from "./report-form";
 
 export default async function CampaignPage({ params }: PageProps<"/campaigns/[id]">) {
   const { id } = await params;
@@ -58,7 +59,6 @@ export default async function CampaignPage({ params }: PageProps<"/campaigns/[id
     ["Xəstə", c.patientName],
     ["Diaqnoz", c.diagnosis],
     ["Təşkilatçı", c.relation],
-    ["Təsdiqlənmiş xərc", c.confirmedCostQepik ? formatAZN(c.confirmedCostQepik) : "—"],
   ];
   if (c.declaredRouteLast4) facts.push(["Bəyan edilmiş kart", `•••• ${c.declaredRouteLast4}`]);
 
@@ -160,10 +160,15 @@ export default async function CampaignPage({ params }: PageProps<"/campaigns/[id
         <div className="mt-6">
           {c.status === "verified" ? (
             <DonateForm campaignId={c.id} />
+          ) : c.status === "rejected" ? (
+            <p className="flex items-center gap-2 rounded-xl bg-destructive-soft p-4 font-semibold text-destructive">
+              <Icon icon={Alert02Icon} size={20} />
+              Klinika saxta kimi bildirib
+            </p>
           ) : (
             <p className="flex items-center gap-2 rounded-xl bg-warning p-4 font-semibold text-warning-foreground">
               <Icon icon={HourglassIcon} size={20} />
-              Klinika təsdiqi gözlənilir
+              MyGov təsdiqi gözlənilir
             </p>
           )}
           {!c.identityVerifiedAt && c.status !== "rejected" && (
@@ -173,6 +178,11 @@ export default async function CampaignPage({ params }: PageProps<"/campaigns/[id
                 MyGov ilə təsdiqlə
               </Link>
             </Button>
+          )}
+          {c.status !== "rejected" && (
+            <div className="mt-3">
+              <ReportForm campaignId={c.id} />
+            </div>
           )}
         </div>
       </aside>

@@ -26,9 +26,9 @@ Prepared answers for the 2-minute Q&A on business, market, GTM and evidence. Kee
 |---|---|---|
 | How do you make money? | Not from donations: 0% fee. Banks pay for the scam-card feed and check API; clinics for the verified-case workflow; corporates for verified CSR giving. | [[business-model]] |
 | How do you get users? | Free checker plus a Telegram/WhatsApp bot, where appeals are forwarded. "Check before you send" on Instagram and TikTok, where the scams live. | [[go-to-market]] |
-| What's the roadmap? | Two stages. First the Tool: paste an Instagram or LinkedIn link and see if the campaign is legit (that's the MVP). Then the full Platform (a half-built version is already in the MVP). Then FIN code / myGov identity checks in Azerbaijan, and clinic verification last. | [[roadmap]] |
-| How do you know a campaign is legit without clinics or ID checks? | Today: clone detection, a scam blacklist and scam signals, matched against our registry. "Verified" will get stronger with myGov identity and then clinic confirmation. We say so openly. | [[roadmap]], [[scam-checker]] |
-| How do you get clinics? | It's the last stage on purpose: the Tool and identity checks work without them. Then one Baku clinic and one Türkiye transplant clinic; they get paid invoices directly and a trust badge. | [[go-to-market]] |
+| What's the roadmap? | Two stages. First the Tool: paste an Instagram or LinkedIn link and see if the campaign is legit (that's the MVP). Then the full Platform (a half-built version is already in the MVP). Then FIN code / myGov identity checks in Azerbaijan. Clinics don't confirm; they can report a fake that uses their name. | [[roadmap]] |
+| How do you know a campaign is legit without clinics or ID checks? | Today: clone detection, a scam blacklist and scam signals, matched against our registry. In the MVP, "verified" = registered and passed the (mock) myGov gate. We say so openly. | [[roadmap]], [[scam-checker]] |
+| How do you get clinics? | We don't depend on them. The flow is AI gate → myGov gate. A clinic can report a campaign that misuses its name, and we confirm through the clinic's own email. | [[go-to-market]] |
 | Does myGov work outside Azerbaijan? | No. Abroad we plug in that country's e-ID or a KYC provider; the Tool itself works anywhere. | [[market-global]] |
 
 ## Legal

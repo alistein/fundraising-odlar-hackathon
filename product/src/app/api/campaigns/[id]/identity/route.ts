@@ -35,7 +35,12 @@ export const POST = handler(
 
     await db
       .update(schema.campaigns)
-      .set({ identityVerifiedAt: new Date(), identityFinHash: finHash(body.fin) })
+      .set({
+        identityVerifiedAt: new Date(),
+        identityFinHash: finHash(body.fin),
+        // Passing the MyGov gate is what makes a campaign live (clinics no longer confirm).
+        ...(campaign.status === "pending" ? { status: "verified" as const, confirmedAt: new Date() } : {}),
+      })
       .where(eq(schema.campaigns.id, id));
     return Response.json({ verified: true });
   },

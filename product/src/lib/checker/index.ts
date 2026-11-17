@@ -19,12 +19,12 @@ import {
 } from "./text";
 
 export type AppealVerdict =
-  | "verified" // clinic-confirmed campaign, official route
-  | "declared" // registered by the organiser, clinic has not confirmed yet
+  | "verified" // registered campaign, organiser confirmed through MyGov, official route
+  | "declared" // registered by the organiser, MyGov confirmation still pending
   | "route_mismatch" // known case, payment details are not the official ones
   | "stale" // collection is finished
-  | "altered" // amount differs from what the clinic confirmed
-  | "rejected" // clinic rejected the case
+  | "altered" // amount differs from the registered one
+  | "rejected" // blocked after a confirmed clinic report
   | "serial_card" // one card used in several unrelated stories
   | "multi_route" // one story circulating with several cards
   | "pressure" // not in the registry and written with scam pressure tactics (AI-read)
@@ -64,11 +64,11 @@ export type AppealAnalysis = {
 
 export const VERDICT_TITLE: Record<AppealVerdict, string> = {
   verified: "Təsdiqlənmiş kampaniya",
-  declared: "Klinika təsdiqi gözlənilir",
+  declared: "MyGov təsdiqi gözlənilir",
   route_mismatch: "Ödəniş yolu təsdiqlənməyib",
   stale: "Yığım başa çatıb",
   altered: "Məlumat dəyişdirilib",
-  rejected: "Klinika rədd edib",
+  rejected: "Klinika saxta kimi bildirib",
   serial_card: "Şübhəli kart",
   multi_route: "Şübhəli elan",
   pressure: "Şübhəli elan",
@@ -195,7 +195,7 @@ export async function analyseAppeal(text: string): Promise<AppealAnalysis> {
 
     if (c.status === "rejected") {
       verdict = "rejected";
-      registry.push("Klinika bu xəstə və diaqnozu təsdiqləməyib");
+      registry.push("Kampaniya dayandırılıb");
     } else if (foreign.length > 0) {
       verdict = "route_mismatch";
       registry.push("Bu hekayə reyestrdəki kampaniyaya uyğundur");
@@ -208,11 +208,11 @@ export async function analyseAppeal(text: string): Promise<AppealAnalysis> {
     } else if (claimed > confirmed * 1.1) {
       verdict = "altered";
       registry.push(
-        `Elanda ${formatAZN(claimed)} yazılıb, ${c.status === "verified" ? "klinika" : "kampaniya"} ${formatAZN(confirmed)} göstərir`,
+        `Elanda ${formatAZN(claimed)} yazılıb, kampaniya ${formatAZN(confirmed)} göstərir`,
       );
     } else if (c.status === "verified") {
       verdict = "verified";
-      registry.push("Klinika diaqnozu və xərci təsdiqləyib");
+      registry.push("Kampaniya Safefund reyestrindədir");
       registry.push("İanələr birbaşa klinikanın hesabına gedir");
     } else {
       verdict = "declared";
@@ -221,7 +221,7 @@ export async function analyseAppeal(text: string): Promise<AppealAnalysis> {
           ? "Bu kart təşkilatçının bəyan etdiyi kartdır"
           : "Təşkilatçı qeydiyyatdan keçib",
       );
-      registry.push("Klinika diaqnozu hələ təsdiqləməyib");
+      registry.push("Təşkilatçı hələ MyGov ilə təsdiqlənməyib");
     }
   } else {
     // No registry match: memory of earlier checks, then what the model read.

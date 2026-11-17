@@ -6,9 +6,11 @@ Unresolved items. Move a row to "Resolved" with the answer and date when settled
 
 | Question | Needed by | Status |
 |---|---|---|
+| Clinic role changed to optional reporter (2026-11-17). Rewrite the deck Future slide and pitch line that argue for clinic verification (thalassemia case), business-model line 3 (clinic subscription) and jury-qa rows on clinic payouts and collusion? → [[deck]], [[pitch]], [[business-model]], [[jury-qa]] | Before pitch | Open |
+| Clinic-confirmed document codes (`SD-…`) and the document confirm route still exist from before the clinic change. Keep as legacy or remove? → [[scam-checker]] | Before pitch | Open |
+| Statistika "Son aşkarlananlar" labels `rejected` as "MyGov rədd edib", but `rejected` now means a confirmed clinic report. Keep or change the label? → [[decisions]] | Before pitch | Open |
 | Clash check for "Safefund" (existing companies, domains) | Before pitch | Open |
 | Which track(s) to declare — brief proposes 1 and 3 → [[tracks]] | 22:00 submission | Open |
-| Show the clinic-confirmation step (built in Sprint I, but clinics are last on the roadmap) in the demo, or only the half-built Platform's donations + ledger? → [[roadmap]] | Before pitch | Open |
 | What "verified" means in the MVP Tool without identity or clinic checks → [[roadmap]], [[scam-checker]] | Before pitch | Open |
 | FIN code / myGov: which API or access route exists for third parties, and what consent is required? → [[roadmap]] | Roadmap | Open |
 | Add `ANTHROPIC_API_KEY` to Vercel env before deploying the checker (tested live locally 2026-11-17) → [[scam-checker]] | Before submission | Open |
@@ -35,6 +37,7 @@ Unresolved items. Move a row to "Resolved" with the answer and date when settled
 
 | Question | Answer | Date |
 |---|---|---|
+| Show the clinic-confirmation step in the demo? | No: clinics no longer confirm; they can only report fakes, outside the core flow (AI gate → myGov gate) → [[decisions]] | 2026-11-17 |
 | Pitch language | Azerbaijani → [[deck]] | 2026-11-17 |
 | Crowdfunding law 450-VIIQ: is donation crowdfunding outside it? | Yes in substance: it regulates only equity and debt crowdfunding; in force 24 Jan 2027; statute text not read → [[fundraising-law]] (SAFEFUN-11) | 2026-11-17 |
 | Product stages and what's in the MVP | MVP = Tool (Instagram / LinkedIn link checker) + half-built Platform; then full Platform; then FIN code / myGov; clinics last → [[roadmap]] | 2026-11-17 |

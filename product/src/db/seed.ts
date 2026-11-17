@@ -8,6 +8,7 @@ async function main() {
   const { finHash, routeHash } = await import("../lib/crypto");
   const { storyTokens } = await import("../lib/checker/text");
 
+  await db.delete(schema.clinicReports);
   await db.delete(schema.appeals);
   await db.delete(schema.ledgerEntries);
   await db.delete(schema.documents);
@@ -126,6 +127,15 @@ async function main() {
     ["camp-closed", 4_000_000, "Anonim"],
   ] as const)
     await appendLedgerEntry({ campaignId, type: "donation", amountQepik, label });
+
+  // A clinic reported SF-2210 as fake and confirmed it from its own email (synthetic).
+  await db.insert(schema.clinicReports).values({
+    campaignId: "camp-rejected",
+    clinicName: "Demo Mərkəzi Klinika",
+    email: "hesabat@demo-klinika.test",
+    reason: "Bu xəstə klinikamızda müalicə almır, sənəd saxtadır",
+    confirmedAt: new Date(),
+  });
 
   // Memory of earlier checks, so the checker has something to remember.
   const route = (card: string) => ({

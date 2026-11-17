@@ -6,7 +6,7 @@ import type { Campaign } from "@/db/schema";
 const map = {
   verified: { label: "Təsdiqlənib", variant: "verified", icon: CheckmarkBadge01Icon },
   pending: { label: "Yoxlanılır", variant: "pending", icon: HourglassIcon },
-  rejected: { label: "Rədd edilib", variant: "destructive", icon: Cancel01Icon },
+  rejected: { label: "Dayandırılıb", variant: "destructive", icon: Cancel01Icon },
 } as const;
 
 export function StatusBadge({ status }: { status: Campaign["status"] }) {

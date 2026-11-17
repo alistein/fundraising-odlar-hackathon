@@ -1,15 +1,18 @@
-// The check pipeline: five steps in a fixed order, then one score.
+// The check pipeline: six steps in a fixed order, then one score.
 //
 //   1 ai      is it machine-made / written to pressure        (model + content credentials)
 //   2 edit    was the file edited after it was issued          (metadata + pixel forensics + model)
 //   3 web     does the same story circulate elsewhere          (our memory + public web search)
 //   4 mygov   is the organiser a verified person               (SIMULATED, see lib/mygov.ts)
-//   5 clinic  does the clinic's registry stand behind it       (rules)
+//   5 clinic  is it a registered Safefund campaign             (rules; id kept for history)
+//   6 report  has a clinic reported it as fake                 (optional, outside the core flow)
 //
-// Steps are emitted as they finish so the page can show real progress.
+// Core flow: AI gate (steps 1–3) → MyGov gate (step 4). Clinics do not confirm;
+// they can only report. Steps are emitted as they finish so the page can show real progress.
 // Only step 5 can make something trustworthy; the others can only lower trust.
 import { db, schema } from "@/db";
 import { campaignIdentity } from "@/lib/mygov";
+import { clinicReportsFor } from "@/lib/reports";
 import { sha256 } from "@/lib/crypto";
 import { campaignOf, findDocumentByCode, findDocumentsByHash, fingerprint } from "@/lib/documents";
 import { readFile, rereadIdentifiers, searchWeb, webSearchEnabled } from "./ai";
@@ -21,7 +24,7 @@ import { classifyOrigin } from "./origin";
 import { analyseAppeal, type AppealAnalysis, type AppealVerdict, type CampaignRef } from "./index";
 import { containment, extractIdentifiers, storyTokens } from "./text";
 
-export const STEP_IDS = ["ai", "edit", "web", "mygov", "clinic"] as const;
+export const STEP_IDS = ["ai", "edit", "web", "mygov", "clinic", "report"] as const;
 export type StepId = (typeof STEP_IDS)[number];
 
 // pass: positive evidence. info: nothing either way. warn / fail: lowers trust. skip: not applicable.
@@ -56,6 +59,7 @@ const POINTS: Record<StepId, { pass: number; warn: number; fail: number }> = {
   web: { pass: 5, warn: -20, fail: -40 },
   mygov: { pass: 10, warn: -10, fail: -20 },
   clinic: { pass: 35, warn: -15, fail: -45 },
+  report: { pass: 0, warn: -15, fail: -45 },
 };
 
 export function score(steps: Step[]): number {
@@ -66,11 +70,13 @@ export function score(steps: Step[]): number {
   const clinicPassed = steps.some((x) => x.id === "clinic" && x.status === "pass");
   const anyFail = steps.some((x) => x.status === "fail");
   const anyWarn = steps.some((x) => x.status === "warn");
-  // Without the clinic nothing is trustworthy, however clean it looks.
+  // Outside the registry nothing is trustworthy, however clean it looks.
   if (!clinicPassed) s = Math.min(s, 60);
+  // An unconfirmed clinic report keeps a campaign out of the trusted band until we hear back.
+  if (steps.some((x) => x.id === "report" && x.status === "warn")) s = Math.min(s, 70);
   // One hard failure outweighs everything else.
   if (anyFail) s = Math.min(s, 35);
-  // The clinic stands behind it and nothing contradicts that.
+  // A registered, MyGov-confirmed campaign and nothing contradicts that.
   if (clinicPassed && !anyFail && !anyWarn) s = Math.max(s, 85);
   return Math.max(0, Math.min(100, Math.round(s)));
 }
@@ -84,7 +90,7 @@ const CLINIC_STATUS: Record<AppealVerdict, StepStatus> = {
   verified: "pass",
   declared: "info",
   route_mismatch: "fail",
-  rejected: "fail",
+  rejected: "info", // the report step carries the failure
   stale: "warn",
   altered: "warn",
   serial_card: "warn",
@@ -155,6 +161,21 @@ async function mygovStep(campaign: CampaignRef | null): Promise<Step> {
     : { id: "mygov", status: "warn", findings: ["Təşkilatçı MyGov ilə təsdiqlənməyib"] };
 }
 
+async function reportStep(campaign: CampaignRef | null): Promise<Step> {
+  if (!campaign) return { id: "report", status: "skip", findings: [] };
+  const reports = await clinicReportsFor(campaign.id);
+  const confirmed = reports.find((r) => r.confirmedAt);
+  if (confirmed)
+    return {
+      id: "report",
+      status: "fail",
+      findings: [`${confirmed.clinicName} bu kampaniyanı saxta kimi bildirib`],
+    };
+  if (reports.length)
+    return { id: "report", status: "warn", findings: ["Klinika şikayəti var, yoxlanılır"] };
+  return { id: "report", status: "pass", findings: ["Klinika şikayəti yoxdur"] };
+}
+
 // ── Runner ──────────────────────────────────────────────────────────────────
 
 export async function runCheck(input: CheckInput, emit: (e: CheckEvent) => void): Promise<void> {
@@ -210,9 +231,19 @@ export async function runCheck(input: CheckInput, emit: (e: CheckEvent) => void)
       status: CLINIC_STATUS[a.verdict],
       findings: a.registry,
     }));
+    await run("report", () => reportStep(a.campaign));
     // "Not verified" undersells an appeal that a step has already failed.
     const failed = steps.some((x) => x.status === "fail");
-    finish(a.verdict === "unknown" && failed ? "Şübhəli elan" : a.title, a.campaign, heatmap);
+    const reported = steps.some((x) => x.id === "report" && x.status === "warn");
+    finish(
+      a.verdict === "unknown" && failed
+        ? "Şübhəli elan"
+        : reported && !failed
+          ? "Klinika şikayəti yoxlanılır"
+          : a.title,
+      a.campaign,
+      heatmap,
+    );
   };
 
   // ── Text ──
@@ -241,6 +272,7 @@ export async function runCheck(input: CheckInput, emit: (e: CheckEvent) => void)
               findings: [`${docCode} kodu ilə heç bir klinika sənəd təsdiqləməyib`],
             },
       );
+      await run("report", () => reportStep(doc ? campaignOf(doc) : null));
       return finish(doc ? "Klinika təsdiqləyib" : "Kod reyestrdə yoxdur", doc ? campaignOf(doc) : null);
     }
 
@@ -276,6 +308,7 @@ export async function runCheck(input: CheckInput, emit: (e: CheckEvent) => void)
         `Faylın barmaq izi: ${fingerprint(confirmed.sha256)}`,
       ],
     }));
+    await run("report", () => reportStep(campaignOf(confirmed)));
     return finish("Klinika təsdiqləyib", campaignOf(confirmed));
   }
   const known = rows.at(0);
@@ -427,6 +460,7 @@ export async function runCheck(input: CheckInput, emit: (e: CheckEvent) => void)
     if (!report.hasMetadata) findings.push("Faylın mənşə məlumatı silinib");
     return { id: "clinic", status: "warn", findings };
   });
+  await run("report", () => reportStep(known ? campaignOf(known) : null));
 
   const failed = steps.some((s) => s.status === "fail");
   finish(

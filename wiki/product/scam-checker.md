@@ -107,7 +107,7 @@ Content comparison and the vision check live in the AI layer below.
 
 ### The five-step pipeline and the score (built 2026-11-17)
 
-Every check, text or file, runs the same five steps in order and ends in one score. The page shows each step as it really finishes (the API streams one JSON line per step).
+Every check, text or file, runs the same six steps in order and ends in one score (sixth step added 2026-11-17). The page shows each step as it really finishes (the API streams one JSON line per step).
 
 | # | Step | What runs | Can it raise trust? |
 |---|---|---|---|
@@ -115,11 +115,12 @@ Every check, text or file, runs the same five steps in order and ends in one sco
 | 2 | Edit traces | Editing-software metadata, modified-after-creation, compression history, camera noise, the model's visible-edit observations | Slightly |
 | 3 | Similar posts online | Our memory of past checks (serial card, same story with several cards) plus a live public web search for the same patient and condition | Slightly |
 | 4 | MyGov **(demo)** | Whether the campaign's organiser is an identity-verified person. **Simulated**: reads the campaign's identity status, set through the mock consent screen (`/mygov`); no request goes to MyGov | Yes |
-| 5 | Clinic registry | Campaign confirmed by the clinic, official payment route, clinic-confirmed document or code | **Yes — the only step that can make something trusted** |
+| 5 | Safefund registry | Registered campaign that passed the myGov gate, official payment route, code. (Clinic-confirmed document codes still answer here; legacy, see open questions) | **Yes — the only step that can make something trusted** |
+| 6 | Clinic report | A clinic reported the campaign: confirmed by email → fail; not yet confirmed → warn (score capped at 70, title "Klinika şikayəti yoxlanılır"); none → pass with no points | No |
 
 Each step ends as pass, info, warn, fail or skip (not applicable).
 
-**Score, 0–100.** Starts at 50 (nothing known). Points per step: AI +5 / −15 / −35, edit +5 / −15 / −35, web +5 / −20 / −40, MyGov +10 / −10 / −20, clinic +35 / −15 / −45 (pass / warn / fail). Then three caps: without a clinic pass the score cannot exceed 60; any fail caps it at 35; a clinic pass with no warn or fail lifts it to at least 85. Bands: 80+ trusted, 60–79 neutral, 40–59 caution, below 40 danger. The weights are our own judgement, not fitted to data.
+**Score, 0–100.** Starts at 50 (nothing known). Points per step: AI +5 / −15 / −35, edit +5 / −15 / −35, web +5 / −20 / −40, MyGov +10 / −10 / −20, registry +35 / −15 / −45, clinic report 0 / −15 / −45 (pass / warn / fail). Then caps: without a registry pass the score cannot exceed 60; an unconfirmed clinic report caps it at 70; any fail caps it at 35; a registry pass with no warn or fail lifts it to at least 85. Bands: 80+ trusted, 60–79 neutral, 40–59 caution, below 40 danger. The weights are our own judgement, not fitted to data.
 
 Measured locally after the step 1 rework, one run each: official code 95, clinic-confirmed document or its code 95, declared card 60, honest unregistered appeal 40, clean unregistered invoice 40, cloned appeal 20, screenshot of a clone 15, forged PDF 5, AI-generated document 5, fake document code 5, forged image 0, pressure scam 0, implausible appeal 0, serial card 0. A check takes 6–28 s when the web search runs (the search alone is 4–16 s) and is instant when the registry answers by itself.
 

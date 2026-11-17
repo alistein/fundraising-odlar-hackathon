@@ -212,3 +212,14 @@ Append-only. Format: `## [YYYY-MM-DD] ingest|query|decision|lint | Title`.
 - Checker MyGov step now reads the campaign's identity status. Seed confirms the three verified campaigns (FIN `5AZ7K2P`, Aysel Məmmədova); SF-3307 and SF-2210 start unconfirmed.
 - Live DB pushed and reseeded. Demo: check `4169 7388 1234 5678` (MyGov warn) → confirm SF-3307 with `5AZ7K2P` / Aysel / Məmmədova → recheck (MyGov pass). Wrong name → "Ad FIN ilə uyğun gəlmir".
 - Note: SF-3307 was confirmed during testing; reseed before the demo to reset it.
+
+## [2026-11-17] decision | Clinic becomes an optional reporter
+- Core flow is AI gate → myGov gate. Clinics no longer register or confirm campaigns; optionally they can report a campaign as fake and are contacted through their own email. Not part of the business plan.
+- Updated decisions, roadmap (stage 4), product-overview (roles), open-questions (demo question resolved). Still to update once built: product-flow, scam-checker (clinic step and scoring), pitch, deck, jury-qa, business-model.
+
+## [2026-11-17] decision | Clinic reporter built
+- Checker: step 5 is now "Safefund reyestri" (registered + myGov gate passed); new step 6 "Klinika şikayəti" (confirmed report fails, unconfirmed warns and caps at 70).
+- MyGov confirmation makes a pending campaign live. Clinic confirmation page `/clinic` and `POST /api/campaigns/[id]/confirm` removed.
+- New `clinic_reports` table and `POST /api/campaigns/[id]/report`; "Klinika olaraq bildir" form on campaign pages (clinic, own email, reason).
+- Live DB pushed and reseeded: SF-2210 carries a confirmed report from Demo Mərkəzi Klinika (score 0). SF-4821 95; Leyla card 40 before myGov, 95 after.
+- Updated product-flow, scam-checker, architecture, jury-qa. Deck, pitch, business-model still argue for clinic verification: listed in open-questions.

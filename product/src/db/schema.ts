@@ -119,6 +119,23 @@ export const appeals = pgTable("appeals", {
     .defaultNow(),
 });
 
+// A clinic reports a campaign that misuses its name. Optional, outside the core flow
+// (AI gate → MyGov gate). We confirm a report by writing back to the clinic's own email;
+// only a confirmed report blocks the campaign.
+export const clinicReports = pgTable("clinic_reports", {
+  id: id(),
+  campaignId: text("campaign_id")
+    .notNull()
+    .references(() => campaigns.id),
+  clinicName: text("clinic_name").notNull(),
+  email: text("email").notNull(),
+  reason: text("reason").notNull(),
+  confirmedAt: timestamp("confirmed_at", { withTimezone: true }),
+  createdAt: timestamp("created_at", { withTimezone: true })
+    .notNull()
+    .defaultNow(),
+});
+
 export type User = typeof users.$inferSelect;
 export type Clinic = typeof clinics.$inferSelect;
 export type Campaign = typeof campaigns.$inferSelect;

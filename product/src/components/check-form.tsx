@@ -5,7 +5,9 @@ import {
   ArrowRight01Icon,
   Cancel01Icon,
   CheckmarkBadge01Icon,
+  Database01Icon,
   File01Icon,
+  Flag02Icon,
   Globe02Icon,
   Hospital01Icon,
   IdentityCardIcon,
@@ -36,7 +38,8 @@ const STEPS: { id: StepId; label: string; icon: IconData }[] = [
   { id: "edit", label: "Redaktə izləri", icon: PencilEdit02Icon },
   { id: "web", label: "İnternetdə oxşar paylaşımlar", icon: Globe02Icon },
   { id: "mygov", label: "MyGov (demo)", icon: IdentityCardIcon },
-  { id: "clinic", label: "Klinika reyestri", icon: Hospital01Icon },
+  { id: "clinic", label: "Safefund reyestri", icon: Database01Icon },
+  { id: "report", label: "Klinika şikayəti", icon: Flag02Icon },
 ];
 
 const STATUS: Record<StepStatus, { icon: IconData; chip: string }> = {

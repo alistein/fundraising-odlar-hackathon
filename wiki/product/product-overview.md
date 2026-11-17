@@ -39,7 +39,7 @@ The checker works from day one without signed clinics or a payment licence; the 
 |---|---|
 | Donor (primary) | Checks an appeal before sending money; donates to verified campaigns; views the ledger |
 | Organiser | Family member opening a campaign to earn the verified badge; never receives money |
-| Clinic | Confirms diagnosis and treatment cost via its own account; receives the payout |
+| Clinic | Optional: reports a campaign that misuses its name as fake, contacted through its own email. Does not register or confirm campaigns (2026-11-17) |
 
 Also in the pitch as targets: charities, banks (scam-card intelligence). Later: corporate giving.
 
