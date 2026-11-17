@@ -226,3 +226,7 @@ Append-only. Format: `## [YYYY-MM-DD] ingest|query|decision|lint | Title`.
 
 ## [2026-11-17] decision | Recent campaigns on the home page
 - Home page order: checker → categories → "Son kampaniyalar" (newest 6, blocked campaigns left out) with a "Hamısı" link to `/campaigns`. Campaign card shared via `components/campaign-grid.tsx`.
+
+## [2026-11-17] decision | Checker input is link-only
+- Home checker: one pill row — link input, search icon button, file icon button. Codes and card numbers are no longer typed into the box (team: they can't be detected from a post link). Search stays disabled until the text is a link. Files still go through the file button.
+- The API still accepts any text; the link fetch itself is SAFEFUN-6 (Emil).

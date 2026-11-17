@@ -26,7 +26,6 @@ import { Mascot, type MascotMood, type MascotTone, setMascotMood } from "@/compo
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { Textarea } from "@/components/ui/textarea";
 import type { CheckEvent, Report, Step, StepId, StepStatus, Tone } from "@/lib/checker/pipeline";
 import { cn } from "@/lib/utils";
 
@@ -56,6 +55,18 @@ const TONE: Record<Tone, { face: MascotTone; mood: MascotMood; notify: (m: strin
   warn: { face: "warning", mood: "alert", notify: toast.warning },
   danger: { face: "danger", mood: "alert", notify: toast.error },
 };
+
+// Only links are checked from the box; codes and card numbers are not entered by hand.
+function isLink(value: string): boolean {
+  const v = value.trim();
+  if (!v || /\s/.test(v)) return false;
+  try {
+    const url = new URL(v.includes("://") ? v : `https://${v}`);
+    return /^https?:$/.test(url.protocol) && url.hostname.includes(".");
+  } catch {
+    return false;
+  }
+}
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
@@ -147,19 +158,28 @@ export function CheckForm() {
     <div className="flex flex-col items-center gap-8">
       <Mascot size={112} listen mood={busy ? "thinking" : "idle"} />
       <h1 className="display text-4xl sm:text-6xl">Elanı yoxla</h1>
-      <form onSubmit={submit} className="flex w-full flex-col gap-3">
-        <Textarea
+      <form
+        onSubmit={submit}
+        className="flex w-full items-center gap-2 rounded-full border border-input bg-background p-2 shadow-medium transition-[border-color,box-shadow] duration-150 focus-within:border-ring focus-within:ring-3 focus-within:ring-ring/20"
+      >
+        <input
+          type="text"
+          inputMode="url"
           value={q}
           onChange={(e) => setQ(e.target.value)}
-          aria-label="Elan mətni, link, kod və ya kart nömrəsi"
-          placeholder="Elan mətni, link, kod və ya kart nömrəsi"
-          rows={4}
+          aria-label="Elanın linki"
+          placeholder="Elanın linki"
           spellCheck={false}
-          className="rounded-3xl px-5 py-4 text-left text-lg shadow-medium"
+          autoComplete="off"
+          className="h-12 min-w-0 flex-1 bg-transparent pl-4 text-lg outline-none placeholder:text-muted-foreground"
         />
-        <Button size="lg" disabled={busy || q.trim().length < 4} className="w-full">
-          <Icon icon={Search01Icon} size={20} />
-          Yoxla
+        <Button
+          size="icon"
+          aria-label="Yoxla"
+          disabled={busy || !isLink(q)}
+          className="size-12 shrink-0 rounded-full"
+        >
+          <Icon icon={Search01Icon} size={22} />
         </Button>
         <input
           ref={fileInput}
@@ -173,13 +193,13 @@ export function CheckForm() {
         <Button
           type="button"
           variant="outline"
-          size="lg"
+          size="icon"
+          aria-label="Şəkil və ya sənəd"
           disabled={busy}
           onClick={() => fileInput.current?.click()}
-          className="w-full"
+          className="size-12 shrink-0 rounded-full"
         >
-          <Icon icon={File01Icon} size={20} />
-          Şəkil və ya sənəd
+          <Icon icon={File01Icon} size={22} />
         </Button>
       </form>
 
