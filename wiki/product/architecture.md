@@ -58,6 +58,20 @@ Stack, code layout and API surface of the MVP in `product/`. Scaffolded 2026-11-
 - Document upload and forgery check (reuse, tamper, AI-generation signals)
 - Clone detection behind the verify page
 - Payout entries to the clinic
-- Deployment (Neon database, Vercel project, env vars)
 
 See [[mvp-scope]], [[threat-model]], [[decisions]].
+
+## Deployment (2026-11-17)
+
+| Piece | Setup |
+|---|---|
+| Vercel project | `safefund` (team mralialyev-5170s-projects), root directory `product/`, functions in `fra1` (Frankfurt) via `product/vercel.json` |
+| Git | Connected to github.com/alistein/fundraising-odlar-hackathon — every push to `main` deploys to production |
+| Production URL | https://safefund.vercel.app (behind Vercel login until deployment protection is relaxed) |
+| Database | Neon Postgres `safefund-db`, free plan, Frankfurt, via Vercel Marketplace; env vars `DATABASE_URL` (+ `_UNPOOLED`, `PG*`) set for all environments. Schema pushed and seeded 2026-11-17. |
+| Blob | Private store `safefund-docs`, Frankfurt; `BLOB_READ_WRITE_TOKEN` set for all environments |
+| Encryption | `FILE_ENCRYPTION_KEY` (sensitive) for production and preview only; local dev uses its own key from `.env.local` |
+
+To run against the cloud database locally: `vercel env pull product/.env.local` from the repo root — but production and local then share the same data.
+
+Tested on production 2026-11-17: pages and APIs return 200, a test donation was appended and the chain verified, an unverified campaign refused a donation.

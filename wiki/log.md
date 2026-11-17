@@ -47,3 +47,6 @@ Append-only. Format: `## [YYYY-MM-DD] ingest|query|decision|lint | Title`.
 
 ## [2026-11-17] decision | Avatars: DiceBear Lorelei
 - Added avatars to user menu, donor list and ledger; recorded in design-system and decisions.
+
+## [2026-11-17] decision | Deployed to Vercel
+- Vercel project, Neon database, private Blob store, encryption key; GitHub auto-deploy. Recorded in architecture and open-questions.
