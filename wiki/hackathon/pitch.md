@@ -12,13 +12,17 @@ Required format: 5 minutes pitch/demo + 2 minutes Q&A, 18 Nov 10:30–13:00. Sec
 | Future | 15 s | Next direction | Telegram / WhatsApp bot, first clinic pilot, licensed payment partner. |
 | Q&A | 2 min | Jury questions | Prep from [[swot]] weaknesses/threats |
 
+Full slide text and speaker script: [[deck]] (2026-11-17). The content column above predates the Tool/Platform roadmap; [[deck]] is current.
+
 ## Notes
 
 - Open the demo with a scam being caught, not with a campaign being created. See [[product-overview]].
 - Build the pitch as an HTML artifact using the app's `tokens.css` so slides and product match. See [[design-system]].
+- Demo is a **pre-recorded video** (decided 2026-11-17); keep the live app open for a Q&A check. See [[deck]].
 - The demo is 40% of the talk time and maps to 45 pts of criteria 3 and 4 — rehearse it in Sprint III, with cached verdicts as a fallback if the AI call is slow. See [[judging-criteria]], [[scam-checker]].
 - Put the threat table on a slide. See [[threat-model]].
-- Evidence gap: thalassemia case date and one or two recent local cases still needed for the problem slide. See [[fraud-cases]], [[open-questions]].
+- Problem-slide numbers: 36 children, 3 deaths, 1M AZN; ~200k AZN Instagram case (Dec 2025); 22.4M AZN / 16,804 cyber-fraud cases in 2024 (MIA). See [[fraud-cases]], [[fraud-statistics]].
+- Impact slide: [[business-model]], [[go-to-market]], [[market-global]]. Q&A prep: [[jury-qa]].
 - Technical check is 10:00–10:30 on the day. See [[schedule]].
 
-Sources: [[hackathon-program]], [[idea-brief]]
+Sources: [[hackathon-program]], [[idea-brief]], [[market-research-2026-11-17]]

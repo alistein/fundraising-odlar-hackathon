@@ -4,6 +4,11 @@ Dated log of team decisions (stack, scope cuts, naming). Newest first. Update af
 
 | Date | Decision | Why | Affects |
 |---|---|---|---|
+| 2026-11-17 | Pitch demo is a **pre-recorded video**; the team prepares the flow | Removes stage risk (slow AI call, network); keep the live app open for Q&A | [[deck]], [[pitch]] |
+| 2026-11-17 | **Two gates in the MVP:** gate 1 = AI checker; gate 2 = myGov identity check against our own **mock** myGov sandbox (synthetic FIN codes, consent screen, only hashes stored). Real myGov stays post-MVP. Tracked as SAFEFUN-8 (unassigned). Partly reverses "myGov not in MVP" from earlier today | Shows the identity layer in the demo without a real government integration or real personal data | [[roadmap]], [[mvp-scope]], [[scam-checker]] |
+| 2026-11-17 | **Roadmap in two stages: Tool, then Platform.** MVP = the Tool: paste an Instagram or LinkedIn post link into the Checker and see whether the campaign is legit (a teammate is building it). Platform = the full product; a half-built version ships with the MVP (clarified the same day), the full one comes later. After that: **FIN code / myGov identity integration** (not in MVP; myGov covers Azerbaijan only). **Clinic verification is the last roadmap item**, not in the MVP. | Ship one working tool for the hackathon; identity and clinic checks need integrations and partners that can't be done in a day | [[roadmap]], [[product-overview]], [[mvp-scope]], [[scam-checker]], [[go-to-market]], [[business-model]], [[jury-qa]] |
+| 2026-11-17 | Post-link checker on the landing page: paste an Instagram / LinkedIn post link, we fetch it and run the checker. Demo fetches only our own synthetic posts; real-platform fetching is roadmap. Tracked as SAFEFUN-6 (Emil) | Rules forbid real personal data and scraped appeals; platforms have no open API for public posts | [[scam-checker]], [[mvp-scope]] |
+| 2026-11-17 | Linear: team **SafeFund** (`SAFEFUN`) in workspace "Z" is the default for task tracking; agents ignore the Kintalks team | Workspace holds an unrelated Kintalks team; agents need one fixed target | [[linear]] |
 | 2026-11-17 | **Pivot: checker-first.** The AI scam and forgery checker is the product and the home page; the verified-campaign platform becomes the registry (ground truth) behind it. No code is thrown away. Proposed by Emil — to be confirmed by the whole team. | The working build was a donation platform with one security feature; no AI in the code and both claimed tracks rested on stubs, so fit to a CyberAI hackathon was weak. The checker is scam/fraud detection (track 1) and a public anti-scam tool (track 3), and works without clinics or a payment licence. | [[product-overview]], [[scam-checker]], [[product-flow]], [[threat-model]], [[mvp-scope]], [[architecture]], [[pitch]], [[tracks]], [[judging-criteria]], [[swot]] |
 | 2026-11-17 | Local dev uses the production keys (Neon, Blob, encryption key) | Team wants one set of keys everywhere; local and live share data | [[architecture]] |
 | 2026-11-17 | Avatars: DiceBear Lorelei, generated locally | Team pick from DiceBear; CC0 licence, no attribution needed; local generation keeps donor names out of third-party requests | [[design-system]] |
@@ -20,7 +25,6 @@ Dated log of team decisions (stack, scope cuts, naming). Newest first. Update af
 ## Pending
 
 - Which track(s) to declare at submission — brief proposes two, see [[tracks]]
-- Team confirmation of the checker-first pivot
 - AI provider for extraction and document checks, see [[scam-checker]]
 
 Tracked in [[open-questions]].

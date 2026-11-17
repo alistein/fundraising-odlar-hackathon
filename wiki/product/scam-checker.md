@@ -2,6 +2,8 @@
 
 The hero feature after the 2026-11-17 pivot: anyone pastes a donation appeal and gets a verdict — verified, suspicious or scam — with the reasons. Design only; nothing on this page is built yet (see [[architecture]]).
 
+MVP focus (2026-11-17): **Instagram and LinkedIn post links** are the primary input; the other inputs below are secondary. → [[roadmap]]
+
 ## Input
 
 One box on the home page. Accepts any of:
@@ -9,7 +11,7 @@ One box on the home page. Accepts any of:
 | Input | Example |
 |---|---|
 | Appeal text | A copied Instagram / WhatsApp / Telegram post |
-| Link | A Safefund campaign URL or a link from the post |
+| Link | A Safefund campaign URL, a link from the post, or a social-post link (Instagram / LinkedIn); the post text and images are fetched and checked. Demo: our own synthetic posts only (decided 2026-11-17) |
 | Card number or IBAN | The number the post asks donors to send money to |
 | Screenshot | Image of the post |
 | Document | Medical certificate or invoice attached to the appeal |
@@ -29,7 +31,7 @@ One box on the home page. Accepts any of:
 
 | Verdict | When | Mascot mood |
 |---|---|---|
-| Verified | Link or account belongs to a clinic-confirmed campaign | happy |
+| Verified | Link or account belongs to a campaign in the registry (MVP: seeded; later identity- and clinic-checked) | happy |
 | Suspicious | No registry match and scam signals present, or a document flagged | thinking |
 | Scam | Clone of a verified campaign with swapped payment details, or a blacklisted identifier | alert |
 
@@ -37,7 +39,7 @@ Every verdict lists its reasons, and for a clone it links the original verified 
 
 ## Where the ground truth comes from
 
-- **Verified registry:** campaigns that passed clinic confirmation in the existing flow → [[product-flow]]. Each needs its public identifiers stored (campaign URL, clinic IBAN).
+- **Verified registry:** in the MVP, synthetic seeded campaigns. Later, organisers identity-checked through FIN code / myGov (Azerbaijan), and last, clinic-confirmed campaigns → [[roadmap]], [[product-flow]]. Each entry needs its public identifiers stored (post URL, account, card / IBAN).
 - **Blacklist:** identifiers reported by users and confirmed as scams. Seeded with synthetic entries for the demo.
 
 ## Data model additions (planned)

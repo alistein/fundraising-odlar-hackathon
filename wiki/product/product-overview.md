@@ -19,6 +19,10 @@ Medical fundraising in Azerbaijan runs on social media posts and a personal card
 
 The transfer limit broke the existing channel, so collections are moving to new cards, relatives' cards and e-wallets — exactly the confusion scammers exploit. The Central Bank's stated goal (transparency, less fraud) is the same goal this product serves.
 
+## Stages (decided 2026-11-17)
+
+**Tool first, then Platform.** The MVP is the Tool: paste an Instagram or LinkedIn link and see whether the campaign is legit. After it come the Platform, then FIN code / myGov identity checks (Azerbaijan only), and clinic verification last. The MVP also carries a half-built Platform (campaign pages, test donations, ledger); identity and clinic checks are not in it. → [[roadmap]]
+
 ## Two layers
 
 | Layer | What it does | Detail |
@@ -26,7 +30,7 @@ The transfer limit broke the existing channel, so collections are moving to new 
 | **Scam checker** (hero) | Extracts the claims from an appeal, matches them against the registry and blacklist, detects clones, checks documents for forgery, returns a verdict with reasons | [[scam-checker]] |
 | **Verified registry** (ground truth) | Clinic confirms diagnosis and cost, donations go to the clinic, every payment sits on a tamper-evident ledger | [[product-flow]] |
 
-The checker works from day one without signed clinics or a payment licence; the registry makes it more accurate as campaigns join.
+The checker works from day one without signed clinics or a payment licence; the registry makes it more accurate as campaigns join. Clinic confirmation is now the **last** roadmap stage, so the registry starts from seeded and identity-checked campaigns ([[roadmap]]).
 
 ## Users
 

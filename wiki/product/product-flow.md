@@ -2,6 +2,8 @@
 
 Two flows since the 2026-11-17 pivot: the donor's check (hero) and the campaign's path to the verified registry (ground truth).
 
+> **2026-11-17:** the registry flow (B) is the Platform stage, and its clinic step is the **last** roadmap item, not MVP. The MVP is the check flow only. → [[roadmap]]
+
 ## A. Check flow — donor
 
 | # | Step | What happens |
