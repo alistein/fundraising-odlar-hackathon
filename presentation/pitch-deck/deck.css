@@ -77,7 +77,7 @@ section.dark .source { color: var(--mute-dark); }
 .post .who { display: flex; align-items: center; gap: 20px; }
 .post .avatar { width: 64px; height: 64px; border-radius: 999px; background: var(--line); }
 .post .handle { font-size: 28px; font-weight: 800; color: var(--ink); }
-.post .photo { height: 260px; border-radius: 20px; background: #E9E4DA; display: flex; align-items: center; justify-content: center; }
+.post .photo { height: 200px; border-radius: 20px; background: #E9E4DA; display: flex; align-items: center; justify-content: center; }
 .post .photo p { font-size: 28px; color: var(--mute); }
 .post .caption { font-size: 30px; line-height: 1.35; color: var(--ink); }
 .post .cardno { font-size: 30px; font-weight: 800; color: var(--ink); }

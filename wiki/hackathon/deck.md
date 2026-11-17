@@ -2,7 +2,7 @@
 
 Slide text and speaker script for the 18 Nov pitch, following the organisers' format: 5 min talk and demo, then 2 min Q&A. Each slide gives the on-screen text (short) and what to say (timed at ~140 words/min). Draft, 2026-11-17.
 
-**Slides:** https://claude.ai/artifact/Li9v6gMuq5oXNTkm9X28cv (private until shared; 13 slides + 3 backup, click-by-click reveals, app tokens and mascot).
+**Slides:** https://claude.ai/artifact/Li9v6gMuq5oXNTkm9X28cv (private until shared; 13 slides + 3 backup, click-by-click reveals, app tokens and mascot). **Slides and speaker notes are in Azerbaijani** (2026-11-17); the English text below is the reference version.
 
 Format and criteria: [[pitch]], [[judging-criteria]]. Evidence: [[fraud-cases]], [[fraud-statistics]]. Stages: [[roadmap]].
 
@@ -153,7 +153,7 @@ Keep them hidden and open one only if asked. Answers: [[jury-qa]].
 
 ## Open points
 
-- Pitch language: this draft is in English. Translate to Azerbaijani if the jury or the team prefers ([[open-questions]]).
+- Pitch language: Azerbaijani, decided 2026-11-17; the deck is translated, with no em dashes or middle dots and no full stops on slide lines.
 - The demo video depends on the post-link checker being finished and the demo posts being seeded; the team owns the flow.
 - Whether to show clinic confirmation: currently left out (clinics are last on the [[roadmap]]).
 

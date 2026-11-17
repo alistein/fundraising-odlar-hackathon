@@ -8,7 +8,6 @@ Unresolved items. Move a row to "Resolved" with the answer and date when settled
 |---|---|---|
 | Clash check for "Safefund" (existing companies, domains) | Before pitch | Open |
 | Which track(s) to declare — brief proposes 1 and 3 → [[tracks]] | 22:00 submission | Open |
-| Pitch language: English or Azerbaijani deck? → [[deck]] | Before pitch | Open |
 | Show the clinic-confirmation step (built in Sprint I, but clinics are last on the roadmap) in the demo, or only the half-built Platform's donations + ledger? → [[roadmap]] | Before pitch | Open |
 | What "verified" means in the MVP Tool without identity or clinic checks → [[roadmap]], [[scam-checker]] | Before pitch | Open |
 | FIN code / myGov: which API or access route exists for third parties, and what consent is required? → [[roadmap]] | Roadmap | Open |
@@ -35,6 +34,7 @@ Unresolved items. Move a row to "Resolved" with the answer and date when settled
 
 | Question | Answer | Date |
 |---|---|---|
+| Pitch language | Azerbaijani → [[deck]] | 2026-11-17 |
 | Product stages and what's in the MVP | MVP = Tool (Instagram / LinkedIn link checker) + half-built Platform; then full Platform; then FIN code / myGov; clinics last → [[roadmap]] | 2026-11-17 |
 | Whole team confirms the checker-first pivot | Confirmed as the Tool stage → [[decisions]] | 2026-11-17 |
 | Recent local fraud cases for the problem slide | Seidova case opened Feb 2023 (36 children, ~1M AZN, 3 deaths); Həsənov ~200k AZN, Dec 2025; more → [[fraud-cases]] | 2026-11-17 |

@@ -105,3 +105,15 @@ Append-only. Format: `## [YYYY-MM-DD] ingest|query|decision|lint | Title`.
 
 ## [2026-11-17] query | Pitch deck artifact
 - Built the slide deck as a Slides artifact (13 slides + 3 backup), minimal, app tokens, step-by-step reveals; script in speaker notes. Linked from deck.
+
+## [2026-11-17] decision | Verdict shown by mascot colour
+- Verdict card mascot: green/happy = safe, yellow/thinking = neutral, red/alert = scam or AI-generated; header logo stays green.
+- Linear: SAFEFUN-9, assigned to Ali. Updated scam-checker verdict table.
+
+## [2026-11-17] decision | Deck in Azerbaijani
+- Translated all slides and speaker notes to Azerbaijani; removed em dashes, middle dots and full stops on slide lines. Updated presentation/pitch-deck, deck, open-questions.
+
+## [2026-11-17] decision | "Reyestr" nav becomes "Statistika"
+- Nav item "Reyestr" replaced by a statistics page: money collected, verified campaigns, checks run, potential fraud detected, blacklisted identifiers, money protected.
+- Campaign list stays, reached from the category grid (SAFEFUN-7).
+- Linear: SAFEFUN-10, unassigned; depends on `checks` and `scam_reports` from SAFEFUN-5.
