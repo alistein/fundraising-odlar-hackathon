@@ -270,3 +270,47 @@ Append-only. Format: `## [YYYY-MM-DD] ingest|query|decision|lint | Title`.
 - Success opens a modal "MyGov tərəfindən təsdiqləndi" with the happy mascot, the campaign title and "Kampaniya canlıdır" (or "AI nəticəsi yoxlanılır" when the AI gate failed); "Kampaniyaya keç" goes to the campaign.
 - shadcn Dialog added and aligned to the tokens (Hugeicons close icon, foreground scrim). Identity API now also returns `live`.
 - Tested on Leyla (SF-3307); live DB reseeded afterwards, so Leyla is waiting for MyGov again.
+
+## [2026-11-17] decision | Deck solution slide follows the platform core
+- Solution slide rewritten: campaigns pass documents, AI gate and MyGov before going live; payouts go through Safefund; the link checker is shown last as the free tool for campaigns on other platforms.
+- deck.md solution text updated; artifact and presentation/pitch-deck synced.
+
+## [2026-11-17] decision | Solution slide as an animated scene
+- Solution slide redrawn as an illustration from the design tokens: campaign card through three gates, fake stopped at the AI gate, money through the Safefund mascot, link checker last. Four clicks; checked in a local preview.
+
+## [2026-11-17] decision | Deck roadmap: market expansion
+- Roadmap slide: MVP (platform + link tool) → Azerbaijan (real MyGov, bank partner) → Central Asia (Kazakhstan, Uzbekistan) → global API. Clinic step and thalassemia line removed from the slide.
+- Fixed the track drawing over the dots; each step now draws its segment in.
+- Synced presentation/pitch-deck with the deck (whynow slide was removed in the deck, so removed here too).
+
+## [2026-11-17] decision | Market slide merged into roadmap
+- Market slide removed from the deck; its expansion path already lives on the roadmap, and its 442B USD stat (GASA) is now the roadmap's last click. "One bank covers much of Azerbaijan" moved into the roadmap speaker notes.
+
+## [2026-11-17] decision | Roadmap timeline redrawn
+- Roadmap track and circles are now one drawn SVG timeline: the line leaves each circle at its edge, at its centre height, and each click draws the next segment and circle.
+
+## [2026-11-17] decision | Users slide illustrated
+- Users slide redrawn as three portraits from the design tokens (donor with a phone and check, family with a verified badge, bank with a shield), joined by a dotted path. Donor line now matches the platform core: "Yalnız yoxlanmış kampaniyalara ianə edirlər".
+
+## [2026-11-17] decision | Users slide: charities replace banks
+- Third user on the Users slide is now local and global charity organisations that collect money on behalf of people (they use Safefund to show each case is real and where the money went). Banks stay on the Business slide as payers.
+
+## [2026-11-17] decision | Business model: 1 manat fee per donation
+- After mentor feedback, the Business slide now shows a donation splitting into 100 manat for the family and a 1 manat fee for Safefund, paid by the donor. Recorded in decisions; business-model page flagged. Open: fixed fee vs small percentage.
+
+## [2026-11-17] query | Donation platform fee benchmarks
+- Added a fee benchmark table (GoFundMe, JustGiving, Kazakhstan, Türkiye) and takeaway to business-model.
+
+## [2026-11-17] decision | Fee: 2% donor-paid, min 0.20 AZN
+- Business slide and wiki switched from a fixed 1 manat fee to 2% paid by the donor (minimum 0.20 AZN); family still gets 100%. Reason in decisions and the fee benchmark table.
+
+## [2026-11-18] decision | Team slide
+- Team slide added before the close: Əli Əliyev (Luhive.com founder, 5+ yrs software, 1.5 yrs entrepreneurship, SpaceXSI community manager) and Emil (mobile developer at Push30, core developer of 30AI Health, hackathon winner, Teknofest, 4+ yrs software). Initials until photos arrive.
+
+## [2026-11-18] query | Competitors slide; layf.az found
+- layf.az is a local verified-donation platform (LAYF charity foundation, manual document checks, 1–3 days). Added to market-azerbaijan; the old claim "no verified local platform found" is now wrong and was fixed on backup slide A2.
+- New Competitors slide before the roadmap: grid of Instagram + card, layf.az, GoFundMe vs Safefund on documents, automatic fraud checks, state identity check, checks of posts elsewhere, AZN.
+
+## [2026-11-18] decision | Backup slides: security added, legal updated
+- New A4 security backup slide: AES-256-GCM files, FIN and card numbers stored only as HMAC, hash-chained ledger, forged-document checks, synthetic demo data (from architecture and threat-model).
+- A3 legal rewritten for the 2% model: money moves through a licensed bank or payment institution straight to the recipient; the 2% is a donor-paid verification fee; crowdfunding law 450-VIIQ covers only equity and debt. Lawyer review still pending.

@@ -122,3 +122,134 @@ section.dark .source { color: var(--mute-dark); }
 
 /* Tables (backup) */
 table { font-size: 30px; color: var(--ink); width: 1664px; }
+
+/* Solution scene: gates, money through Safefund, link check */
+.sol { position: relative; width: 1664px; height: 620px; }
+.sol .label { position: absolute; top: 226px; font-size: 28px; font-weight: 800; color: var(--forest); text-align: center; }
+.sol .layer { position: absolute; left: 0; top: 0; width: 1664px; height: 620px; }
+.sol .layer.fragment, .sol .ext.fragment { transform: none; }
+.sol .ring { position: absolute; top: 84px; width: 132px; height: 132px; border-radius: 999px; border: 6px solid var(--forest); box-sizing: border-box; }
+.sol .ring.fail { border-color: var(--scam); }
+.sol .badge { position: absolute; top: 72px; width: 52px; height: 52px; border-radius: 999px; background: var(--forest); }
+.sol .badge.fail { background: var(--scam); }
+.fragment.visible .ring { animation: ring-in 500ms var(--ease) both; animation-delay: var(--d); }
+.fragment.visible .badge { animation: badge-in 600ms var(--ease) both; animation-delay: var(--d); }
+@keyframes ring-in { from { opacity: 0; transform: scale(0.8); } }
+@keyframes badge-in { from { opacity: 0; transform: scale(0.3); } }
+.sol .ring.fail, .sol .badge.fail { opacity: 0; }
+.fragment.visible .ring.fail, .fragment.visible .badge.fail { animation: flash 2600ms var(--ease) both; animation-delay: var(--d); }
+@keyframes flash { 0% { opacity: 0; transform: scale(0.6); } 15%, 75% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1); } }
+.sol .camp { position: absolute; left: 240px; top: 106px; width: 120px; height: 88px; box-sizing: border-box; padding: 10px; background: var(--card); border: 2px solid var(--line); border-radius: 16px; box-shadow: 0 6px 14px rgba(35, 35, 35, 0.12); display: flex; flex-direction: column; gap: 6px; }
+.sol .camp .photo { height: 38px; border-radius: 8px; background: #E9E4DA; display: flex; align-items: center; justify-content: center; }
+.sol .camp .bar { height: 8px; border-radius: 4px; background: var(--line); }
+.sol .camp .bar.short { width: 60%; }
+.sol .camp.go { transform: translateX(1030px); }
+.fragment.visible .camp.go { animation: camp-go 3000ms linear both; animation-delay: 400ms; }
+@keyframes camp-go { from { transform: translateX(0); } }
+.sol .live { position: absolute; left: 1272px; top: 36px; font-size: 26px; padding: 8px 22px; }
+.fragment.visible .live { animation: badge-in 600ms var(--ease) both; animation-delay: 3.4s; }
+.sol .camp.fake { background: var(--scam-soft); border-color: var(--scam); opacity: 0; transform: translate(420px, 60px); }
+.fragment.visible .camp.fake { animation: camp-fake 2600ms var(--ease) both; animation-delay: 300ms; }
+@keyframes camp-fake {
+  0% { opacity: 1; transform: translate(0, 0); }
+  46% { transform: translate(420px, 0); }
+  52% { transform: translate(400px, 0); }
+  58% { transform: translate(420px, 0); }
+  64% { transform: translate(404px, 0); }
+  70%, 80% { opacity: 1; transform: translate(420px, 0); }
+  100% { opacity: 0; transform: translate(420px, 60px); }
+}
+.sol .guard { position: absolute; left: 744px; top: 354px; width: 112px; height: 112px; }
+.fragment.visible .guard { animation: badge-in 700ms var(--ease) both; }
+.sol .ext { position: absolute; left: 0; top: 520px; width: 1664px; display: flex; align-items: center; justify-content: center; gap: 32px; }
+.sol .ext-label { font-size: 32px; font-weight: 800; color: var(--mute); }
+.input.mini { width: 640px; padding: 12px 12px 12px 32px; }
+.input.mini .url { font-size: 30px; }
+.input.mini .url span { display: inline-block; white-space: nowrap; }
+.input.mini .btn { font-size: 28px; padding: 12px 34px; }
+.fragment.visible .input.mini .url span { animation: type-in 1100ms steps(20) both; animation-delay: 300ms; }
+@keyframes type-in { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+.fragment.visible .input.mini .btn { animation: press 300ms var(--ease) both; animation-delay: 1.5s; }
+@keyframes press { 50% { transform: scale(0.92); } }
+.fragment.visible .verdict-pop { animation: badge-in 600ms var(--ease) both; animation-delay: 1.9s; }
+@media (prefers-reduced-motion: reduce) { .sol *, .sol .fragment * { animation: none !important; } }
+
+/* Roadmap: one drawn timeline, the line meets each circle at its edge */
+.rm { position: relative; width: 1664px; margin: auto 0; }
+.rm .tl { display: block; }
+.rm .tl-layer { position: absolute; left: 0; top: 0; width: 1664px; height: 40px; }
+.rm .tl-layer.fragment { transform: none; }
+.rm .tl-seg { stroke-dasharray: 1; stroke-dashoffset: 0; }
+.fragment.visible .tl-seg { animation: tl-draw 600ms var(--ease) both; }
+@keyframes tl-draw { from { stroke-dashoffset: 1; } }
+.rm .tl-dot { transform-box: fill-box; transform-origin: center; }
+.fragment.visible .tl-dot { animation: badge-in 450ms var(--ease) both; animation-delay: 500ms; }
+.rm .tl-steps { display: flex; margin-top: 28px; }
+.rm .tl-step { width: 416px; box-sizing: border-box; padding-right: 40px; display: flex; flex-direction: column; gap: 16px; }
+.rm .tl-step .when { font-size: 28px; font-weight: 800; color: var(--mute); }
+.rm .tl-step .when.now { color: var(--forest); }
+@media (prefers-reduced-motion: reduce) { .rm * { animation: none !important; } }
+
+/* Users: three illustrated portraits, joined by a dotted path */
+.people { display: flex; gap: 52px; width: 1664px; margin: auto 0; }
+.people .who { position: relative; width: 520px; display: flex; flex-direction: column; align-items: center; gap: 20px; text-align: center; }
+.people .portrait { display: block; margin-bottom: 12px; }
+.people .link { position: absolute; left: -162px; top: 146px; }
+.people .line { font-size: 32px; line-height: 1.35; color: var(--mute); max-width: 440px; }
+.people .fragment.visible .portrait, .people .who.fragment.visible .portrait { animation: badge-in 600ms var(--ease) both; }
+
+/* Business: donation splits into the full amount for the family and a 1 manat fee */
+.biz { position: relative; width: 1664px; height: 470px; }
+.biz .layer { position: absolute; left: 0; top: 0; width: 1664px; height: 470px; }
+.biz .layer.fragment { transform: none; }
+.biz .lbl { position: absolute; font-size: 32px; font-weight: 800; color: var(--forest); text-align: center; }
+.biz .amt { position: absolute; font-weight: 900; color: var(--forest); letter-spacing: -2px; }
+.biz .big-amt { font-size: 88px; }
+.biz .fee-amt { font-size: 52px; color: var(--mute); }
+.biz .guard-biz { position: absolute; left: 1305px; top: 290px; width: 150px; height: 150px; }
+.fragment.visible .guard-biz, .fragment.visible .amt { animation: badge-in 600ms var(--ease) both; animation-delay: 300ms; }
+
+/* Team: two round portraits */
+.team { display: flex; justify-content: center; gap: 120px; margin: auto 0; }
+.team .mate { display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; }
+.team .face { width: 260px; height: 260px; border-radius: 999px; overflow: hidden; display: flex; align-items: center; justify-content: center; border: 8px solid var(--card); box-shadow: 0 0 0 4px var(--line), 0 12px 28px rgba(35, 35, 35, 0.10); margin-bottom: 16px; }
+.team .face.lime { background: var(--lime); }
+.team .face.forest { background: var(--forest); }
+.team .face p { font-size: 110px; font-weight: 900; color: var(--forest); }
+.team .face.forest p { color: var(--lime); }
+.team .face img { width: 100%; height: 100%; object-fit: cover; }
+.team .role { font-size: 34px; font-weight: 800; color: var(--forest); }
+.team .mate { width: 640px; }
+.team .facts { list-style: none; padding: 0; margin: 8px 0 0; display: flex; flex-direction: column; gap: 10px; }
+.team .facts li { font-size: 30px; line-height: 1.3; color: var(--mute); }
+
+/* Competitors: comparison grid, Safefund column arrives on click */
+.cmp { width: 1664px; display: flex; flex-direction: column; }
+.cmp .c-row { display: grid; grid-template-columns: 584px repeat(4, 270px); align-items: center; border-bottom: 2px solid var(--line); }
+.cmp .c-row:last-child { border-bottom: 0; }
+.cmp .c-head { border-bottom: 0; align-items: end; }
+.cmp .c-lbl { font-size: 32px; font-weight: 700; color: var(--ink); padding: 22px 24px 22px 0; line-height: 1.25; }
+.cmp .c-col { text-align: center; padding: 0 12px 16px; }
+.cmp .c-tag { font-size: 22px; font-weight: 800; letter-spacing: 2px; color: var(--mute); text-transform: uppercase; }
+.cmp .c-name { font-size: 30px; font-weight: 900; color: var(--forest); line-height: 1.2; }
+.cmp .c-cell { display: flex; justify-content: center; align-items: center; height: 100%; padding: 18px 0; }
+.cmp .c-us { background: var(--lime); }
+.cmp .c-head .c-us { border-radius: 28px 28px 0 0; padding-top: 20px; }
+.cmp .c-row:last-child .c-us { border-radius: 0 0 28px 28px; }
+.cmp .c-us .c-tag { color: var(--forest); }
+.cmp .mk { display: block; width: 44px; height: 44px; }
+.cmp .c-us.fragment { transform: none; }
+
+/* Team header: company logos top right */
+.team-head { display: flex; align-items: center; justify-content: space-between; width: 1664px; }
+.team-head .logos { display: flex; align-items: center; gap: 48px; }
+.team-head .logos img { height: 40px; width: auto; display: block; }
+.team-head .logos .lg-luhive { height: 44px; }
+.team-head .logos .lg-spacexsi { height: 34px; }
+
+/* Backup: compact 3 x 2 card grid */
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; width: 1664px; }
+.card.sm { padding: 36px; gap: 14px; }
+.card.sm h3 { font-size: 36px; }
+.card.sm .line { font-size: 28px; }
+.card.sm .num { width: 48px; height: 48px; font-size: 24px; }

@@ -1,0 +1,14 @@
+<section id="a4-security" class="footed">
+<p class="eyebrow">ƏLAVƏ, TƏHLÜKƏSİZLİK</p>
+<h2>Məlumatları belə qoruyuruq</h2>
+<div class="grid3">
+<div class="card sm"><p class="num">1</p><h3>Sənədlər şifrələnir</h3><p class="line">Tibbi fayllar AES-256-GCM ilə şifrələnib saxlanılır</p></div>
+<div class="card sm"><p class="num">2</p><h3>FIN kod saxlanılmır</h3><p class="line">Bazada yalnız onun HMAC heşi qalır</p></div>
+<div class="card sm"><p class="num">3</p><h3>Kart nömrəsi saxlanılmır</h3><p class="line">Yalnız heşi və son 4 rəqəmi saxlanılır</p></div>
+<div class="card sm"><p class="num">4</p><h3>Dəyişməz reyestr</h3><p class="line">Hər ianə əvvəlkinin heşi ilə zəncirlənir, dəyişiklik dərhal görünür</p></div>
+<div class="card sm"><p class="num">5</p><h3>Saxta sənəd aşkarlanır</h3><p class="line">Təkrar istifadə heşi, redaktə izləri və süni intellekt baxışı</p></div>
+<div class="card sm"><p class="num">6</p><h3>Demo məlumatı sintetikdir</h3><p class="line">Real xəstə, bank və ya MyGov sistemi istifadə olunmur</p></div>
+</div>
+<p class="source">Fayllar Frankfurtdakı (AB) bağlı yaddaşda saxlanılır; MyGov hələlik test mühitidir</p>
+<aside>Təhlükəsizlik və ya məlumatların qorunması soruşulsa, bu slaydı açın. Tibbi sənədlər yaddaşa yazılmazdan əvvəl AES-256-GCM ilə şifrələnir. FIN kod və kart nömrəsi açıq şəkildə saxlanılmır, yalnız heşləri saxlanılır, ona görə baza sızsa belə bu məlumatlar oxunmur. Hər ianə əvvəlki qeydin heşi ilə zəncirlənir, kimsə bazada bir rəqəmi dəyişsə, yoxlama dərhal hansı qeydin dəyişdiyini göstərir. Demoda bütün məlumatlar sintetikdir.</aside>
+</section>

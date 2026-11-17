@@ -30,6 +30,7 @@ Instagram pages, TikTok, Facebook groups, Telegram and WhatsApp forwards. Each c
 | Large foundations and the state treatment-abroad commission | Fund treatment through their own programmes | Yes, internally | Closed, not a channel for public giving; queues |
 | Bank CSR and donate buttons (e.g. Karabakh Revival Fund in banking apps) | One-click giving to state funds | n/a | Not open to individual medical cases |
 | SMS donations through mobile operators | Short-number campaigns | Depends on the NGO | No verification layer; partner, not competitor |
+| layf.az (LAYF Xeyriyyə Fondu, registered NGO, 2021) | Donation platform: applicants upload ID and medical documents; admin checks manually in 1–3 working days; money goes to the foundation account, then to the hospital or institution | Yes, manual; no AI, no state identity check, no checks of posts elsewhere | Self-reported: ₼2.4M raised, 15K+ donors, 320 campaigns, "98% reaches beneficiaries"; report section empty, no audit **(unverified)**. Source: layf.az, read 2026-11-18 |
 | GoFundMe and other global platforms | Some Azerbaijani families use them for treatment abroad | No ("cannot verify" in its terms) | Not local; no AZN, no clinic payout |
 | Generic scam checkers (link and URL scanners) | Check URLs and websites | n/a | Don't read appeals, card numbers or medical documents |
 

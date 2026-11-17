@@ -4,7 +4,7 @@ Slide text and speaker script for the 18 Nov pitch, following the organisers' fo
 
 **Slides:** https://claude.ai/artifact/Li9v6gMuq5oXNTkm9X28cv (private until shared; 14 slides + 3 backup, problem opens with an animated scene: donors' money flowing to a family, then diverted to a scammer's card; click-by-click reveals, app tokens and mascot). **Slides and speaker notes are in Azerbaijani** (2026-11-17); the English text below is the reference version.
 
-> **Case fit (2026-11-17):** the Instagram case (Həsənov, ~200k AZN) is exactly what the Tool catches, so it leads the problem. The thalassemia case (Seidova, ~1M AZN) was a fake medical-travel intermediary, not a donation post; only clinic verification and paying the clinic directly would stop it, so it sits on the Future slide. See [[fraud-cases]].
+> **Case fit (2026-11-17):** the Instagram case (Həsənov, ~200k AZN) is exactly what the Tool catches, so it leads the problem. The thalassemia case (Seidova, ~1M AZN) was a fake medical-travel intermediary, not a donation post; only clinic verification and paying the clinic directly would stop it, it was on the Future slide until 2026-11-17 and is now Q&A material only. See [[fraud-cases]].
 
 Format and criteria: [[pitch]], [[judging-criteria]]. Evidence: [[fraud-cases]], [[fraud-statistics]]. Stages: [[roadmap]].
 
@@ -55,18 +55,20 @@ Format and criteria: [[pitch]], [[judging-criteria]]. Evidence: [[fraud-cases]],
 
 *Criterion 2: innovation and differentiation (15 pts)*
 
-**On screen**
+**On screen** (animated scene, updated 2026-11-17 after the core moved to the platform, see [[decisions]])
 
-> Paste a link → get a verdict in seconds
-> **Verified · Suspicious · Scam**, with the reasons
->
-> AI reads the post · finds clones · checks the scam blacklist · flags edited documents
+> Title: "Hər kampaniya yoxlamadan keçir". Family on the left, donors on the right, three gates between: Sənədlər, Süni intellekt, MyGov.
+> Click 1: a campaign card travels through the gates, each gate lights with a check, the card reaches the donors with a "Yayımda" badge.
+> Click 2: a red fake card is stopped at the AI gate, shakes and drops.
+> Click 3: coins flow from the donors through the Safefund mascot to the family.
+> Click 4: "Başqa platformalar" row: a link is typed, Yoxla is pressed, "Dələduzluq" pops.
 
 **Say**
 
-> "Safefund is a scam checker for donation appeals. You paste an Instagram or LinkedIn link, and in seconds you get a verdict: verified, suspicious or scam, always with the reasons.
-> AI reads the post and pulls out the claims: patient, diagnosis, clinic, amount, card number. Then we check them. Is this a copy of a known campaign with the card swapped? Is the card on our scam blacklist? Does the post use pressure tactics? Is the medical document edited or reused?
-> Generic scam tools check links. We check the appeal itself, against a registry of known campaigns — and real campaigns live on our platform, where every donation sits on a tamper-proof public ledger."
+> "Safefund is a platform where medical campaigns are created, and none goes live unchecked. First the medical documents are checked for forgery. Then AI checks whether the story was copied from another campaign and whether the card has appeared in scams. Then the organiser's identity is confirmed with a FIN code through MyGov. Only then does the campaign go live, and the money is paid through Safefund, not to a personal card.
+> For campaigns posted elsewhere, on Instagram or LinkedIn, we have a free tool: paste the link and see the verdict."
+
+Slide `how` (next) still explains the link checker's four checks; keep or cut it depending on time.
 
 ---
 
@@ -118,26 +120,26 @@ All demo data is synthetic ([[rules]]). If the Platform part runs long, cut the 
 > Banks: scam-card feed + pre-transfer check
 > Corporates: verified CSR giving
 >
-> Azerbaijan → Kazakhstan, Uzbekistan → global API
-> $442B lost to scams worldwide every year — GASA 2025
 
 **Say**
 
 > "We will never take a cut of money for sick children. Donors and families use Safefund free.
-> Banks pay. Every check adds to a database of scam cards and cloned appeals, and banks need exactly that to warn a customer before a transfer. Companies pay for verified giving with a public record of where their charity money went.
-> Azerbaijan is our starting market, because it's small enough to cover with one bank. The same scam — a child's photo and a card number — runs in Kazakhstan and Uzbekistan, and globally people lose 442 billion dollars a year to scams. The checker works in any language, so it can grow into an API for banks and platforms anywhere."
+> Banks pay. Every check adds to a database of scam cards and cloned appeals, and banks need exactly that to warn a customer before a transfer. Companies pay for verified giving with a public record of where their charity money went."
+> (Market expansion and the 442B figure moved to the Future slide on 2026-11-17.)
 
 ---
 
 ## 6. Future — 15 s
 
-**On screen**
+**On screen** (updated 2026-11-17: next steps are market expansion; clinic step and thalassemia line removed)
 
-> Tool → Platform → myGov identity → clinic verification
+> İndi, MVP: Platforma və link aləti → Azərbaycan: real MyGov və bank tərəfdaşı → Mərkəzi Asiya: Qazaxıstan və Özbəkistan → Qlobal: banklar və platformalar üçün API
+> Each click draws the track to the next step. Last click: **442 mlrd $** hər il dələduzlara itirilir (GASA and Feedzai 2025).
+> The separate Market slide was merged in here and removed (2026-11-17).
 
 **Say**
 
-> "Next: the full platform, then identity checks through FIN code and myGov, so every organiser is a verified real person. And finally clinics confirming the diagnosis and receiving the money directly. Why that matters: in 2023, 36 families of children with thalassemia paid a middleman company about one million manat for transplants in Türkiye that never happened, and three children died waiting. If the money had gone straight to a clinic that confirmed the patient, that couldn't have happened."
+> "Today the platform and the link tool work. Next, in Azerbaijan, the real MyGov integration and a licensed bank partner for payouts. Then Kazakhstan and Uzbekistan, where the same sick-child scam runs. And finally our checks as an API for banks and donation platforms anywhere, because people lose 442 billion dollars a year to scams."
 
 ---
 
