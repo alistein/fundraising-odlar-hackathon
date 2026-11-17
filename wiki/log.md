@@ -330,3 +330,6 @@ Append-only. Format: `## [YYYY-MM-DD] ingest|query|decision|lint | Title`.
 
 ## [2026-11-18] decision | Backup pitch player in the product repo
 - presentation/pitch-deck/build-player.py builds product/public/pitch/index.html: one slide at a time, fragments, animations, demo video with sound, F for fullscreen. Served at /pitch/index.html after deploy; also opens offline from disk. Tested locally.
+
+## [2026-11-18] decision | Pitch player works fully offline
+- Nunito Sans (latin and latin-ext, from the app build) is bundled in the player; it makes no network requests. Copy product/public/pitch/ to a USB stick and open index.html.

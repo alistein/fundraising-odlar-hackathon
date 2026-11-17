@@ -36,8 +36,9 @@ page = f"""<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{deck.get("title", "Safefund pitch")}</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&display=swap">
 <style>
+@font-face {{ font-family: 'Nunito Sans'; font-style: normal; font-weight: 200 1000; font-display: swap; src: url("assets/fonts/nunito-sans-latin-ext.woff2") format("woff2"); unicode-range: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }}
+@font-face {{ font-family: 'Nunito Sans'; font-style: normal; font-weight: 200 1000; font-display: swap; src: url("assets/fonts/nunito-sans-latin.woff2") format("woff2"); unicode-range: U+0000-00FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }}
 * {{ margin: 0 }}
 html, body {{ height: 100%; background: #111; overflow: hidden; }}
 #stage {{ position: absolute; left: 50%; top: 50%; width: 1920px; height: 1080px; transform-origin: 0 0; }}
@@ -140,4 +141,5 @@ OUT.mkdir(parents=True, exist_ok=True)
 (OUT / "assets").mkdir(exist_ok=True)
 for local in set(blob_map.values()):
     shutil.copy(DECK / local, OUT / local)
+shutil.copytree(DECK / "assets" / "fonts", OUT / "assets" / "fonts", dirs_exist_ok=True)
 print(f"Wrote {OUT / 'index.html'} with {len(slides)} slides")
