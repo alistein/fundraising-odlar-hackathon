@@ -49,5 +49,6 @@ Catalog of every wiki page. Read this first. Schema and conventions live in the 
 - [[idea-brief]] — Verified medical fundraising idea brief, 16 Nov 2026 (`raw/idea-brief.pdf`)
 - [[market-research-2026-11-17]] — web research on fraud, market, law and competitors (URLs)
 - [[crowdfunding-law-2026]] — crowdfunding law 450-VIIQ (in force 24 Jan 2027): equity and debt only; EY brief (`raw/ey-crowdfunding-law-2026-07.pdf`) and press
+- [[abb-conversation-2026-11-18]] — ABB Bank project manager: banks want to lift the 5-a-day donation limit but fear fraud; open to integration (informal)
 - [[icnl-crowdfunding-2018]] — ICNL legal review of crowdfunding in Azerbaijan (`raw/icnl-crowdfunding-azerbaijan-2018.pdf`)
 - [[hackathon-program]] — OYU CyberAI Hackathon 2026 programme and judging (`raw/hackathon-program.pdf`)

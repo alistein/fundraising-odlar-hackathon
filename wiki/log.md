@@ -314,3 +314,16 @@ Append-only. Format: `## [YYYY-MM-DD] ingest|query|decision|lint | Title`.
 ## [2026-11-18] decision | Backup slides: security added, legal updated
 - New A4 security backup slide: AES-256-GCM files, FIN and card numbers stored only as HMAC, hash-chained ledger, forged-document checks, synthetic demo data (from architecture and threat-model).
 - A3 legal rewritten for the 2% model: money moves through a licensed bank or payment institution straight to the recipient; the 2% is a donor-paid verification fee; crowdfunding law 450-VIIQ covers only equity and debt. Lawyer review still pending.
+
+## [2026-11-18] ingest | ABB Bank employee conversation
+- New source page abb-conversation-2026-11-18 (informal, one employee, not the bank's position).
+- New deck slide "Bazardan ilk siqnal" after Business: banks want to lift the 5-a-day limit for donations but fraud blocks it; Safefund can integrate with banks.
+
+## [2026-11-18] decision | Signal slide redesign
+- ABB contact is a project manager, not a backend developer; source page and slide corrected. Slide now leads with a large ABB badge and "ABB Bank, layihə meneceri" line.
+
+## [2026-11-18] decision | Signal slide: white with ABB logo
+- Signal slide moved to a white background with the ABB logo, a drawn person ("Layihə meneceri") and speech bubbles: quote, then "Belə bir həll axtarırlar", then a dark Safefund bubble. Source line still says it is not the bank official position.
+
+## [2026-11-18] decision | Roadmap: Kazakhstan case line
+- Central Asia step on the roadmap now carries one red fact line: Shymkent 2024, fake page, ~6,000 transfers, 32M tenge (Tengrinews, Sep 2024; see market-global).
