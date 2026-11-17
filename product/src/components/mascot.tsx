@@ -32,6 +32,7 @@ export function Mascot({
   size = 32,
   listen = false,
   tone = "safe",
+  gaze,
   className,
 }: {
   mood?: MascotMood;
@@ -39,6 +40,8 @@ export function Mascot({
   /** React to setMascotMood() calls anywhere on the page. */
   listen?: boolean;
   tone?: MascotTone;
+  /** Where the eyes look, each axis -1…1 (e.g. following a caret). Ignored while thinking. */
+  gaze?: { x: number; y: number } | null;
   className?: string;
 }) {
   const [override, setOverride] = useState<MascotMood | null>(null);
@@ -86,7 +89,14 @@ export function Mascot({
             </g>
           ))}
         </g>
-        <g className="m-look">
+        <g
+          className="m-look"
+          style={
+            gaze && current !== "thinking"
+              ? { transform: `translate(${gaze.x * 11}px, ${gaze.y * 7}px)` }
+              : undefined
+          }
+        >
           <g className="m-eyes-open">
             <g className="m-blink" fill="var(--mascot-ink)">
               <circle cx="96" cy="124" r="13" />

@@ -55,6 +55,11 @@
   94%, 97% { opacity: 0; }
 }
 
+/* gaze: eyes follow a point (the caret while typing); a transition re-targets from the current position */
+.mascot .m-look {
+  transition: transform 180ms var(--ease-default);
+}
+
 /* thinking: eyes scan left and right */
 .mascot[data-mood="thinking"] .m-look {
   transform-origin: center;

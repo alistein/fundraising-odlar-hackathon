@@ -233,3 +233,6 @@ Append-only. Format: `## [YYYY-MM-DD] ingest|query|decision|lint | Title`.
 
 ## [2026-11-17] decision | Checker buttons outside the input, with tooltips
 - Link input is its own pill; search and file are separate round icon buttons beside it, lifting on hover and pressing in on pointer-down (transform only, off under reduced motion). shadcn Tooltip added: "Yoxla", "Şəkil və ya sənəd" (shows on the disabled search button too).
+
+## [2026-11-17] decision | Mascot eyes follow the caret
+- On the home checker, the big mascot's eyes track the caret while the link input is focused (down toward the input, left/right with the caret); they return to centre on blur and scan while checking. `Mascot` gained a `gaze` prop; transform only.

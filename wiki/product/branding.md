@@ -29,7 +29,7 @@ Component: `product/src/components/mascot.tsx`; preview page `/kit`.
 | Mood | Look | Where it appears |
 |---|---|---|
 | idle | Blinks | Header, verify page |
-| thinking | Flat mouth, eyes scan | Verify page while typing |
+| thinking | Flat mouth, eyes scan | Home checker while a check runs |
 | happy | Closed smiling eyes, one hop | After donating, creating a campaign, clinic confirming; clinic empty state |
 | alert | Wide eyes, "o" mouth, one shake | Errors, clinic rejecting, broken ledger chain |
 

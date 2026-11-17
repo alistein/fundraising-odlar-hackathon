@@ -73,6 +73,8 @@ function isLink(value: string): boolean {
   }
 }
 
+let measure: CanvasRenderingContext2D | null = null;
+
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 export function CheckForm() {
@@ -83,6 +85,25 @@ export function CheckForm() {
   const [report, setReport] = useState<Report | null>(null);
   const [started, setStarted] = useState(false);
   const fileInput = useRef<HTMLInputElement>(null);
+  const mascotRef = useRef<HTMLSpanElement>(null);
+  const [gaze, setGaze] = useState<{ x: number; y: number } | null>(null);
+
+  // Point the mascot's eyes at the caret: measure the text before it with the input's font.
+  function follow(input: HTMLInputElement) {
+    const face = mascotRef.current?.getBoundingClientRect();
+    if (!face) return;
+    const style = getComputedStyle(input);
+    const ctx = (measure ??= document.createElement("canvas").getContext("2d"));
+    if (!ctx) return;
+    ctx.font = style.font;
+    const before = input.value.slice(0, input.selectionStart ?? input.value.length);
+    const box = input.getBoundingClientRect();
+    const caret = box.left + parseFloat(style.paddingLeft) + ctx.measureText(before).width - input.scrollLeft;
+    const dx = caret - (face.left + face.width / 2);
+    const dy = box.top + box.height / 2 - (face.top + face.height / 2);
+    const reach = Math.max(box.width / 2, 1);
+    setGaze({ x: Math.max(-1, Math.min(1, dx / reach)), y: Math.max(-1, Math.min(1, dy / 160)) });
+  }
 
   function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -161,7 +182,9 @@ export function CheckForm() {
 
   return (
     <div className="flex flex-col items-center gap-8">
-      <Mascot size={112} listen mood={busy ? "thinking" : "idle"} />
+      <span ref={mascotRef} className="inline-flex">
+        <Mascot size={112} listen mood={busy ? "thinking" : "idle"} gaze={gaze} />
+      </span>
       <h1 className="display text-4xl sm:text-6xl">Elanı yoxla</h1>
       <TooltipProvider delayDuration={250}>
         <form onSubmit={submit} className="flex w-full items-center gap-2 sm:gap-3">
@@ -169,7 +192,13 @@ export function CheckForm() {
             type="text"
             inputMode="url"
             value={q}
-            onChange={(e) => setQ(e.target.value)}
+            onChange={(e) => {
+              setQ(e.target.value);
+              follow(e.target);
+            }}
+            onSelect={(e) => follow(e.currentTarget)}
+            onFocus={(e) => follow(e.currentTarget)}
+            onBlur={() => setGaze(null)}
             aria-label="Elanın linki"
             placeholder="Elanın linki"
             spellCheck={false}
