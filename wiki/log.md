@@ -246,4 +246,4 @@ Append-only. Format: `## [YYYY-MM-DD] ingest|query|decision|lint | Title`.
 - New columns `campaigns.ai_status`, `ai_signals`, `ai_checked_at`; seed marks demo campaigns as AI-passed. Live DB push + reseed pending approval.
 - Live DB pushed and reseeded. Full creator flow verified in the browser: details → clean invoice → AI gate pass → MyGov (`3QW9L4T` / Rəşad Hüseynov) → live with AI and MyGov badges. Gate also verified to fail on no documents and on a copied story; MyGov refuses before the AI gate.
 - Decision (same day): the creator does **not** collect a card number; payouts go through Safefund. Card field removed from the form and API.
-- Three test campaigns (Kamal ×2, Səbinə) remain on the live DB until the next reseed.
+- Test campaigns removed by a reseed; live DB is back to the five demo campaigns.
