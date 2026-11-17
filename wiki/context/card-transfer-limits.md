@@ -15,6 +15,8 @@ The regulatory change that makes personal-card fundraising unworkable and gives 
 
 **Contradiction:** the idea brief frames the purpose as anti-fraud; the Governor framed it as anti-tax-evasion and anti-illegal activity. Pitch wording: "the regulator wants money flows to be transparent and accountable", which is true either way.
 
+**Softening (Aug 2026):** MP Vüqar Bayramov said aid, health and social campaigns are not treated as "risky" transfers, and advance notice to the bank may be enough. This is a statement, not regulation → [[crowdfunding-law-2026]].
+
 ## Why it matters
 
 - A family collecting for an operation can now accept five donations a day; the usual channel is effectively broken.
@@ -23,4 +25,4 @@ The regulatory change that makes personal-card fundraising unworkable and gives 
 
 Used in: [[product-overview]], [[pitch]].
 
-Sources: [[idea-brief]], [[market-research-2026-11-17]]
+Sources: [[idea-brief]], [[market-research-2026-11-17]], [[crowdfunding-law-2026]]

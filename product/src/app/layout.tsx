@@ -28,7 +28,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <div className="mx-auto grid h-16 max-w-6xl grid-cols-[1fr_auto_1fr] items-center gap-4 px-4 sm:px-6">
             <nav className="flex items-center gap-1">
               <Button asChild variant="ghost" size="sm">
-                <Link href="/ledger">Reyestr</Link>
+                <Link href="/stats">Statistika</Link>
               </Button>
               <Button asChild variant="ghost" size="sm">
                 <Link href="/campaigns">Kampaniyalar</Link>

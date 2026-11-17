@@ -24,12 +24,13 @@ Stack, code layout and API surface of the MVP in `product/`. Scaffolded 2026-11-
 | `db/seed.ts` | Synthetic demo data (2 clinics, 4 users, 2 campaigns, 2 donations) |
 | `lib/auth.ts` | Mock session, `requireRole()` |
 | `lib/ledger.ts` | Hash-chain append and `verifyChain()` |
+| `lib/stats.ts` | `getStats()`: platform totals for `/stats` and `GET /api/stats` |
 | `lib/crypto.ts` | AES-256-GCM file encryption, `sha256()` |
 | `lib/campaigns.ts` | Campaign queries with raised total |
 | `lib/api.ts` | `handler()` wrapper: thrown errors → JSON |
 | `styles/tokens.css` | Design tokens → [[design-system]] |
 | `components/ui/` | shadcn/ui components; `components/icon.tsx` wraps Hugeicons |
-| `app/` | Pages: `/`, `/campaigns/new`, `/campaigns/[id]`, `/clinic`, `/ledger`, `/verify` |
+| `app/` | Pages: `/`, `/campaigns/new`, `/campaigns/[id]`, `/clinic`, `/ledger`, `/stats`, `/verify` |
 
 ## API
 
@@ -43,6 +44,7 @@ Stack, code layout and API surface of the MVP in `product/`. Scaffolded 2026-11-
 | `POST /api/campaigns/[id]/donate` | anyone; only if `verified` | Working (test payment) |
 | `GET /api/ledger` | public | Working |
 | `GET /api/ledger/verify` | public | Working |
+| `GET /api/stats` | public | Working |
 | `POST /api/campaigns/[id]/documents` | the campaign's organiser | Working (branch `checker`) — forgery signals, reuse check, AES-256-GCM, ciphertext stored |
 | `GET /api/documents/[id]` | the campaign's clinic only | Working (branch `checker`) — decrypts per request |
 | `POST /api/documents/[id]/confirm` | the campaign's clinic only | Working (branch `checker`) — issues the `SD-` code |

@@ -109,6 +109,8 @@ export const appeals = pgTable("appeals", {
   routes: jsonb("routes").$type<AppealRoute[]>().notNull().default([]),
   matchedCampaignId: text("matched_campaign_id").references(() => campaigns.id),
   verdict: text("verdict").notNull(),
+  // Amount the appeal asks for (or the matched campaign's), for the "protected" total.
+  amountQepik: integer("amount_qepik"),
   createdAt: timestamp("created_at", { withTimezone: true })
     .notNull()
     .defaultNow(),

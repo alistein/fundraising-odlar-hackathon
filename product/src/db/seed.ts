@@ -135,9 +135,9 @@ async function main() {
     "7 yaşlı Kənanın gözündə şiş aşkarlanıb, görmə qabiliyyətini itirməməsi üçün təcili göz əməliyyatı olunmalıdır.";
   await db.insert(schema.appeals).values([
     { tokens: storyTokens(yusif), routes: [route(SERIAL_CARD)], verdict: "unknown" },
-    { tokens: storyTokens(zehra), routes: [route(SERIAL_CARD)], verdict: "serial_card" },
+    { tokens: storyTokens(zehra), routes: [route(SERIAL_CARD)], verdict: "serial_card", amountQepik: 1_200_000 },
     { tokens: storyTokens(kenan), routes: [route("4127001122334455")], verdict: "unknown" },
-    { tokens: storyTokens(kenan), routes: [route("5103998877665544")], verdict: "multi_route" },
+    { tokens: storyTokens(kenan), routes: [route("5103998877665544")], verdict: "multi_route", amountQepik: 850_000 },
   ]);
 
   console.log("Seeded.");

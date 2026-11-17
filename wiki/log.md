@@ -186,3 +186,14 @@ Append-only. Format: `## [YYYY-MM-DD] ingest|query|decision|lint | Title`.
 ## [2026-11-17] decision | Mascot result faces built (SAFEFUN-9)
 - Yellow and coral face tokens; result card shows a large mascot whose colour and mood follow the report tone. Header logo stays lime.
 - Checked with SF-4821, 4169 7388 1234 5678 and SF-2210 at desktop and phone width, light and dark. Updated branding, scam-checker.
+
+## [2026-11-17] ingest | Crowdfunding law 450-VIIQ (SAFEFUN-11)
+- New source crowdfunding-law-2026 (EY July 2026 brief in raw/, law-firm summaries, press).
+- Law adopted 14 Jul 2026, in force 24 Jan 2027; regulates only equity and debt crowdfunding under the CBA. No explicit donation exclusion found; statute text not read.
+- Updated fundraising-law (Q&A table, pitch line), card-transfer-limits (MP Bayramov softening), jury-qa, open-questions (resolved one, added "read statute"), index.
+
+## [2026-11-17] decision | Statistika page (SAFEFUN-10)
+- Header "Reyestr" → "Statistika" (`/stats`, `GET /api/stats`); `/ledger` stays reachable by URL, campaigns via "Kampaniyalar".
+- Tiles: donations raised, verified campaigns, checks, caught scams, blacklisted cards, protected amount, plus the six latest caught scams.
+- No `checks`/`scam_reports` tables exist; numbers come from `appeals` (text checks only; file checks are not stored). Scam verdicts: route_mismatch, rejected, altered, serial_card, multi_route, pressure.
+- New nullable `appeals.amount_qepik` (pushed to the live DB): amount the appeal asks for, else the matched campaign's. Repeated checks of the same appeal each count.

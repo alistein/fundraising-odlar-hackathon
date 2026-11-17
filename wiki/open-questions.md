@@ -22,7 +22,7 @@ Unresolved items. Move a row to "Resolved" with the answer and date when settled
 | Question | Status |
 |---|---|
 | **Legal:** confirm with a lawyer that "pay the clinic's invoice via a licensed bank" avoids donation registration; ICNL review is from 2018 → [[fundraising-law]] | Proposed |
-| Verify crowdfunding law No. 450-VIIQ (Jan 2027) and that donation crowdfunding is outside it → [[fundraising-law]] | Open |
+| Read the official text of law 450-VIIQ (e-qanun.az) to confirm there is no donation clause → [[crowdfunding-law-2026]] | Open |
 | **Competition:** is layf.az live, at what scale, and does it verify with clinics? → [[market-azerbaijan]] | Open |
 | Team confirms business model (0% fee, B2B revenue) and GTM phases → [[business-model]], [[go-to-market]] | Proposed |
 | Number of licensed banks in Azerbaijan (for sizing) → [[market-azerbaijan]] | Open |
@@ -36,6 +36,7 @@ Unresolved items. Move a row to "Resolved" with the answer and date when settled
 | Question | Answer | Date |
 |---|---|---|
 | Pitch language | Azerbaijani → [[deck]] | 2026-11-17 |
+| Crowdfunding law 450-VIIQ: is donation crowdfunding outside it? | Yes in substance: it regulates only equity and debt crowdfunding; in force 24 Jan 2027; statute text not read → [[fundraising-law]] (SAFEFUN-11) | 2026-11-17 |
 | Product stages and what's in the MVP | MVP = Tool (Instagram / LinkedIn link checker) + half-built Platform; then full Platform; then FIN code / myGov; clinics last → [[roadmap]] | 2026-11-17 |
 | Whole team confirms the checker-first pivot | Confirmed as the Tool stage → [[decisions]] | 2026-11-17 |
 | Recent local fraud cases for the problem slide | Seidova case opened Feb 2023 (36 children, ~1M AZN, 3 deaths); Həsənov ~200k AZN, Dec 2025; more → [[fraud-cases]] | 2026-11-17 |

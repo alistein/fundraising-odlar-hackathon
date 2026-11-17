@@ -62,7 +62,7 @@ export type AppealAnalysis = {
   aiUsed: boolean;
 };
 
-const TITLE: Record<AppealVerdict, string> = {
+export const VERDICT_TITLE: Record<AppealVerdict, string> = {
   verified: "Təsdiqlənmiş kampaniya",
   declared: "Klinika təsdiqi gözlənilir",
   route_mismatch: "Ödəniş yolu təsdiqlənməyib",
@@ -277,17 +277,21 @@ export async function analyseAppeal(text: string): Promise<AppealAnalysis> {
     }
   }
 
+  const stated = Math.max(0, ...ids.amountsAzn, reading?.amountAzn ?? 0) * 100;
+  const matched = found?.row.campaign;
   await db.insert(schema.appeals).values({
     tokens,
     routes,
-    matchedCampaignId: found?.row.campaign.id ?? null,
+    matchedCampaignId: matched?.id ?? null,
     verdict,
+    amountQepik:
+      Math.round(stated) || (matched ? (matched.confirmedCostQepik ?? matched.targetQepik) : null),
   });
 
   const c = found?.row.campaign;
   return {
     verdict,
-    title: title ?? TITLE[verdict],
+    title: title ?? VERDICT_TITLE[verdict],
     registry,
     memory,
     manipulation,

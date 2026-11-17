@@ -36,6 +36,7 @@ Prepared answers for the 2-minute Q&A on business, market, GTM and evidence. Kee
 | Question | Answer | Page |
 |---|---|---|
 | Is it legal to collect donations? | Private people can't legally run donation drives, and NGOs must register each donation. So we don't collect donations: the checker handles no money, and verified campaigns pay the clinic's invoice through a licensed bank. | [[fundraising-law]] |
+| What about the new crowdfunding law? | Law 450-VIIQ comes into force on 24 January 2027. It covers investment crowdfunding only (shares and bonds, under the Central Bank). Donation crowdfunding still has no regime of its own: that's the gap we fill. | [[fundraising-law]] |
 | Do you need a licence? | Not for the checker. For money we partner with a licensed bank or payment institution; we never hold funds. | [[fundraising-law]] |
 | What about personal data? | Synthetic data in the demo. In production, medical files are encrypted and only the clinic and the reviewer see them; banks get card-level signals only. | [[threat-model]] |
 
