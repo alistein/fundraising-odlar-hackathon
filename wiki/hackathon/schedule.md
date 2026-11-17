@@ -29,10 +29,10 @@ Timetable for OYU CyberAI Hackathon 2026, 17–18 Nov 2026, Odlar Yurdu Universi
 
 ## Submission checklist (22:00)
 
-- [ ] Product name
+- [x] Product name: Safefund
 - [ ] Problem statement
 - [ ] Solution statement
-- [ ] Demo/MVP link (deployed)
+- [x] Demo/MVP link (deployed): https://safefund.vercel.app
 - [ ] Chosen track(s) → [[tracks]]
 
 What we build in each sprint: [[mvp-scope]]. Pitch format: [[pitch]].

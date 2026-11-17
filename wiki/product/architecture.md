@@ -67,7 +67,7 @@ See [[mvp-scope]], [[threat-model]], [[decisions]].
 |---|---|
 | Vercel project | `safefund` (team mralialyev-5170s-projects), root directory `product/`, functions in `fra1` (Frankfurt) via `product/vercel.json` |
 | Git | Connected to github.com/alistein/fundraising-odlar-hackathon — every push to `main` deploys to production |
-| Production URL | https://safefund.vercel.app (behind Vercel login until deployment protection is relaxed) |
+| Production URL | https://safefund.vercel.app — public since 2026-11-17; Vercel protection still covers preview and per-deployment URLs |
 | Database | Neon Postgres `safefund-db`, free plan, Frankfurt, via Vercel Marketplace; env vars `DATABASE_URL` (+ `_UNPOOLED`, `PG*`) set for all environments. Schema pushed and seeded 2026-11-17. |
 | Blob | Private store `safefund-docs`, Frankfurt; `BLOB_READ_WRITE_TOKEN` set for all environments |
 | Encryption | `FILE_ENCRYPTION_KEY` (sensitive) for production and preview only; local dev uses its own key from `.env.local` |

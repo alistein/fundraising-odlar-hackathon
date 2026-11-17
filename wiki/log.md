@@ -50,3 +50,6 @@ Append-only. Format: `## [YYYY-MM-DD] ingest|query|decision|lint | Title`.
 
 ## [2026-11-17] decision | Deployed to Vercel
 - Vercel project, Neon database, private Blob store, encryption key; GitHub auto-deploy. Recorded in architecture and open-questions.
+
+## [2026-11-17] decision | Production URL made public
+- safefund.vercel.app opened to the public; previews stay protected. Submission checklist updated.

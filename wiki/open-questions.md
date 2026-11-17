@@ -7,7 +7,6 @@ Unresolved items. Move a row to "Resolved" with the answer and date when settled
 | Question | Needed by | Status |
 |---|---|---|
 | Clash check for "Safefund" (existing companies, domains) | Before pitch | Open |
-| Make https://safefund.vercel.app public (Vercel deployment protection currently requires login) | 22:00 submission | Open |
 | Which track(s) to declare — brief proposes 1 and 3 → [[tracks]] | 22:00 submission | Open |
 | How the document check actually detects edit / reuse / AI generation in the MVP | Sprint II | Open |
 | How clone detection matches a pasted link or card number | Sprint III | Open |
