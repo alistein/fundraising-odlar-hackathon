@@ -136,9 +136,23 @@ export function CampaignWizard({
 
   return (
     <div className="space-y-8">
-      <ol className="grid grid-cols-4 gap-2">
+      <ol className="grid grid-cols-4">
         {STEPS.map((s, i) => (
-          <li key={s.label} className="flex flex-col items-center gap-2 text-center">
+          <li key={s.label} className="relative flex flex-col items-center gap-2 text-center">
+            {i > 0 && (
+              // Connector from the previous step's circle to this one; fills as steps complete.
+              <span
+                aria-hidden
+                className="absolute top-[22px] right-[calc(50%+30px)] left-[calc(-50%+30px)] h-0.5 -translate-y-1/2 overflow-hidden rounded-full bg-border"
+              >
+                <span
+                  className={cn(
+                    "block h-full origin-left bg-primary transition-transform duration-500 ease-(--ease-default) motion-reduce:transition-none",
+                    i <= step ? "scale-x-100" : "scale-x-0",
+                  )}
+                />
+              </span>
+            )}
             <span
               className={cn(
                 "grid size-11 place-items-center rounded-full border transition-[background-color,color,border-color] duration-300",
