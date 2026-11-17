@@ -33,15 +33,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               <span className="max-sm:hidden">safefund</span>
             </Link>
             <nav className="flex items-center gap-1">
-              <Button asChild variant="ghost" size="sm">
+              <Button asChild variant="ghost" className="max-sm:px-3">
                 <Link href="/stats">Statistika</Link>
               </Button>
-              <Button asChild variant="ghost" size="sm">
+              <Button asChild variant="ghost" className="max-sm:px-3">
                 <Link href="/campaigns">Kampaniyalar</Link>
               </Button>
-              <Button asChild size="sm" className="ml-1">
+              <Button asChild className="ml-2 max-sm:size-10 max-sm:px-0">
                 <Link href="/campaigns/new" aria-label="Kampaniya yarat">
-                  <Icon icon={Add01Icon} size={16} />
+                  <Icon icon={Add01Icon} size={18} />
                   <span className="max-sm:hidden">Kampaniya yarat</span>
                 </Link>
               </Button>

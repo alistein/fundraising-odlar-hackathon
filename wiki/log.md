@@ -263,3 +263,4 @@ Append-only. Format: `## [YYYY-MM-DD] ingest|query|decision|lint | Title`.
 - A failed gate no longer dead-ends: "MyGov ilə davam et" is always offered. Both gates passed → live; AI failed + MyGov done → stays pending with "AI problem tapıb, yoxlanılır" and a red AI badge.
 - Steps are stored in `campaigns.ai_signals` (no schema change). Rows from before steps existed re-run the gate.
 - Follow-up: the creator's step indicator has connector lines between the circles; each fills green (left to right) as the step before it completes.
+- Follow-up: header buttons use the standard button size (h-10, px-5) instead of the small one; on phones "Kampaniya yarat" is a round 40px "+" button.
