@@ -43,14 +43,16 @@ Stack, code layout and API surface of the MVP in `product/`. Scaffolded 2026-11-
 | `POST /api/campaigns/[id]/donate` | anyone; only if `verified` | Working (test payment) |
 | `GET /api/ledger` | public | Working |
 | `GET /api/ledger/verify` | public | Working |
-| `POST /api/campaigns/[id]/documents` | organiser | **Stub (501)** — Sprint II |
-| `POST /api/verify` | public | **Stub (501)** — Sprint III |
+| `POST /api/campaigns/[id]/documents` | the campaign's organiser | Working (branch `checker`) — forgery signals, reuse check, AES-256-GCM, ciphertext stored |
+| `GET /api/documents/[id]` | the campaign's clinic only | Working (branch `checker`) — decrypts per request |
+| `POST /api/documents/[id]/confirm` | the campaign's clinic only | Working (branch `checker`) — issues the `SD-` code |
+| `POST /api/check` | public | Working (branch `checker`) — text or file in, stream of pipeline steps and a score out → [[scam-checker]]. Replaces `/api/verify` |
 
 ## Security mechanisms
 
 - **Tamper-evident ledger:** each row stores `sha256(prevHash + [seq, campaignId, type, amount, label, createdAt])`. Appends take a Postgres advisory lock. `verifyChain()` recomputes from genesis and names the first broken entry. Tested: editing a row's amount in the DB is reported as "entry was altered" at that seq.
 - **Role checks:** enforced in the API, not only the UI. A clinic can confirm only its own campaigns; an unverified campaign refuses donations.
-- **File encryption:** AES-256-GCM helper exists, key in `FILE_ENCRYPTION_KEY`; not yet wired to an upload route.
+- **File encryption:** AES-256-GCM, key in `FILE_ENCRYPTION_KEY`. Wired on branch `checker`: uploads are encrypted before storage and decrypted only for the campaign's clinic. Tested locally: stored file is ciphertext, decrypted bytes equal the original, organiser and other clinics get 403.
 - Money is stored as integer qəpik.
 
 ## Not built yet
@@ -75,6 +77,33 @@ The scam checker becomes the product and the home page; design in [[scam-checker
 | AI provider | Not chosen; needs an API key in Vercel env → [[open-questions]] |
 
 Everything in the API table above stays as is.
+
+### Built on branch `checker` (2026-11-17, local only, not merged or deployed)
+
+| Piece | What |
+|---|---|
+| `lib/checker/text.ts` | Pure helpers: identifier extraction (card, IBAN, SF code, campaign link, amount), Azerbaijani-folded story fingerprint, similarity, story clustering |
+| `lib/checker/index.ts` | `checkAppeal()`: find the campaign (code/link → declared card → story or patient+diagnosis), apply rules, fall back to memory, store the check |
+| `lib/crypto.ts` | `routeHash()`: HMAC-SHA256 of a card/IBAN with the server key; numbers are never stored |
+| Schema | `campaigns.code`, `declared_route_hash`, `declared_route_last4`, `closed_at`; new `appeals` table (fingerprint, hashed routes, verdict). `code` is not UNIQUE because `drizzle-kit push` would offer to truncate the live table |
+| UI | `/` is the checker with a verdict card; campaign list moved to `/campaigns`; `/verify` redirects to `/`; campaign page shows the code and declared card; new-campaign form takes an optional card |
+| Seed | 5 campaigns (verified ×3 incl. one closed, pending with declared card, rejected) and 4 remembered appeals |
+
+| `lib/checker/document.ts` | `inspectDocument()`: file type by magic bytes; editing-software trace in PDF Producer/Creator or image EXIF/XMP; AI-generation marks; PDF modified after creation; PDF re-saved on top (extra `%%EOF`) |
+| `lib/checker/pipeline.ts` | `runCheck()`: the five steps, emitted as they finish, and `score()` |
+| `lib/mygov.ts` | **Simulated** MyGov identity check (reads `users.mygov_verified_at`, set by the seed) |
+| `lib/checker/origin.ts` | `classifyOrigin()`: camera / scan / screenshot / digital from grain, light and aspect ratio; no model |
+| `detector/server.py`, `lib/checker/detector.ts` | Self-hosted AI-image detector (open SigLIP classifier, local Python service on :8790) and its client; used only for photo-like pictures |
+| `lib/checker/identifiers.ts` | Check digits for ОГРН, ИНН, IBAN and card numbers; pure arithmetic |
+| `lib/checker/forensics.ts` | `analyseImage()` with `sharp`: compression-history ladder and camera-noise check, returns signals and a heatmap |
+| `lib/documents.ts`, `app/d/[code]` | Clinic-confirmed document registry, code lookup, public proof page with QR (`qrcode`) |
+| `lib/storage.ts` | Ciphertext to Vercel Blob (private) when `BLOB_READ_WRITE_TOKEN` is set, else to `product/.data/docs/` |
+| Documents UI | Campaign page shows documents only to its organiser and its clinic; organiser uploads, clinic opens. Checker home has a "Sənəd yoxla" button |
+| `product/demo-docs/` | Synthetic `clean-invoice.pdf` and `forged-invoice.pdf`, built by `make.py` |
+
+| `lib/checker/ai.ts` | Optional AI layer (`@anthropic-ai/sdk`): `readAppeal()` and `readFile()` with structured output; returns null without `ANTHROPIC_API_KEY` or on any failure. Tested live locally 2026-11-17 → [[scam-checker]] |
+
+The Vercel Blob path is untested (no token locally). Similarity runs in TypeScript, so `pg_trgm` is not needed. To go live: `pnpm db:push` then `pnpm db:seed` against production (the seed resets live data).
 
 ## Deployment (2026-11-17)
 

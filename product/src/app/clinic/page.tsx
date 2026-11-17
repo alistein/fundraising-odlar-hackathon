@@ -1,4 +1,5 @@
 import { and, eq } from "drizzle-orm";
+import Link from "next/link";
 import { db, schema } from "@/db";
 import { getSession } from "@/lib/auth";
 import { Mascot } from "@/components/mascot";
@@ -28,7 +29,11 @@ export default async function ClinicPage() {
         {pending.map((c) => (
           <li key={c.id} className="rounded-2xl border bg-card p-6">
             <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
-              <h2 className="text-xl font-bold">{c.title}</h2>
+              <h2 className="text-xl font-bold">
+                <Link href={`/campaigns/${c.id}`} className="underline-offset-4 hover:underline">
+                  {c.title}
+                </Link>
+              </h2>
               <p className="text-xl font-bold tabular-nums">{formatAZN(c.targetQepik)}</p>
             </div>
             <p className="mt-1 text-muted-foreground">

@@ -1,4 +1,4 @@
-import { createCipheriv, createDecipheriv, createHash, randomBytes } from "node:crypto";
+import { createCipheriv, createDecipheriv, createHash, createHmac, randomBytes } from "node:crypto";
 
 // AES-256-GCM for medical files. Key: 32 bytes, base64, in FILE_ENCRYPTION_KEY.
 function key(): Buffer {
@@ -28,4 +28,11 @@ export function decryptFile(ciphertext: Buffer, iv: string, authTag: string): Bu
 
 export function sha256(data: Buffer | string): string {
   return createHash("sha256").update(data).digest("hex");
+}
+
+// Keyed hash for card numbers and IBANs. A plain SHA-256 of 16 digits can be
+// brute-forced, so the server key is mixed in. Input is digits/letters only.
+export function routeHash(value: string): string {
+  const clean = value.replace(/[^0-9a-z]/gi, "").toUpperCase();
+  return createHmac("sha256", key()).update(`route:${clean}`).digest("hex");
 }

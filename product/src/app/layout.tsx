@@ -39,7 +39,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
                 <Link href="/ledger">Reyestr</Link>
               </Button>
               <Button asChild variant="ghost" size="sm">
-                <Link href="/verify">Yoxla</Link>
+                <Link href="/campaigns">Kampaniyalar</Link>
               </Button>
             </nav>
             <Link href="/" aria-label="Safefund" className="flex items-center gap-2 text-xl font-bold tracking-tight text-primary">

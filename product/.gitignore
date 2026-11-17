@@ -40,3 +40,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 !.env.example
+.data/
+
+# Local AI-image detector service (Python env, model weights, server). Stays on the machine that runs it.
+/detector/

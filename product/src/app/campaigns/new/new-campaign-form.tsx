@@ -45,6 +45,7 @@ export function NewCampaignForm({ clinics }: { clinics: { id: string; name: stri
         diagnosis: f.get("diagnosis"),
         targetAzn: Number(f.get("targetAzn")),
         clinicId,
+        declaredCard: f.get("declaredCard") || undefined,
       }),
     });
     const data = await res.json();
@@ -98,6 +99,16 @@ export function NewCampaignForm({ clinics }: { clinics: { id: string; name: stri
           </Select>
         </Field>
       </div>
+      <Field label="Kart nömrəsi" id="declaredCard">
+        <Input
+          id="declaredCard"
+          name="declaredCard"
+          inputMode="numeric"
+          autoComplete="off"
+          pattern="[0-9 ]{16,19}"
+          placeholder="0000 0000 0000 0000"
+        />
+      </Field>
       <Button size="lg" disabled={busy} className="mt-3 w-full">
         Təsdiqə göndər
       </Button>
