@@ -1,0 +1,709 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Safefund pitch</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&display=swap">
+<style>
+* { margin: 0 }
+html, body { height: 100%; background: #111; overflow: hidden; }
+#stage { position: absolute; left: 50%; top: 50%; width: 1920px; height: 1080px; transform-origin: 0 0; }
+#stage > section { position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden; display: none; isolation: isolate; }
+#stage > section.active { display: flex; }
+aside { display: none !important; }
+x-icon, x-shape { display: block; }
+table { border-collapse: separate; border-spacing: 0; }
+th, td { padding: .35em .6em; text-align: left; border-bottom: 2px solid #E6E5E1; }
+#count { position: fixed; right: 16px; bottom: 12px; font: 600 14px/1 sans-serif; color: #888; opacity: 0; transition: opacity .3s; }
+body:hover #count { opacity: 1; }
+video.deck-video { display: block; background: #000; }
+</style>
+<style>
+/* Safefund pitch — tokens from product/src/styles/tokens.css */
+section {
+  --paper: #F8F6F2;
+  --card: #FFFEFB;
+  --ink: #232323;
+  --forest: #274A34;
+  --night: #1B3625;
+  --cream: #F4F2EC;
+  --mute: #6F6F6F;
+  --mute-dark: #B9C4B6;
+  --lime: #CCF88E;
+  --line: #E6E5E1;
+  --scam: #C8321F;
+  --scam-soft: #FDEBE8;
+  --warn: #6A4A00;
+  --warn-soft: #FDEFC3;
+  --ease: cubic-bezier(0.3, 0.01, 0, 1);
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Nunito Sans', Arial, sans-serif;
+  padding: 128px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  box-sizing: border-box;
+}
+section.dark { background: var(--night); color: var(--cream); }
+section.center { align-items: center; justify-content: center; text-align: center; }
+section.footed { padding: 128px 128px 160px; }
+
+h1 { font-size: 160px; font-weight: 900; line-height: 1.0; letter-spacing: -4px; color: var(--forest); }
+h2 { font-size: 88px; font-weight: 800; line-height: 1.08; letter-spacing: -2px; color: var(--forest); }
+h3 { font-size: 44px; font-weight: 800; line-height: 1.15; color: var(--forest); }
+p { font-size: 36px; line-height: 1.35; }
+section.dark h1, section.dark h2, section.dark h3 { color: var(--cream); }
+
+.eyebrow { font-size: 28px; font-weight: 800; letter-spacing: 3px; color: var(--forest); }
+section.dark .eyebrow { color: var(--lime); }
+.lead { font-size: 44px; line-height: 1.3; color: var(--mute); }
+section.dark .lead { color: var(--mute-dark); }
+.hi { color: var(--lime); }
+.red { color: var(--scam); }
+.source { position: absolute; left: 128px; bottom: 64px; width: 1664px; font-size: 24px; color: var(--mute); }
+section.dark .source { color: var(--mute-dark); }
+
+/* Arrival: plain rule is the finished look */
+.rise { animation: rise 800ms var(--ease) both; animation-delay: calc(var(--i, 0) * 140ms); }
+@keyframes rise { from { opacity: 0; transform: translateY(40px); } }
+.pop { animation: pop 900ms var(--ease) both; animation-delay: calc(var(--i, 0) * 140ms); }
+@keyframes pop { from { opacity: 0; transform: translateY(24px) scale(0.86); } }
+
+/* Click steps */
+.fragment { opacity: 0; transform: translateY(28px); transition: opacity 650ms var(--ease), transform 650ms var(--ease); }
+.fragment.visible { opacity: 1; transform: translateY(0); }
+
+/* Big numbers */
+.stack { display: flex; flex-direction: column; gap: 28px; }
+.big { font-size: 144px; font-weight: 900; line-height: 1.0; letter-spacing: -4px; }
+.big-label { font-size: 44px; font-weight: 700; color: var(--mute-dark); }
+.stat { display: flex; align-items: baseline; gap: 36px; }
+
+/* Cards */
+.row { display: flex; gap: 40px; }
+.card { flex: 1; background: var(--card); border: 2px solid var(--line); border-radius: 32px; padding: 48px; display: flex; flex-direction: column; gap: 20px; box-shadow: 0 6px 14px rgba(35, 35, 35, 0.06); }
+.card .num { font-size: 28px; font-weight: 900; color: var(--forest); background: var(--lime); border-radius: 999px; width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; }
+.card .line { font-size: 32px; line-height: 1.35; color: var(--mute); }
+.card x-icon { width: 64px; height: 64px; color: var(--forest); }
+
+/* Verdict pills */
+.pill { font-size: 32px; font-weight: 800; border-radius: 999px; padding: 14px 32px; display: inline-block; }
+.ok { background: var(--lime); color: var(--forest); }
+.sus { background: var(--warn-soft); color: var(--warn); }
+.bad { background: var(--scam-soft); color: var(--scam); }
+
+/* Fake post */
+.post { width: 600px; background: var(--card); border: 2px solid var(--line); border-radius: 32px; padding: 32px; display: flex; flex-direction: column; gap: 24px; box-shadow: 0 6px 14px rgba(35, 35, 35, 0.08); }
+.post .who { display: flex; align-items: center; gap: 20px; }
+.post .avatar { width: 64px; height: 64px; border-radius: 999px; background: var(--line); }
+.post .handle { font-size: 28px; font-weight: 800; color: var(--ink); }
+.post .photo { height: 200px; border-radius: 20px; background: #E9E4DA; display: flex; align-items: center; justify-content: center; }
+.post .photo p { font-size: 28px; color: var(--mute); }
+.post .caption { font-size: 30px; line-height: 1.35; color: var(--ink); }
+.post .cardno { font-size: 30px; font-weight: 800; color: var(--ink); }
+.tag { font-size: 24px; font-weight: 900; color: var(--card); background: var(--scam); border-radius: 999px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; }
+.mark { display: flex; align-items: center; gap: 16px; }
+.notes { display: flex; flex-direction: column; gap: 40px; }
+.note { display: flex; align-items: center; gap: 28px; }
+.note p { font-size: 44px; font-weight: 800; color: var(--forest); }
+.note .tag { width: 64px; height: 64px; font-size: 32px; }
+
+/* Checker input */
+.input { display: flex; align-items: center; gap: 24px; background: var(--card); border: 2px solid var(--line); border-radius: 999px; padding: 20px 20px 20px 40px; width: 1240px; box-shadow: 0 6px 14px rgba(35, 35, 35, 0.08); }
+.input x-icon { width: 44px; height: 44px; color: var(--mute); }
+.input .url { flex: 1; font-size: 36px; color: var(--mute); text-align: left; }
+.input .btn { font-size: 32px; font-weight: 800; color: var(--cream); background: var(--forest); border-radius: 999px; padding: 18px 44px; }
+.verdicts { display: flex; gap: 32px; width: 1240px; }
+.verdict { flex: 1; display: flex; flex-direction: column; gap: 20px; align-items: flex-start; }
+.verdict .why { font-size: 28px; line-height: 1.35; color: var(--mute); }
+
+/* Journey / roadmap */
+.steps { display: flex; gap: 0; align-items: flex-start; }
+.step { flex: 1; display: flex; flex-direction: column; gap: 20px; padding-right: 32px; }
+.dot { width: 40px; height: 40px; border-radius: 999px; background: var(--line); border: 6px solid var(--paper); }
+.dot.now { background: var(--forest); }
+.track { height: 6px; background: var(--line); border-radius: 3px; }
+.step .when { font-size: 28px; font-weight: 800; color: var(--mute); }
+.step .when.now { color: var(--forest); }
+
+/* Scene: donors → scammer */
+.scene { position: relative; width: 1664px; height: 560px; }
+.scene .label { position: absolute; font-size: 32px; font-weight: 800; color: var(--forest); text-align: center; }
+.scene .layer { position: absolute; left: 0; top: 0; width: 1664px; height: 560px; }
+.scene .thief { position: absolute; left: 712px; top: 318px; width: 240px; height: 242px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.scene .thief p { font-size: 32px; font-weight: 900; color: var(--scam); }
+.scene .empty { position: absolute; left: 1290px; top: 90px; width: 374px; height: 300px; background: rgba(248, 246, 242, 0.82); border-radius: 32px; display: flex; align-items: center; justify-content: center; }
+.scene .empty p { font-size: 48px; font-weight: 900; color: var(--scam); }
+.captions { position: relative; width: 1664px; height: 64px; }
+.captions .cap { position: absolute; left: 0; top: 0; width: 1664px; font-size: 44px; font-weight: 700; color: var(--mute); text-align: center; }
+/* The first flow hides once the next step arrives */
+.handoff.fragment.visible { opacity: 0; }
+.handoff.fragment.visible.current-fragment { opacity: 1; }
+
+/* Tables (backup) */
+table { font-size: 30px; color: var(--ink); width: 1664px; }
+
+/* Solution scene: gates, money through Safefund, link check */
+.sol { position: relative; width: 1664px; height: 620px; }
+.sol .label { position: absolute; top: 226px; font-size: 28px; font-weight: 800; color: var(--forest); text-align: center; }
+.sol .layer { position: absolute; left: 0; top: 0; width: 1664px; height: 620px; }
+.sol .layer.fragment, .sol .ext.fragment { transform: none; }
+.sol .ring { position: absolute; top: 84px; width: 132px; height: 132px; border-radius: 999px; border: 6px solid var(--forest); box-sizing: border-box; }
+.sol .ring.fail { border-color: var(--scam); }
+.sol .badge { position: absolute; top: 72px; width: 52px; height: 52px; border-radius: 999px; background: var(--forest); }
+.sol .badge.fail { background: var(--scam); }
+.fragment.visible .ring { animation: ring-in 500ms var(--ease) both; animation-delay: var(--d); }
+.fragment.visible .badge { animation: badge-in 600ms var(--ease) both; animation-delay: var(--d); }
+@keyframes ring-in { from { opacity: 0; transform: scale(0.8); } }
+@keyframes badge-in { from { opacity: 0; transform: scale(0.3); } }
+.sol .ring.fail, .sol .badge.fail { opacity: 0; }
+.fragment.visible .ring.fail, .fragment.visible .badge.fail { animation: flash 2600ms var(--ease) both; animation-delay: var(--d); }
+@keyframes flash { 0% { opacity: 0; transform: scale(0.6); } 15%, 75% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1); } }
+.sol .camp { position: absolute; left: 240px; top: 106px; width: 120px; height: 88px; box-sizing: border-box; padding: 10px; background: var(--card); border: 2px solid var(--line); border-radius: 16px; box-shadow: 0 6px 14px rgba(35, 35, 35, 0.12); display: flex; flex-direction: column; gap: 6px; }
+.sol .camp .photo { height: 38px; border-radius: 8px; background: #E9E4DA; display: flex; align-items: center; justify-content: center; }
+.sol .camp .bar { height: 8px; border-radius: 4px; background: var(--line); }
+.sol .camp .bar.short { width: 60%; }
+.sol .camp.go { transform: translateX(1030px); }
+.fragment.visible .camp.go { animation: camp-go 3000ms linear both; animation-delay: 400ms; }
+@keyframes camp-go { from { transform: translateX(0); } }
+.sol .live { position: absolute; left: 1272px; top: 36px; font-size: 26px; padding: 8px 22px; }
+.fragment.visible .live { animation: badge-in 600ms var(--ease) both; animation-delay: 3.4s; }
+.sol .camp.fake { background: var(--scam-soft); border-color: var(--scam); opacity: 0; transform: translate(420px, 60px); }
+.fragment.visible .camp.fake { animation: camp-fake 2600ms var(--ease) both; animation-delay: 300ms; }
+@keyframes camp-fake {
+  0% { opacity: 1; transform: translate(0, 0); }
+  46% { transform: translate(420px, 0); }
+  52% { transform: translate(400px, 0); }
+  58% { transform: translate(420px, 0); }
+  64% { transform: translate(404px, 0); }
+  70%, 80% { opacity: 1; transform: translate(420px, 0); }
+  100% { opacity: 0; transform: translate(420px, 60px); }
+}
+.sol .guard { position: absolute; left: 744px; top: 354px; width: 112px; height: 112px; }
+.fragment.visible .guard { animation: badge-in 700ms var(--ease) both; }
+.sol .ext { position: absolute; left: 0; top: 520px; width: 1664px; display: flex; align-items: center; justify-content: center; gap: 32px; }
+.sol .ext-label { font-size: 32px; font-weight: 800; color: var(--mute); }
+.input.mini { width: 640px; padding: 12px 12px 12px 32px; }
+.input.mini .url { font-size: 30px; }
+.input.mini .url span { display: inline-block; white-space: nowrap; }
+.input.mini .btn { font-size: 28px; padding: 12px 34px; }
+.fragment.visible .input.mini .url span { animation: type-in 1100ms steps(20) both; animation-delay: 300ms; }
+@keyframes type-in { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+.fragment.visible .input.mini .btn { animation: press 300ms var(--ease) both; animation-delay: 1.5s; }
+@keyframes press { 50% { transform: scale(0.92); } }
+.fragment.visible .verdict-pop { animation: badge-in 600ms var(--ease) both; animation-delay: 1.9s; }
+@media (prefers-reduced-motion: reduce) { .sol *, .sol .fragment * { animation: none !important; } }
+
+/* Roadmap: one drawn timeline, the line meets each circle at its edge */
+.rm { position: relative; width: 1664px; margin: auto 0; }
+.rm .tl { display: block; }
+.rm .tl-layer { position: absolute; left: 0; top: 0; width: 1664px; height: 40px; }
+.rm .tl-layer.fragment { transform: none; }
+.rm .tl-seg { stroke-dasharray: 1; stroke-dashoffset: 0; }
+.fragment.visible .tl-seg { animation: tl-draw 600ms var(--ease) both; }
+@keyframes tl-draw { from { stroke-dashoffset: 1; } }
+.rm .tl-dot { transform-box: fill-box; transform-origin: center; }
+.fragment.visible .tl-dot { animation: badge-in 450ms var(--ease) both; animation-delay: 500ms; }
+.rm .tl-steps { display: flex; margin-top: 28px; }
+.rm .tl-step { width: 416px; box-sizing: border-box; padding-right: 40px; display: flex; flex-direction: column; gap: 16px; }
+.rm .tl-step .when { font-size: 28px; font-weight: 800; color: var(--mute); }
+.rm .tl-step .when.now { color: var(--forest); }
+@media (prefers-reduced-motion: reduce) { .rm * { animation: none !important; } }
+
+/* Users: three illustrated portraits, joined by a dotted path */
+.people { display: flex; gap: 52px; width: 1664px; margin: auto 0; }
+.people .who { position: relative; width: 520px; display: flex; flex-direction: column; align-items: center; gap: 20px; text-align: center; }
+.people .portrait { display: block; margin-bottom: 12px; }
+.people .link { position: absolute; left: -162px; top: 146px; }
+.people .line { font-size: 32px; line-height: 1.35; color: var(--mute); max-width: 440px; }
+.people .fragment.visible .portrait, .people .who.fragment.visible .portrait { animation: badge-in 600ms var(--ease) both; }
+
+/* Business: donation splits into the full amount for the family and a 1 manat fee */
+.biz { position: relative; width: 1664px; height: 470px; }
+.biz .layer { position: absolute; left: 0; top: 0; width: 1664px; height: 470px; }
+.biz .layer.fragment { transform: none; }
+.biz .lbl { position: absolute; font-size: 32px; font-weight: 800; color: var(--forest); text-align: center; }
+.biz .amt { position: absolute; font-weight: 900; color: var(--forest); letter-spacing: -2px; }
+.biz .big-amt { font-size: 88px; }
+.biz .fee-amt { font-size: 52px; color: var(--mute); }
+.biz .guard-biz { position: absolute; left: 1305px; top: 290px; width: 150px; height: 150px; }
+.fragment.visible .guard-biz, .fragment.visible .amt { animation: badge-in 600ms var(--ease) both; animation-delay: 300ms; }
+
+/* Team: two round portraits */
+.team { display: flex; justify-content: center; gap: 120px; margin: auto 0; }
+.team .mate { display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; }
+.team .face { width: 260px; height: 260px; border-radius: 999px; overflow: hidden; display: flex; align-items: center; justify-content: center; border: 8px solid var(--card); box-shadow: 0 0 0 4px var(--line), 0 12px 28px rgba(35, 35, 35, 0.10); margin-bottom: 16px; }
+.team .face.lime { background: var(--lime); }
+.team .face.forest { background: var(--forest); }
+.team .face p { font-size: 110px; font-weight: 900; color: var(--forest); }
+.team .face.forest p { color: var(--lime); }
+.team .face img { width: 100%; height: 100%; object-fit: cover; }
+.team .role { font-size: 34px; font-weight: 800; color: var(--forest); }
+.team .mate { width: 640px; }
+.team .facts { list-style: none; padding: 0; margin: 8px 0 0; display: flex; flex-direction: column; gap: 10px; }
+.team .facts li { font-size: 30px; line-height: 1.3; color: var(--mute); }
+
+/* Competitors: comparison grid, Safefund column arrives on click */
+.cmp { width: 1664px; display: flex; flex-direction: column; }
+.cmp .c-row { display: grid; grid-template-columns: 584px repeat(4, 270px); align-items: center; border-bottom: 2px solid var(--line); }
+.cmp .c-row:last-child { border-bottom: 0; }
+.cmp .c-head { border-bottom: 0; align-items: end; }
+.cmp .c-lbl { font-size: 32px; font-weight: 700; color: var(--ink); padding: 22px 24px 22px 0; line-height: 1.25; }
+.cmp .c-col { text-align: center; padding: 0 12px 16px; }
+.cmp .c-tag { font-size: 22px; font-weight: 800; letter-spacing: 2px; color: var(--mute); text-transform: uppercase; }
+.cmp .c-name { font-size: 30px; font-weight: 900; color: var(--forest); line-height: 1.2; }
+.cmp .c-cell { display: flex; justify-content: center; align-items: center; height: 100%; padding: 18px 0; }
+.cmp .c-us { background: var(--lime); }
+.cmp .c-head .c-us { border-radius: 28px 28px 0 0; padding-top: 20px; }
+.cmp .c-row:last-child .c-us { border-radius: 0 0 28px 28px; }
+.cmp .c-us .c-tag { color: var(--forest); }
+.cmp .mk { display: block; width: 44px; height: 44px; }
+.cmp .c-us.fragment { transform: none; }
+
+/* Team header: company logos top right */
+.team-head { display: flex; align-items: center; justify-content: space-between; width: 1664px; }
+.team-head .logos { display: flex; align-items: center; gap: 48px; }
+.team-head .logos img { height: 40px; width: auto; display: block; }
+.team-head .logos .lg-luhive { height: 44px; }
+.team-head .logos .lg-spacexsi { height: 34px; }
+
+/* Backup: compact 3 x 2 card grid */
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; width: 1664px; }
+.card.sm { padding: 36px; gap: 14px; }
+.card.sm h3 { font-size: 36px; }
+.card.sm .line { font-size: 28px; }
+.card.sm .num { width: 48px; height: 48px; font-size: 24px; }
+
+/* Signal: one big quote */
+.quote { font-size: 72px; font-weight: 800; line-height: 1.15; letter-spacing: -1.5px; color: var(--cream); max-width: 1600px; }
+
+/* Signal on white: ABB logo, person and speech bubbles */
+section.white { background: #FFFFFF; }
+.abb-logo { height: 100px; width: auto; align-self: flex-start; }
+.chat { display: flex; align-items: flex-start; gap: 56px; width: 1664px; margin: auto 0; }
+.chat .person { flex: none; margin-top: 200px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.chat .person-role { font-size: 30px; font-weight: 800; color: var(--forest); }
+.chat .talk { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; }
+.chat .bubble { position: relative; background: var(--paper); border: 2px solid var(--line); border-radius: 40px 40px 40px 8px; padding: 36px 48px; max-width: 1300px; }
+.chat .bubble p { font-size: 52px; font-weight: 800; line-height: 1.2; color: var(--ink); }
+.chat .bubble b { color: var(--forest); background: var(--lime); border-radius: 12px; padding: 0 10px; }
+.chat .bubble::before { content: ""; position: absolute; left: -2px; bottom: -2px; width: 34px; height: 34px; background: inherit; border-left: 2px solid var(--line); border-bottom: 2px solid var(--line); transform: translate(-60%, 0) skewX(40deg); border-radius: 0 0 0 6px; }
+.chat .bubble.small { padding: 22px 36px; }
+.chat .bubble.small p { font-size: 36px; font-weight: 700; color: var(--mute); }
+.chat .bubble.small::before { display: none; }
+.chat .bubble.us { background: var(--forest); border-color: var(--forest); }
+.chat .bubble.us p { color: var(--lime); font-weight: 800; }
+.rm .fact { font-size: 26px; line-height: 1.3; font-weight: 700; color: var(--scam); }
+
+</style>
+</head>
+<body>
+<div id="stage">
+<section id="cover" class="center" data-transition="fade">
+<div class="pop" style="--i:0"><svg aria-label="Safefund maskotu" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256"><path fill="#ccf88e" d="M128 26C176 26 214 40 220 62C228 92 226 150 204 186C186 214 158 232 128 232C98 232 70 214 52 186C30 150 28 92 36 62C42 40 80 26 128 26Z"/><path fill="#274a34" fill-rule="evenodd" d="M128 26C176 26 214 40 220 62C228 92 226 150 204 186C186 214 158 232 128 232C98 232 70 214 52 186C30 150 28 92 36 62C42 40 80 26 128 26ZM128 38C84 38 52 50 47 66C40 93 42 146 62 179C78 205 102 220 128 220C154 220 178 205 194 179C214 146 216 93 209 66C204 50 172 38 128 38Z"/><g fill="#acf86c"><ellipse cx="78" cy="152" rx="16" ry="9"/><ellipse cx="178" cy="152" rx="16" ry="9"/></g><path fill="#274a34" d="M83 124a13 13 0 1 0 26 0a13 13 0 1 0 -26 0ZM147 124a13 13 0 1 0 26 0a13 13 0 1 0 -26 0ZM106 160A22 22 0 0 0 150 160A6.0 6.0 0 0 0 138 160A10 10 0 0 1 118 160A6.0 6.0 0 0 0 106 160Z"/><path fill="#ffffff" d="M96 119a4 4 0 1 0 8 0a4 4 0 1 0 -8 0ZM160 119a4 4 0 1 0 8 0a4 4 0 1 0 -8 0Z"/></svg></div>
+<h1 class="rise" style="--i:2">safefund</h1>
+<p class="lead rise" style="--i:3">İanə etməzdən əvvəl yoxlayın</p>
+<p class="rise" style="--i:4; font-size:34px; color:var(--forest); max-width:1200px">Tibbi ianə kampaniyalarını sənəd, süni intellekt və MyGov ilə yoxlayan və pulu dələduzlardan qoruyan platforma</p>
+<aside>Bu slayd ekranda olarkən səhnəyə çıxın. Burada danışmağa ehtiyac yoxdur, birbaşa problemlə başlayın.</aside>
+</section>
+<section id="scene" data-transition="fade">
+<h2 class="rise" style="--i:0">Kömək yolda oğurlanır</h2>
+<div class="scene rise" style="--i:1">
+<svg aria-label="Solda üç ianəçi, sağda xəstə uşağın ailəsi, aralarında pul yolu" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1664 560" width="1664" height="560">
+<line x1="440" y1="210" x2="1300" y2="210" stroke="#274A34" stroke-width="4" stroke-dasharray="4 18" stroke-linecap="round" opacity="0.35"/>
+<g fill="#274A34">
+<circle cx="110" cy="150" r="30"/><path d="M60 270v-40a50 50 0 0 1 100 0v40z"/>
+<circle cx="250" cy="150" r="30"/><path d="M200 270v-40a50 50 0 0 1 100 0v40z"/>
+<circle cx="390" cy="150" r="30"/><path d="M340 270v-40a50 50 0 0 1 100 0v40z"/>
+<circle cx="1400" cy="150" r="30"/><path d="M1350 270v-40a50 50 0 0 1 100 0v40z"/>
+<circle cx="1530" cy="185" r="22"/><path d="M1495 270v-26a35 35 0 0 1 70 0v26z"/>
+</g>
+<path fill="#C8321F" d="M1530 132c-9-14-30-10-30 6c0 14 30 30 30 30s30-16 30-30c0-16-21-20-30-6z"/>
+</svg>
+<p class="label" style="left:40px; top:300px; width:420px">İanəçilər</p>
+<p class="label" style="left:1300px; top:300px; width:340px">Xəstə uşağın ailəsi</p>
+<div class="layer fragment handoff" data-fragment-index="1">
+<svg aria-label="Pul ianəçilərdən ailəyə axır" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1664 560" width="1664" height="560">
+<g fill="#CCF88E" stroke="#274A34" stroke-width="4">
+<circle cx="450" cy="210" r="16"><animateMotion dur="2.4s" begin="0s" repeatCount="indefinite" path="M0 0 L840 0"/><animate attributeName="opacity" values="0;1;1;0" dur="2.4s" begin="0s" repeatCount="indefinite"/></circle>
+<circle cx="450" cy="210" r="16"><animateMotion dur="2.4s" begin="0.6s" repeatCount="indefinite" path="M0 0 L840 0"/><animate attributeName="opacity" values="0;1;1;0" dur="2.4s" begin="0.6s" repeatCount="indefinite"/></circle>
+<circle cx="450" cy="210" r="16"><animateMotion dur="2.4s" begin="1.2s" repeatCount="indefinite" path="M0 0 L840 0"/><animate attributeName="opacity" values="0;1;1;0" dur="2.4s" begin="1.2s" repeatCount="indefinite"/></circle>
+<circle cx="450" cy="210" r="16"><animateMotion dur="2.4s" begin="1.8s" repeatCount="indefinite" path="M0 0 L840 0"/><animate attributeName="opacity" values="0;1;1;0" dur="2.4s" begin="1.8s" repeatCount="indefinite"/></circle>
+</g>
+</svg>
+</div>
+<div class="layer fragment" data-fragment-index="2">
+<svg aria-label="Pul yolda dələduzun kartına yönəlir" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1664 560" width="1664" height="560">
+<path d="M450 210Q760 210 832 380" fill="none" stroke="#C8321F" stroke-width="4" stroke-dasharray="4 18" stroke-linecap="round" opacity="0.5"/>
+<g fill="#CCF88E" stroke="#274A34" stroke-width="4">
+<circle cx="450" cy="210" r="16"><animateMotion dur="2s" begin="0s" repeatCount="indefinite" path="M0 0Q310 0 382 170"/><animate attributeName="opacity" values="0;1;1;0" dur="2s" begin="0s" repeatCount="indefinite"/></circle>
+<circle cx="450" cy="210" r="16"><animateMotion dur="2s" begin="0.5s" repeatCount="indefinite" path="M0 0Q310 0 382 170"/><animate attributeName="opacity" values="0;1;1;0" dur="2s" begin="0.5s" repeatCount="indefinite"/></circle>
+<circle cx="450" cy="210" r="16"><animateMotion dur="2s" begin="1s" repeatCount="indefinite" path="M0 0Q310 0 382 170"/><animate attributeName="opacity" values="0;1;1;0" dur="2s" begin="1s" repeatCount="indefinite"/></circle>
+<circle cx="450" cy="210" r="16"><animateMotion dur="2s" begin="1.5s" repeatCount="indefinite" path="M0 0Q310 0 382 170"/><animate attributeName="opacity" values="0;1;1;0" dur="2s" begin="1.5s" repeatCount="indefinite"/></circle>
+</g>
+</svg>
+</div>
+<div class="thief fragment" data-fragment-index="2">
+<svg aria-label="Dələduz kartla" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" width="240" height="180">
+<path fill="#C8321F" d="M120 20c-30 0-48 22-48 46c0 20 14 36 48 36s48-16 48-36c0-24-18-46-48-46z"/>
+<rect x="96" y="56" width="48" height="14" rx="7" fill="#1B3625"/>
+<path fill="#C8321F" d="M60 178v-38a60 60 0 0 1 120 0v38z"/>
+<rect x="150" y="116" width="72" height="46" rx="8" fill="#CCF88E" stroke="#1B3625" stroke-width="4"/>
+<rect x="150" y="128" width="72" height="8" fill="#1B3625"/>
+</svg>
+<p>Dələduz</p>
+</div>
+<div class="empty fragment" data-fragment-index="2"><p>0 manat</p></div>
+</div>
+<div class="captions">
+<p class="cap fragment handoff" data-fragment-index="1">İnsanlar xəstə uşağa kömək etmək üçün pul göndərir</p>
+<p class="cap fragment" data-fragment-index="2">Amma pul ailəyə yox, <b class="red">dələduzun kartına</b> gedir</p>
+</div>
+<aside>Gəlin bunu sadə şəkildə görək. Solda ianəçilər, sağda isə xəstə uşağın ailəsidir. [klik] İnsanlar Instagram-da müraciəti görür və uşağa kömək etmək üçün pul göndərir. [klik] Amma kart nömrəsi dələduza məxsusdur. Pul yolda onun kartına gedir, ailə isə heç nə almır. Real hadisəyə baxaq.</aside>
+</section>
+<section id="case" class="dark footed" data-transition="fade">
+<p class="eyebrow rise" style="--i:0">INSTAGRAM, 2025</p>
+<div class="stack">
+<p class="big rise" style="--i:1">200 000 manat</p>
+<p class="big-label fragment">xəstə körpələrin foto və videoları ilə toplandı</p>
+<p class="big-label fragment"><span class="hi">Pul ailələrə yox, dələduzun öz kartına getdi</span></p>
+</div>
+<p class="source">Mənbə: Daxili İşlər Nazirliyi, mia.az, 16 dekabr 2025</p>
+<aside>Keçən dekabrda polis 30 yaşlı bir şəxsi saxladı. O, Instagram-da “Zəhra balama yardım”, “Əli üçün yardım” kimi səhifələr açmışdı. [klik] Bu səhifələrdə müalicəyə ehtiyacı olan xəstə körpələrin foto və videolarını paylaşır, təcili kömək lazım olduğunu yazırdı. İnsanlar 1 manatdan 500 manata qədər pul köçürürdü və cəmi təxminən 200 000 manat toplandı. [klik] Amma pul uşaqların ailələrinə deyil, onun öz kartlarına gedirdi və o, bu pulu şəxsi ehtiyaclarına xərcləyirdi.</aside>
+</section>
+<section id="pattern" class="footed" data-transition="fade">
+<h2 class="rise" style="--i:0">Hər saxta müraciət eyni cür qurulur</h2>
+<div class="row" style="align-items:center; gap:96px">
+<div class="post rise" style="--i:1">
+<div class="who"><div class="avatar"></div><p class="handle">zehra_ucun_yardim</p></div>
+<div class="photo"><p>[xəstə uşağın fotosu]</p></div>
+<p class="caption">Zəhranın 3 gün ərzində əməliyyat olunması lazımdır, hər manat önəmlidir</p>
+<p class="cardno">Kart: 4169 7388 XXXX 2231</p>
+</div>
+<div class="notes">
+<div class="note fragment" data-fragment-index="1"><div class="tag">1</div><p>Oğurlanmış foto</p></div>
+<div class="note fragment" data-fragment-index="2"><div class="tag">2</div><p>Təcili hekayə</p></div>
+<div class="note fragment" data-fragment-index="3"><div class="tag">3</div><p>Şəxsi kart nömrəsi</p></div>
+<p class="lead fragment" data-fragment-index="4">İanəçinin bunu yoxlamaq imkanı <b class="red">yoxdur</b></p>
+</div>
+</div>
+<p class="source">Nümunə post uydurmadır</p>
+<aside>Bu, tək bir hadisə deyil. Polis eyni üsulla pul toplayan başqa şəxsləri də saxlayıb. Hər saxta müraciət eyni üç hissədən ibarətdir. [klik] Başqasının xəstə uşağının fotosu. [klik] Təcili və kədərli hekayə. [klik] Və şəxsi kart nömrəsi. [klik] İanəçinin isə bunun real olub-olmadığını yoxlamaq imkanı yoxdur.</aside>
+</section>
+<section id="scale" class="footed" data-transition="fade">
+<p class="eyebrow rise" style="--i:0">AZƏRBAYCAN, 2024</p>
+<div class="stack">
+<p class="big rise" style="--i:1; color:var(--forest)">22,4 mln manat</p>
+<p class="lead rise" style="--i:2">16 804 kiberdələduzluq hadisəsində oğurlanıb</p>
+</div>
+<h2 class="fragment" style="margin-top:48px">İanə dələduzluğu isə <span class="red">heç ayrıca uçota alınmır</span></h2>
+<p class="source">Mənbə: Daxili İşlər Nazirliyinin mətbuat xidməti, APA, 5 fevral 2025</p>
+<aside>Bu, sosial mühəndislikdir. Daxili İşlər Nazirliyinin məlumatına görə, 2024-cü ildə 16 804 kiberdələduzluq hadisəsində 22,4 milyon manat oğurlanıb. [klik] İanə dələduzluğu isə ayrıca kateqoriya kimi heç uçota alınmır. Yəni bu problemi heç kim ölçmür.</aside>
+</section>
+<section id="solution" data-transition="fade">
+<h2 class="rise" style="--i:0">Hər kampaniya yoxlamadan keçir</h2>
+<div class="sol rise" style="--i:1">
+<svg aria-label="Solda ailə, ortada üç yoxlama qapısı, sağda ianəçilər" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1664 620" width="1664" height="620">
+<line x1="270" y1="150" x2="1400" y2="150" stroke="#274A34" stroke-width="4" stroke-dasharray="4 18" stroke-linecap="round" opacity="0.35"/>
+<g fill="#274A34">
+<circle cx="100" cy="110" r="28"/><path d="M52 210v-34a48 48 0 0 1 96 0v34z"/>
+<circle cx="200" cy="142" r="20"/><path d="M168 210v-22a32 32 0 0 1 64 0v22z"/>
+<circle cx="1470" cy="110" r="24"/><path d="M1430 210v-30a40 40 0 0 1 80 0v30z"/>
+<circle cx="1550" cy="110" r="24"/><path d="M1510 210v-30a40 40 0 0 1 80 0v30z"/>
+<circle cx="1630" cy="110" r="24"/><path d="M1594 210v-30a36 36 0 0 1 72 0v30z"/>
+</g>
+<path fill="#C8321F" d="M200 98c-7-11-24-8-24 5c0 11 24 24 24 24s24-13 24-24c0-13-17-16-24-5z"/>
+<g fill="#FFFEFB" stroke="#E6E5E1" stroke-width="4"><circle cx="520" cy="150" r="60"/><circle cx="800" cy="150" r="60"/><circle cx="1080" cy="150" r="60"/></g>
+<g fill="none" stroke="#274A34" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M504 122h22l14 14v36h-36z"/><path d="M526 122v14h14"/><path d="M512 150h20M512 162h14"/>
+<path d="M800 120c3 18 12 27 30 30c-18 3-27 12-30 30c-3-18-12-27-30-30c18-3 27-12 30-30z" fill="#CCF88E"/>
+<rect x="1050" y="128" width="60" height="44" rx="8"/><circle cx="1068" cy="146" r="7"/><path d="M1060 164h16M1084 142h16M1084 154h12"/>
+</g>
+</svg>
+<p class="label" style="left:20px; width:240px">Ailə</p>
+<p class="label" style="left:420px; width:200px">Sənədlər</p>
+<p class="label" style="left:680px; width:240px">Süni intellekt</p>
+<p class="label" style="left:980px; width:200px">MyGov</p>
+<p class="label" style="left:1420px; width:244px">İanəçilər</p>
+<div class="layer fragment" data-fragment-index="1">
+<div class="ring pass" style="left:454px; --d:1.04s"></div><div class="badge pass" style="left:548px; --d:1.04s"><svg viewBox="0 0 52 52" width="52" height="52"><path d="M15 27l8 8 15-16" fill="none" stroke="#CCF88E" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="ring pass" style="left:734px; --d:1.86s"></div><div class="badge pass" style="left:828px; --d:1.86s"><svg viewBox="0 0 52 52" width="52" height="52"><path d="M15 27l8 8 15-16" fill="none" stroke="#CCF88E" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="ring pass" style="left:1014px; --d:2.67s"></div><div class="badge pass" style="left:1108px; --d:2.67s"><svg viewBox="0 0 52 52" width="52" height="52"><path d="M15 27l8 8 15-16" fill="none" stroke="#CCF88E" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+<div class="camp go"><div class="photo"><svg viewBox="0 0 24 24" width="28" height="28"><path fill="#C8321F" d="M12 7c-1.6-2.4-6-1.8-6 1.4C6 11.6 12 15 12 15s6-3.4 6-6.6C18 5.2 13.6 4.6 12 7z"/></svg></div><div class="bar"></div><div class="bar short"></div></div>
+<p class="pill ok live">Yayımda</p>
+</div>
+<div class="layer fragment" data-fragment-index="2">
+<div class="ring fail" style="left:734px; --d:1.6s"></div><div class="badge fail" style="left:828px; --d:1.6s"><svg viewBox="0 0 52 52" width="52" height="52"><path d="M18 18l16 16M34 18L18 34" fill="none" stroke="#FFFEFB" stroke-width="6" stroke-linecap="round"/></svg></div>
+<div class="camp fake"><div class="photo"><svg viewBox="0 0 24 24" width="28" height="28"><path fill="#C8321F" d="M12 7c-1.6-2.4-6-1.8-6 1.4C6 11.6 12 15 12 15s6-3.4 6-6.6C18 5.2 13.6 4.6 12 7z"/></svg></div><div class="bar"></div><div class="bar short"></div></div>
+</div>
+<div class="layer fragment" data-fragment-index="3">
+<svg aria-label="Pul ianəçilərdən Safefund vasitəsilə ailəyə gedir" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1664 620" width="1664" height="620">
+<path d="M1550 290Q1550 410 1400 410L300 410Q130 410 130 290" fill="none" stroke="#274A34" stroke-width="4" stroke-dasharray="4 18" stroke-linecap="round" opacity="0.35"/>
+<g fill="#CCF88E" stroke="#274A34" stroke-width="4">
+<circle r="14" opacity="0"><animateMotion dur="3.2s" begin="0s" repeatCount="indefinite" path="M1550 290Q1550 410 1400 410L300 410Q130 410 130 290"/><animate attributeName="opacity" values="0;1;1;1;0" dur="3.2s" begin="0s" repeatCount="indefinite"/></circle><circle r="14" opacity="0"><animateMotion dur="3.2s" begin="0.8s" repeatCount="indefinite" path="M1550 290Q1550 410 1400 410L300 410Q130 410 130 290"/><animate attributeName="opacity" values="0;1;1;1;0" dur="3.2s" begin="0.8s" repeatCount="indefinite"/></circle><circle r="14" opacity="0"><animateMotion dur="3.2s" begin="1.6s" repeatCount="indefinite" path="M1550 290Q1550 410 1400 410L300 410Q130 410 130 290"/><animate attributeName="opacity" values="0;1;1;1;0" dur="3.2s" begin="1.6s" repeatCount="indefinite"/></circle><circle r="14" opacity="0"><animateMotion dur="3.2s" begin="2.4s" repeatCount="indefinite" path="M1550 290Q1550 410 1400 410L300 410Q130 410 130 290"/><animate attributeName="opacity" values="0;1;1;1;0" dur="3.2s" begin="2.4s" repeatCount="indefinite"/></circle>
+</g>
+</svg>
+<div class="guard"><svg aria-label="Safefund maskotu" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="112" height="112"><path fill="#ccf88e" d="M128 26C176 26 214 40 220 62C228 92 226 150 204 186C186 214 158 232 128 232C98 232 70 214 52 186C30 150 28 92 36 62C42 40 80 26 128 26Z"/><path fill="#274a34" fill-rule="evenodd" d="M128 26C176 26 214 40 220 62C228 92 226 150 204 186C186 214 158 232 128 232C98 232 70 214 52 186C30 150 28 92 36 62C42 40 80 26 128 26ZM128 38C84 38 52 50 47 66C40 93 42 146 62 179C78 205 102 220 128 220C154 220 178 205 194 179C214 146 216 93 209 66C204 50 172 38 128 38Z"/><g fill="#acf86c"><ellipse cx="78" cy="152" rx="16" ry="9"/><ellipse cx="178" cy="152" rx="16" ry="9"/></g><path fill="#274a34" d="M83 124a13 13 0 1 0 26 0a13 13 0 1 0 -26 0ZM147 124a13 13 0 1 0 26 0a13 13 0 1 0 -26 0ZM106 160A22 22 0 0 0 150 160A6.0 6.0 0 0 0 138 160A10 10 0 0 1 118 160A6.0 6.0 0 0 0 106 160Z"/><path fill="#ffffff" d="M96 119a4 4 0 1 0 8 0a4 4 0 1 0 -8 0ZM160 119a4 4 0 1 0 8 0a4 4 0 1 0 -8 0Z"/></svg></div>
+</div>
+<div class="ext fragment" data-fragment-index="4">
+<p class="ext-label">Başqa platformalar</p>
+<div class="input mini"><x-icon name="Link"></x-icon><p class="url"><span>instagram.com/p/zehra</span></p><p class="btn">Yoxla</p></div>
+<p class="pill bad verdict-pop">Dələduzluq</p>
+</div>
+</div>
+<aside>Safefund-da hər kampaniya yayımlanmazdan əvvəl yoxlanılır. [klik] Ailə kampaniya yaradır və o, üç yoxlamadan keçir: tibbi sənədlər saxtakarlığa görə yoxlanılır, süni intellekt hekayənin kopyalanıb kopyalanmadığını və kartın dələduzluqda görünüb görünmədiyini yoxlayır, təşkilatçının kimliyi isə MyGov vasitəsilə FIN kodla təsdiqlənir. Yalnız bundan sonra kampaniya ianəçilərə görünür. [klik] Başqasının hekayəsini kopyalayan saxta kampaniya isə süni intellekt mərhələsində dayandırılır. [klik] İanəçilərin pulu şəxsi karta yox, Safefund vasitəsilə ailəyə çatır. [klik] Instagram və ya LinkedIn kimi başqa platformalarda paylaşılan kampaniyalar üçün isə pulsuz alətimiz var: linki yapışdırırsınız və nəticəni dərhal görürsünüz.</aside>
+</section>
+<section id="demo" class="dark center" data-transition="fade">
+<img class="demo-video" src="assets/demo-still.jpg" data-video="assets/demo.mp4" data-video-sound="on" data-video-start="click" alt="Safefund nümayiş videosu" style="width:1465px; height:824px; object-fit:contain; border-radius:24px">
+<aside>Videonu başlatmaq üçün üzərinə klikləyin (təxminən 1 dəqiqə 5 saniyə). Video bitəndən sonra növbəti slayda keçin. Sual-cavab üçün safefund.vercel.app saytını açıq saxlayın.</aside>
+</section>
+<section id="users" data-transition="fade">
+<h2 class="rise" style="--i:0">Safefund kimlər üçündür</h2>
+<div class="people">
+<div class="who rise" style="--i:1"><svg class="portrait" aria-label="İanəçi telefonla yoxlanmış kampaniyaya baxır" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300"><circle cx="150" cy="150" r="146" fill="#FFFEFB" stroke="#E6E5E1" stroke-width="4"/><g fill="#274A34"><circle cx="120" cy="112" r="34"/><path d="M60 236v-40a60 60 0 0 1 120 0v40z"/></g>
+<rect x="168" y="118" width="74" height="124" rx="14" fill="#FFFEFB" stroke="#274A34" stroke-width="6"/>
+<circle cx="205" cy="172" r="22" fill="#CCF88E"/><g transform="translate(205 172)"><path d="M-9 1l6 6 12-13" fill="none" stroke="#274A34" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<rect x="186" y="208" width="38" height="8" rx="4" fill="#E6E5E1"/></svg><h3>İanəçilər</h3><p class="line">Yalnız yoxlanmış kampaniyalara ianə edirlər</p></div>
+<div class="who fragment"><svg class="link" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 272 8" width="272" height="8"><line x1="4" y1="4" x2="268" y2="4" stroke="#274A34" stroke-width="4" stroke-dasharray="4 18" stroke-linecap="round" opacity="0.35"/></svg><svg class="portrait" aria-label="Xəstə uşağın ailəsi, təsdiq nişanı ilə" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300"><circle cx="150" cy="150" r="146" fill="#CCF88E" stroke="#E6E5E1" stroke-width="4"/><g fill="#274A34"><circle cx="112" cy="118" r="32"/><path d="M58 240v-38a54 54 0 0 1 108 0v38z"/><circle cx="196" cy="156" r="23"/><path d="M160 240v-26a36 36 0 0 1 72 0v26z"/></g>
+<path fill="#C8321F" d="M196 104c-7-11-24-8-24 5c0 11 24 24 24 24s24-13 24-24c0-13-17-16-24-5z"/>
+<circle cx="226" cy="74" r="26" fill="#274A34"/><g transform="translate(226 74)"><path d="M-9 1l6 6 12-13" fill="none" stroke="#CCF88E" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g></svg><h3>Dürüst ailələr</h3><p class="line">Kampaniyalarının real olduğunu sübut edirlər</p></div>
+<div class="who fragment"><svg class="link" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 272 8" width="272" height="8"><line x1="4" y1="4" x2="268" y2="4" stroke="#274A34" stroke-width="4" stroke-dasharray="4 18" stroke-linecap="round" opacity="0.35"/></svg><svg class="portrait" aria-label="Xeyriyyə qutusu, ürək və qlobus" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300"><circle cx="150" cy="150" r="146" fill="#FFFEFB" stroke="#E6E5E1" stroke-width="4"/>
+<circle cx="150" cy="78" r="18" fill="#CCF88E" stroke="#274A34" stroke-width="5"/>
+<rect x="78" y="112" width="144" height="124" rx="18" fill="#274A34"/>
+<rect x="122" y="104" width="56" height="12" rx="6" fill="#FFFEFB" stroke="#274A34" stroke-width="5"/>
+<path fill="#C8321F" d="M150 158c-10-16-36-12-36 8c0 18 36 38 36 38s36-20 36-38c0-20-26-24-36-8z"/>
+<circle cx="226" cy="214" r="34" fill="#CCF88E" stroke="#274A34" stroke-width="5"/>
+<g fill="none" stroke="#274A34" stroke-width="4"><ellipse cx="226" cy="214" rx="14" ry="32"/><path d="M193 214h66M198 198h56M198 230h56"/></g></svg><h3>Xeyriyyə təşkilatları</h3><p class="line">Başqaları üçün topladıqları pulu şəffaf göstərirlər</p></div>
+</div>
+<aside>İlk istifadəçimiz ianəçidir: Azərbaycanda “bu uşağa kömək edin” postunu görən hər kəs. Safefund-da o, yalnız yoxlamadan keçmiş kampaniyalara ianə edir, başqa platformalardakı postları isə pulsuz yoxlaya bilir. [klik] İkincisi, dürüst ailələrdir. Dələduzluq ən çox onlara zərər verir, çünki insanlar müraciətlərə inanmağı dayandırır. Safefund-da onların kampaniyası təsdiq nişanı ilə görünür. [klik] Üçüncüsü, insanlar adından kütləvi şəkildə pul toplayan yerli və qlobal xeyriyyə təşkilatlarıdır. Safefund onlara hər müraciətin real olduğunu və pulun hara getdiyini açıq göstərmək imkanı verir.</aside>
+</section>
+<section id="business" data-transition="fade">
+<p class="eyebrow rise" style="--i:0">BİZNES MODELİ</p>
+<h2 class="rise" style="--i:1">Hər ianəyə 2% xidmət haqqı</h2>
+<div class="biz rise" style="--i:2">
+<svg aria-label="İanəçi solda, ailə sağ yuxarıda, Safefund sağ aşağıda" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1664 460" width="1664" height="460">
+<g fill="#274A34"><circle cx="150" cy="150" r="40"/><path d="M80 290v-50a70 70 0 0 1 140 0v50z"/>
+<circle cx="1390" cy="80" r="30"/><path d="M1338 180v-36a52 52 0 0 1 104 0v36z"/><circle cx="1490" cy="112" r="22"/><path d="M1456 180v-24a34 34 0 0 1 68 0v24z"/></g>
+<path fill="#C8321F" d="M1490 62c-7-11-24-8-24 5c0 11 24 24 24 24s24-13 24-24c0-13-17-16-24-5z"/>
+</svg>
+<p class="lbl" style="left:30px; top:310px; width:240px">İanəçi</p>
+<p class="lbl" style="left:1320px; top:200px; width:240px">Ailə</p>
+<div class="fragment layer" data-fragment-index="1">
+<svg aria-label="100 manat ailəyə, 2 manat Safefund-a" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1664 460" width="1664" height="460">
+<path d="M330 190C760 190 900 110 1290 110" fill="none" stroke="#274A34" stroke-width="10" stroke-linecap="round" opacity="0.18"/>
+<path d="M330 220C760 220 900 370 1300 370" fill="none" stroke="#274A34" stroke-width="4" stroke-dasharray="4 18" stroke-linecap="round" opacity="0.4"/>
+<g fill="#CCF88E" stroke="#274A34" stroke-width="4"><circle r="18" opacity="0"><animateMotion dur="2.4s" begin="0.00s" repeatCount="indefinite" path="M330 190C760 190 900 110 1290 110"/><animate attributeName="opacity" values="0;1;1;0" dur="2.4s" begin="0.00s" repeatCount="indefinite"/></circle><circle r="18" opacity="0"><animateMotion dur="2.4s" begin="0.60s" repeatCount="indefinite" path="M330 190C760 190 900 110 1290 110"/><animate attributeName="opacity" values="0;1;1;0" dur="2.4s" begin="0.60s" repeatCount="indefinite"/></circle><circle r="18" opacity="0"><animateMotion dur="2.4s" begin="1.20s" repeatCount="indefinite" path="M330 190C760 190 900 110 1290 110"/><animate attributeName="opacity" values="0;1;1;0" dur="2.4s" begin="1.20s" repeatCount="indefinite"/></circle><circle r="18" opacity="0"><animateMotion dur="2.4s" begin="1.80s" repeatCount="indefinite" path="M330 190C760 190 900 110 1290 110"/><animate attributeName="opacity" values="0;1;1;0" dur="2.4s" begin="1.80s" repeatCount="indefinite"/></circle><circle r="11" opacity="0"><animateMotion dur="3.6s" begin="0.00s" repeatCount="indefinite" path="M330 220C760 220 900 370 1300 370"/><animate attributeName="opacity" values="0;1;1;0" dur="3.6s" begin="0.00s" repeatCount="indefinite"/></circle></g>
+</svg>
+<p class="amt big-amt" style="left:430px; top:30px">100 manat</p>
+<p class="amt fee-amt" style="left:700px; top:300px">2 manat</p>
+<div class="guard-biz"><svg aria-label="Safefund maskotu" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="150" height="150"><path fill="#ccf88e" d="M128 26C176 26 214 40 220 62C228 92 226 150 204 186C186 214 158 232 128 232C98 232 70 214 52 186C30 150 28 92 36 62C42 40 80 26 128 26Z"/><path fill="#274a34" fill-rule="evenodd" d="M128 26C176 26 214 40 220 62C228 92 226 150 204 186C186 214 158 232 128 232C98 232 70 214 52 186C30 150 28 92 36 62C42 40 80 26 128 26ZM128 38C84 38 52 50 47 66C40 93 42 146 62 179C78 205 102 220 128 220C154 220 178 205 194 179C214 146 216 93 209 66C204 50 172 38 128 38Z"/><g fill="#acf86c"><ellipse cx="78" cy="152" rx="16" ry="9"/><ellipse cx="178" cy="152" rx="16" ry="9"/></g><path fill="#274a34" d="M83 124a13 13 0 1 0 26 0a13 13 0 1 0 -26 0ZM147 124a13 13 0 1 0 26 0a13 13 0 1 0 -26 0ZM106 160A22 22 0 0 0 150 160A6.0 6.0 0 0 0 138 160A10 10 0 0 1 118 160A6.0 6.0 0 0 0 106 160Z"/><path fill="#ffffff" d="M96 119a4 4 0 1 0 8 0a4 4 0 1 0 -8 0ZM160 119a4 4 0 1 0 8 0a4 4 0 1 0 -8 0Z"/></svg></div>
+<p class="lbl" style="left:1260px; top:440px; width:240px">Safefund</p>
+</div>
+</div>
+<p class="lead fragment" data-fragment-index="2">Ailə ianənin <b style="color:var(--forest)">hamısını</b> alır, 2% haqqı ianəçi ödəyir</p>
+<aside>Biznes modelimiz sadədir: hər ianəyə 2% xidmət haqqı əlavə olunur. [klik] Məsələn, ianəçi 100 manat göndərir. 100 manatın hamısı ailəyə çatır, ianəçi isə üstəlik 2 manat ödəyir və bu Safefund-a gedir. [klik] Yəni ailənin payından heç nə kəsilmir. Kiçik ianələrdə haqq ən azı 20 qəpikdir ki, ödəniş xərcləri qarşılansın. Bu pul yoxlama sistemimizi, süni intellekti və MyGov yoxlamasını maliyyələşdirir.</aside>
+</section>
+<section id="signal" class="white footed" data-transition="fade">
+<img class="abb-logo rise" style="--i:0" alt="ABB, Azərbaycan Beynəlxalq Bankı" src="assets/abb.png">
+<div class="chat">
+<div class="person pop" style="--i:1"><svg aria-label="Bank əməkdaşı" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 300" width="240" height="300"><circle cx="120" cy="96" r="64" fill="#274A34"/><path d="M20 300v-62a100 100 0 0 1 200 0v62z" fill="#274A34"/><path d="M96 168l24 34 24-34" fill="none" stroke="#CCF88E" stroke-width="10" stroke-linejoin="round"/></svg><p class="person-role">Layihə meneceri</p></div>
+<div class="talk">
+<div class="bubble rise" style="--i:2"><p>Banklar ianələr üçün <b>gündə 5 köçürmə limitini</b> qaldırmaq istəyir, amma dələduzluq riskinə görə edə bilmir</p></div>
+<div class="bubble small fragment"><p>Belə bir həll axtarırlar</p></div>
+<div class="bubble small us fragment"><p>Safefund banklarla inteqrasiya oluna bilər</p></div>
+</div>
+</div>
+<p class="source">ABB-nin layihə meneceri ilə söhbət, noyabr 2026; bankın rəsmi mövqeyi deyil</p>
+<aside>İdeyanı ABB Bank-da layihə meneceri ilə müzakirə etdik. Onun sözlərinə görə, banklar ianə toplayan kartlar üçün gündə 5 köçürmə limitini aradan qaldırmaq üzərində işləyir, amma dələduzluq hallarına görə bunu rahat edə bilmirlər. [klik] Onlar məhz belə bir həll axtarırlar: dələduzluq problemi həll olunsa, limit qaldırıla bilər. [klik] Yəni Safefund birbaşa banklarla inteqrasiya oluna bilər. Bu, bankın rəsmi mövqeyi deyil, bir əməkdaşın fikridir, amma problemin bank tərəfində də hiss olunduğunu göstərir.</aside>
+</section>
+<section id="competitors" class="footed" data-transition="fade">
+<h2 class="rise" style="--i:0">Rəqiblərimiz</h2>
+<div class="rise" style="--i:1">
+<div class="cmp">
+<div class="c-row c-head"><div class="c-lbl"></div><div class="c-col"><p class="c-tag">İndiki üsul</p><p class="c-name">Instagram və şəxsi kart</p></div><div class="c-col"><p class="c-tag">Yerli</p><p class="c-name">layf.az</p></div><div class="c-col"><p class="c-tag">Qlobal</p><p class="c-name">GoFundMe</p></div><div class="c-col c-us fragment" data-fragment-index="1"><p class="c-tag">Biz</p><p class="c-name">Safefund</p></div></div>
+<div class="c-row"><p class="c-lbl">Tibbi sənədləri yoxlayır</p><div class="c-cell"><span class="mk no"><svg viewBox="0 0 44 44" width="44" height="44"><path d="M12 22h20" stroke="#B9C4B6" stroke-width="5" stroke-linecap="round"/></svg></span></div><div class="c-cell"><span class="mk yes"><svg viewBox="0 0 44 44" width="44" height="44"><circle cx="22" cy="22" r="22" fill="#274A34"/><path d="M13 23l6 6 12-13" fill="none" stroke="#CCF88E" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div><div class="c-cell"><span class="mk no"><svg viewBox="0 0 44 44" width="44" height="44"><path d="M12 22h20" stroke="#B9C4B6" stroke-width="5" stroke-linecap="round"/></svg></span></div><div class="c-cell c-us fragment" data-fragment-index="1"><span class="mk yes"><svg viewBox="0 0 44 44" width="44" height="44"><circle cx="22" cy="22" r="22" fill="#274A34"/><path d="M13 23l6 6 12-13" fill="none" stroke="#CCF88E" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></div>
+<div class="c-row"><p class="c-lbl">Kopyalanmış və saxta müraciəti avtomatik tutur</p><div class="c-cell"><span class="mk no"><svg viewBox="0 0 44 44" width="44" height="44"><path d="M12 22h20" stroke="#B9C4B6" stroke-width="5" stroke-linecap="round"/></svg></span></div><div class="c-cell"><span class="mk no"><svg viewBox="0 0 44 44" width="44" height="44"><path d="M12 22h20" stroke="#B9C4B6" stroke-width="5" stroke-linecap="round"/></svg></span></div><div class="c-cell"><span class="mk part"><svg viewBox="0 0 44 44" width="44" height="44"><circle cx="22" cy="22" r="19" fill="none" stroke="#274A34" stroke-width="5"/><path d="M22 3a19 19 0 0 1 0 38z" fill="#274A34"/></svg></span></div><div class="c-cell c-us fragment" data-fragment-index="1"><span class="mk yes"><svg viewBox="0 0 44 44" width="44" height="44"><circle cx="22" cy="22" r="22" fill="#274A34"/><path d="M13 23l6 6 12-13" fill="none" stroke="#CCF88E" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></div>
+<div class="c-row"><p class="c-lbl">Təşkilatçının kimliyini dövlət bazası ilə yoxlayır</p><div class="c-cell"><span class="mk no"><svg viewBox="0 0 44 44" width="44" height="44"><path d="M12 22h20" stroke="#B9C4B6" stroke-width="5" stroke-linecap="round"/></svg></span></div><div class="c-cell"><span class="mk part"><svg viewBox="0 0 44 44" width="44" height="44"><circle cx="22" cy="22" r="19" fill="none" stroke="#274A34" stroke-width="5"/><path d="M22 3a19 19 0 0 1 0 38z" fill="#274A34"/></svg></span></div><div class="c-cell"><span class="mk part"><svg viewBox="0 0 44 44" width="44" height="44"><circle cx="22" cy="22" r="19" fill="none" stroke="#274A34" stroke-width="5"/><path d="M22 3a19 19 0 0 1 0 38z" fill="#274A34"/></svg></span></div><div class="c-cell c-us fragment" data-fragment-index="1"><span class="mk yes"><svg viewBox="0 0 44 44" width="44" height="44"><circle cx="22" cy="22" r="22" fill="#274A34"/><path d="M13 23l6 6 12-13" fill="none" stroke="#CCF88E" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></div>
+<div class="c-row"><p class="c-lbl">Başqa platformalardakı postları yoxlayır</p><div class="c-cell"><span class="mk no"><svg viewBox="0 0 44 44" width="44" height="44"><path d="M12 22h20" stroke="#B9C4B6" stroke-width="5" stroke-linecap="round"/></svg></span></div><div class="c-cell"><span class="mk no"><svg viewBox="0 0 44 44" width="44" height="44"><path d="M12 22h20" stroke="#B9C4B6" stroke-width="5" stroke-linecap="round"/></svg></span></div><div class="c-cell"><span class="mk no"><svg viewBox="0 0 44 44" width="44" height="44"><path d="M12 22h20" stroke="#B9C4B6" stroke-width="5" stroke-linecap="round"/></svg></span></div><div class="c-cell c-us fragment" data-fragment-index="1"><span class="mk yes"><svg viewBox="0 0 44 44" width="44" height="44"><circle cx="22" cy="22" r="22" fill="#274A34"/><path d="M13 23l6 6 12-13" fill="none" stroke="#CCF88E" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></div>
+<div class="c-row"><p class="c-lbl">Manatla, Azərbaycanda işləyir</p><div class="c-cell"><span class="mk yes"><svg viewBox="0 0 44 44" width="44" height="44"><circle cx="22" cy="22" r="22" fill="#274A34"/><path d="M13 23l6 6 12-13" fill="none" stroke="#CCF88E" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div><div class="c-cell"><span class="mk yes"><svg viewBox="0 0 44 44" width="44" height="44"><circle cx="22" cy="22" r="22" fill="#274A34"/><path d="M13 23l6 6 12-13" fill="none" stroke="#CCF88E" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div><div class="c-cell"><span class="mk no"><svg viewBox="0 0 44 44" width="44" height="44"><path d="M12 22h20" stroke="#B9C4B6" stroke-width="5" stroke-linecap="round"/></svg></span></div><div class="c-cell c-us fragment" data-fragment-index="1"><span class="mk yes"><svg viewBox="0 0 44 44" width="44" height="44"><circle cx="22" cy="22" r="22" fill="#274A34"/><path d="M13 23l6 6 12-13" fill="none" stroke="#CCF88E" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></div>
+</div>
+</div>
+<p class="source">Mənbə: layf.az saytı və GoFundMe şərtləri, noyabr 2026. Yarım dairə qismən deməkdir</p>
+<aside>Bu gün ən çox istifadə olunan üsul Instagram postu və şəxsi kart nömrəsidir, burada heç bir yoxlama yoxdur. Yerli rəqibimiz layf.az xeyriyyə fondudur: sənədləri əl ilə yoxlayır, buna 1 ilə 3 iş günü gedir, şəxsiyyət üçün isə yalnız şəxsiyyət vəsiqəsinin şəklini istəyir. Qlobal lider GoFundMe isə öz şərtlərində müraciətləri yoxlaya bilmədiyini yazır və manatla işləmir. [klik] Safefund bunların hamısını edir: sənədləri və hekayəni süni intellektlə avtomatik yoxlayır, kimliyi MyGov ilə təsdiqləyir və başqa platformalardakı postları da yoxlaya bilir.</aside>
+</section>
+<section id="roadmap" class="footed" data-transition="fade">
+<h2 class="rise" style="--i:0">Növbəti addımlarımız belədir</h2>
+<div class="rm">
+<svg class="tl" aria-label="Zaman xətti" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1664 40" width="1664" height="40"><line x1="40" y1="20" x2="416" y2="20" stroke="#E6E5E1" stroke-width="6"/><line x1="456" y1="20" x2="832" y2="20" stroke="#E6E5E1" stroke-width="6"/><line x1="872" y1="20" x2="1248" y2="20" stroke="#E6E5E1" stroke-width="6"/><circle cx="436" cy="20" r="17" fill="#FFFEFB" stroke="#E6E5E1" stroke-width="6"/><circle cx="852" cy="20" r="17" fill="#FFFEFB" stroke="#E6E5E1" stroke-width="6"/><circle cx="1268" cy="20" r="17" fill="#FFFEFB" stroke="#E6E5E1" stroke-width="6"/><circle cx="20" cy="20" r="17" fill="#CCF88E" stroke="#274A34" stroke-width="6"/></svg>
+<div class="tl-layer fragment" data-fragment-index="1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1664 40" width="1664" height="40"><line class="tl-seg" pathLength="1" x1="40" y1="20" x2="416" y2="20" stroke="#274A34" stroke-width="6"/><circle class="tl-dot" cx="436" cy="20" r="17" fill="#FFFEFB" stroke="#274A34" stroke-width="6"/></svg></div>
+<div class="tl-layer fragment" data-fragment-index="2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1664 40" width="1664" height="40"><line class="tl-seg" pathLength="1" x1="456" y1="20" x2="832" y2="20" stroke="#274A34" stroke-width="6"/><circle class="tl-dot" cx="852" cy="20" r="17" fill="#FFFEFB" stroke="#274A34" stroke-width="6"/></svg></div>
+<div class="tl-layer fragment" data-fragment-index="3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1664 40" width="1664" height="40"><line class="tl-seg" pathLength="1" x1="872" y1="20" x2="1248" y2="20" stroke="#274A34" stroke-width="6"/><circle class="tl-dot" cx="1268" cy="20" r="17" fill="#FFFEFB" stroke="#274A34" stroke-width="6"/></svg></div>
+<div class="tl-steps">
+<div class="tl-step rise" style="--i:1"><p class="when now">İNDİ, MVP</p><h3>Platforma və link aləti</h3></div>
+<div class="tl-step fragment" data-fragment-index="1"><p class="when">AZƏRBAYCAN</p><h3>Real MyGov və bank tərəfdaşı</h3></div>
+<div class="tl-step fragment" data-fragment-index="2"><p class="when">MƏRKƏZİ ASİYA</p><h3>Qazaxıstan və Özbəkistan</h3><p class="fact">Şımkənd, 2024: saxta səhifə 6 000 köçürmə ilə 32 mln tenge topladı</p></div>
+<div class="tl-step fragment" data-fragment-index="3"><p class="when">QLOBAL</p><h3>Banklar və platformalar üçün API</h3></div>
+</div>
+</div>
+<div class="stat fragment" data-fragment-index="4" style="margin-bottom:auto"><p class="big" style="color:var(--forest)">442 mlrd $</p><p class="lead">hər il dələduzlara itirilir</p></div>
+<p class="source">Mənbələr: Tengrinews, sentyabr 2024; Global Anti-Scam Alliance və Feedzai, Global State of Scams 2025</p>
+<aside>Bu gün platforma və link aləti işləyir: kampaniyalar sənəd, süni intellekt və test MyGov yoxlamasından keçir. [klik] Növbəti addım Azərbaycanda real MyGov inteqrasiyası və ödənişləri qəbul edəcək lisenziyalı bank tərəfdaşıdır. Azərbaycanda bir bankla bazarın böyük hissəsini əhatə etmək mümkündür. [klik] Sonra Qazaxıstan və Özbəkistana çıxırıq, çünki orada da eyni uşaq fotosu ilə dələduzluq edilir. Məsələn, 2024-cü ildə Şımkənddə xəstə uşaqlar adına açılmış saxta səhifə təxminən 6 000 köçürmə ilə 32 milyon tenge topladı. [klik] Sonda yoxlama sistemimizi dünyanın istənilən ölkəsində banklar və ianə platformaları üçün API kimi təklif edəcəyik. [klik] Çünki dünyada insanlar hər il dələduzlara 442 milyard dollar itirir.</aside>
+</section>
+<section id="team" data-transition="fade">
+<div class="team-head"><h2 class="rise" style="--i:0">Komanda</h2><div class="logos rise" style="--i:1"><img class="lg-luhive" alt="Luhive" src="assets/luhive.png"><img class="lg-push30" alt="Push30" src="assets/push30.png"><img class="lg-spacexsi" alt="SpaceXSI" src="assets/spacexsi.png"></div></div>
+<div class="team">
+<div class="mate rise" style="--i:1"><div class="face lime"><img alt="Əli Əliyev" src="assets/ali.jpg"></div><h3>Əli Əliyev</h3><p class="role">Luhive.com təsisçisi</p>
+<ul class="facts"><li>5+ il proqram təminatı təcrübəsi</li><li>1,5 il sahibkarlıq təcrübəsi</li><li>SpaceXSI icma meneceri</li></ul></div>
+<div class="mate rise" style="--i:2"><div class="face forest"><img alt="Emil" src="assets/emil.jpg"></div><h3>Emil</h3><p class="role">Mobil developer, Push30</p>
+<ul class="facts"><li>30AI Health həllinin əsas developeri</li><li>5 hakatonun qalibi, Teknofest iştirakçısı</li><li>4+ il proqram təminatı təcrübəsi</li></ul></div>
+</div>
+<aside>Biz iki nəfərik. Mən Əli Əliyevəm, Luhive.com-un təsisçisiyəm. Proqram təminatında 5 ildən çox, sahibkarlıqda isə il yarım təcrübəm var, həmçinin SpaceXSI-də icma meneceriyəm. Safefund-da məhsul və biznes tərəfinə cavabdehəm. Emil Push30-da mobil developerdir və 30AI Health həllinin əsas developerlərindəndir. O, 5 hakatonun qalibi və Teknofest iştirakçısıdır, proqram təminatında 4 ildən çox təcrübəsi var. Safefund-un texniki hissəsini Emil qurur.</aside>
+</section>
+<section id="close" class="center" data-transition="fade">
+<div class="pop" style="--i:0"><svg aria-label="Safefund maskotu" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256"><path fill="#ccf88e" d="M128 26C176 26 214 40 220 62C228 92 226 150 204 186C186 214 158 232 128 232C98 232 70 214 52 186C30 150 28 92 36 62C42 40 80 26 128 26Z"/><path fill="#274a34" fill-rule="evenodd" d="M128 26C176 26 214 40 220 62C228 92 226 150 204 186C186 214 158 232 128 232C98 232 70 214 52 186C30 150 28 92 36 62C42 40 80 26 128 26ZM128 38C84 38 52 50 47 66C40 93 42 146 62 179C78 205 102 220 128 220C154 220 178 205 194 179C214 146 216 93 209 66C204 50 172 38 128 38Z"/><g fill="#acf86c"><ellipse cx="78" cy="152" rx="16" ry="9"/><ellipse cx="178" cy="152" rx="16" ry="9"/></g><path fill="#274a34" d="M83 124a13 13 0 1 0 26 0a13 13 0 1 0 -26 0ZM147 124a13 13 0 1 0 26 0a13 13 0 1 0 -26 0ZM106 160A22 22 0 0 0 150 160A6.0 6.0 0 0 0 138 160A10 10 0 0 1 118 160A6.0 6.0 0 0 0 106 160Z"/><path fill="#ffffff" d="M96 119a4 4 0 1 0 8 0a4 4 0 1 0 -8 0ZM160 119a4 4 0 1 0 8 0a4 4 0 1 0 -8 0Z"/></svg></div>
+<h2 class="rise" style="--i:2">İanə etməzdən əvvəl yoxlayın</h2>
+<p class="rise" style="--i:3; font-size:34px; color:var(--forest); max-width:1200px">Tibbi ianə kampaniyalarını sənəd, süni intellekt və MyGov ilə yoxlayan və pulu dələduzlardan qoruyan platforma</p>
+<p class="lead rise" style="--i:4">safefund.vercel.app</p>
+<aside>Təşəkkür edirik. Suallarınızı cavablandırmağa hazırıq.</aside>
+</section>
+<section id="a1-numbers" class="footed" data-transition="fade">
+<p class="eyebrow">ƏLAVƏ, DƏLƏDUZLUQ RƏQƏMLƏRİ</p>
+<h2>2024-cü ildə Azərbaycanda kiberdələduzluq</h2>
+<table>
+<tr><th style="width:60%">Üsul</th><th style="width:20%; text-align:right">Manat</th><th style="width:20%; text-align:right">Hadisə</th></tr>
+<tr><td>Lotereya və qumar vədləri</td><td style="text-align:right">2 450 403</td><td style="text-align:right">471</td></tr>
+<tr><td>Saxta linklər</td><td style="text-align:right">2 043 896</td><td style="text-align:right">1 027</td></tr>
+<tr><td>Saxta mağaza elanları ilə zənglər</td><td style="text-align:right">1 196 786</td><td style="text-align:right">411</td></tr>
+<tr><td>Bank əməkdaşı kimi təqdim olunma</td><td style="text-align:right">598 048</td><td style="text-align:right">290</td></tr>
+<tr><td>Cəmi, xaricdən kibermüdaxilə</td><td style="text-align:right">22 442 838</td><td style="text-align:right">16 804</td></tr>
+</table>
+<p class="lead">Dünyada hər il dələduzlara 442 mlrd dollar itirilir</p>
+<p class="source">Mənbələr: Daxili İşlər Nazirliyinin mətbuat xidməti, APA, 5 fevral 2025; GASA və Feedzai, Global State of Scams 2025</p>
+<aside>Problemin miqyası soruşulsa, bu slaydı açın. Xeyriyyə dələduzluğu Daxili İşlər Nazirliyinin statistikasında ayrıca kateqoriya deyil.</aside>
+</section>
+<section id="a2-competition" data-transition="fade">
+<p class="eyebrow">ƏLAVƏ, RƏQABƏT</p>
+<h2>Heç kim müraciətin özünü yoxlamır</h2>
+<table>
+<tr><th style="width:36%">Alternativ</th><th style="width:64%">Çatışmazlıq</th></tr>
+<tr><td>Instagram-da şəxsi kartlar</td><td>Yoxlama yoxdur, gündə cəmi 5 köçürmə mümkündür</td></tr>
+<tr><td>GoFundMe və qlobal platformalar</td><td>Öz şərtlərinə görə təşkilatçını yoxlaya bilmirlər, manatla işləmirlər</td></tr>
+<tr><td>Link skanerləri</td><td>Müraciəti, kartı və sənədləri oxumurlar</td></tr>
+<tr><td>Banklar</td><td>Yalnız öz kartlarını görürlər, ona görə bizim müştərimizdirlər</td></tr>
+<tr><td>layf.az xeyriyyə fondu</td><td>Sənədləri əl ilə, 1–3 iş günündə yoxlayır; süni intellekt, MyGov və başqa platformalardakı postların yoxlanması yoxdur</td></tr>
+</table>
+<aside>Rəqiblər haqqında və ya “bank bunu özü qursa nə olar” sualı verilsə, bu slaydı açın.</aside>
+</section>
+<section id="a3-legal" class="footed">
+<p class="eyebrow">ƏLAVƏ, HÜQUQİ TƏRƏF</p>
+<h2>Biz pulu heç vaxt özümüzdə saxlamırıq</h2>
+<div class="row">
+<div class="card"><p class="num">1</p><h3>Ödənişlər</h3><p class="line">Pul lisenziyalı bank və ya ödəniş təşkilatı vasitəsilə birbaşa alana gedir</p></div>
+<div class="card"><p class="num">2</p><h3>2% haqq</h3><p class="line">Bu, ianə deyil, ianəçinin ödədiyi yoxlama xidmətinin haqqıdır</p></div>
+<div class="card"><p class="num">3</p><h3>Qanun</h3><p class="line">Yeni kraudfandinq qanunu yalnız səhm və borc modellərini tənzimləyir, ianələri yox</p></div>
+</div>
+<p class="source">Mənbə: ICNL (2018); 450-VIIQ saylı qanun, 24 yanvar 2027-dən qüvvədədir; hüquqşünas rəyi gözlənilir</p>
+<aside>İanə toplamağın qanuni olub-olmadığı və ya lisenziyanın lazım olub-olmadığı soruşulsa, bu slaydı açın. Safefund pulu öz hesabında saxlamır: ödənişlər lisenziyalı bank və ya ödəniş təşkilatı vasitəsilə birbaşa alana köçürülür. 2% haqq ianənin bir hissəsi deyil, ianəçinin üstəlik ödədiyi yoxlama xidmətinin haqqıdır. 2027-ci ilin yanvarında qüvvəyə minən kraudfandinq qanunu yalnız səhm və borc kraudfandinqini tənzimləyir, ianələr onun əhatəsinə düşmür. Link yoxlama aləti isə pulla ümumiyyətlə işləmir. Bu struktur hələ hüquqşünas tərəfindən təsdiqlənməlidir.</aside>
+</section>
+<section id="a4-security" class="footed">
+<p class="eyebrow">ƏLAVƏ, TƏHLÜKƏSİZLİK</p>
+<h2>Məlumatları belə qoruyuruq</h2>
+<div class="grid3">
+<div class="card sm"><p class="num">1</p><h3>Sənədlər şifrələnir</h3><p class="line">Tibbi fayllar AES-256-GCM ilə şifrələnib saxlanılır</p></div>
+<div class="card sm"><p class="num">2</p><h3>FIN kod saxlanılmır</h3><p class="line">Bazada yalnız onun HMAC heşi qalır</p></div>
+<div class="card sm"><p class="num">3</p><h3>Kart nömrəsi saxlanılmır</h3><p class="line">Yalnız heşi və son 4 rəqəmi saxlanılır</p></div>
+<div class="card sm"><p class="num">4</p><h3>Dəyişməz reyestr</h3><p class="line">Hər ianə əvvəlkinin heşi ilə zəncirlənir, dəyişiklik dərhal görünür</p></div>
+<div class="card sm"><p class="num">5</p><h3>Saxta sənəd aşkarlanır</h3><p class="line">Təkrar istifadə heşi, redaktə izləri və süni intellekt baxışı</p></div>
+<div class="card sm"><p class="num">6</p><h3>Demo məlumatı sintetikdir</h3><p class="line">Real xəstə, bank və ya MyGov sistemi istifadə olunmur</p></div>
+</div>
+<p class="source">Fayllar Frankfurtdakı (AB) bağlı yaddaşda saxlanılır; MyGov hələlik test mühitidir</p>
+<aside>Təhlükəsizlik və ya məlumatların qorunması soruşulsa, bu slaydı açın. Tibbi sənədlər yaddaşa yazılmazdan əvvəl AES-256-GCM ilə şifrələnir. FIN kod və kart nömrəsi açıq şəkildə saxlanılmır, yalnız heşləri saxlanılır, ona görə baza sızsa belə bu məlumatlar oxunmur. Hər ianə əvvəlki qeydin heşi ilə zəncirlənir, kimsə bazada bir rəqəmi dəyişsə, yoxlama dərhal hansı qeydin dəyişdiyini göstərir. Demoda bütün məlumatlar sintetikdir.</aside>
+</section>
+<section id="market" class="footed" data-transition="fade">
+<h2 class="rise" style="--i:0">Azərbaycandan dünyaya çıxırıq</h2>
+<div class="row" style="align-items:center; gap:32px">
+<div class="card rise" style="--i:1"><h3>Azərbaycan</h3><p class="line">Bir bankla bazarın böyük hissəsini əhatə etmək olar</p></div>
+<div class="fragment" data-fragment-index="1"><x-shape kind="arrow-right" style="background:var(--forest); width:72px; height:36px"></x-shape></div>
+<div class="card fragment" data-fragment-index="1"><h3>Qazaxıstan, Özbəkistan</h3><p class="line">Orada da eyni uşaq fotosu ilə dələduzluq edilir</p></div>
+<div class="fragment" data-fragment-index="2"><x-shape kind="arrow-right" style="background:var(--forest); width:72px; height:36px"></x-shape></div>
+<div class="card fragment" data-fragment-index="2"><h3>Qlobal API</h3><p class="line">İstənilən ölkədə banklar və platformalar üçün</p></div>
+</div>
+<div class="stat fragment" data-fragment-index="3" style="margin-top:24px"><p class="big" style="color:var(--forest)">442 mlrd $</p><p class="lead">hər il dələduzlara itirilir</p></div>
+<p class="source">Mənbə: Global Anti-Scam Alliance və Feedzai, Global State of Scams 2025</p>
+<aside>Azərbaycan başlanğıc bazarımızdır, çünki burada bir bankla bazarın böyük hissəsini əhatə etmək mümkündür. [klik] Eyni dələduzluq, yəni uşaq fotosu və kart nömrəsi, Qazaxıstanda və Özbəkistanda da geniş yayılıb. [klik] Yoxlama aləti istənilən dildə işləyir, ona görə də dünyanın hər yerində banklar və platformalar üçün API-yə çevrilə bilər. [klik] Dünyada insanlar hər il dələduzlara 442 milyard dollar itirir.</aside>
+</section>
+</div>
+<p id="count"></p>
+<script>
+(() => {
+  const stage = document.getElementById('stage');
+  const slides = [...stage.querySelectorAll(':scope > section')];
+  const LINK = "<svg viewBox=\"0 0 24 24\" width=\"100%\" height=\"100%\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1\"/><path d=\"M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1\"/></svg>", PLAY = "<svg viewBox=\"0 0 24 24\" width=\"100%\" height=\"100%\" fill=\"currentColor\"><path d=\"M8 5v14l11-7z\"/></svg>";
+  document.querySelectorAll('x-icon').forEach(el => {
+    const n = el.getAttribute('name');
+    if (n === 'Link') el.innerHTML = LINK; else if (n === 'Play') el.innerHTML = PLAY;
+  });
+  // Clip frames become real videos, started by a click.
+  document.querySelectorAll('img[data-video]').forEach(img => {
+    const v = document.createElement('video');
+    v.className = 'deck-video ' + img.className;
+    v.setAttribute('style', img.getAttribute('style') || '');
+    v.src = img.dataset.video; v.poster = img.getAttribute('src');
+    v.preload = 'auto'; v.playsInline = true;
+    v.muted = img.dataset.videoSound !== 'on';
+    v.dataset.start = img.dataset.videoStart || 'slide';
+    v.addEventListener('click', e => { e.stopPropagation(); v.paused ? v.play() : v.pause(); });
+    img.replaceWith(v);
+  });
+  // Fragment steps per slide: sorted by data-fragment-index, then document order.
+  const steps = slides.map(s => {
+    const frs = [...s.querySelectorAll('.fragment')];
+    const groups = new Map(); let auto = 1000;
+    frs.forEach((f, i) => {
+      const k = f.dataset.fragmentIndex !== undefined ? +f.dataset.fragmentIndex : auto + i;
+      if (!groups.has(k)) groups.set(k, []);
+      groups.get(k).push(f);
+    });
+    return [...groups.keys()].sort((a, b) => a - b).map(k => groups.get(k));
+  });
+  let cur = 0, step = 0;
+  const fit = () => {
+    const k = Math.min(innerWidth / 1920, innerHeight / 1080);
+    stage.style.transform = `scale(${k}) translate(-50%, -50%)`;
+  };
+  const paint = () => {
+    steps[cur].forEach((g, i) => g.forEach(f => {
+      f.classList.toggle('visible', i < step);
+      f.classList.toggle('current-fragment', i === step - 1);
+    }));
+  };
+  const show = (n, atEnd) => {
+    slides[cur].querySelectorAll('video').forEach(v => v.pause());
+    slides[cur].classList.remove('active');
+    cur = Math.max(0, Math.min(slides.length - 1, n));
+    step = atEnd ? steps[cur].length : 0;
+    const s = slides[cur];
+    s.classList.add('active');
+    paint();
+    s.querySelectorAll('video').forEach(v => { v.currentTime = 0; if (v.dataset.start !== 'click') v.play(); });
+    document.getElementById('count').textContent = (cur + 1) + ' / ' + slides.length;
+    history.replaceState(null, '', '#' + (cur + 1));
+  };
+  const next = () => { if (step < steps[cur].length) { step++; paint(); } else if (cur < slides.length - 1) show(cur + 1); };
+  const prev = () => { if (step > 0) { step--; paint(); } else if (cur > 0) show(cur - 1, true); };
+  addEventListener('keydown', e => {
+    if (['ArrowRight', 'ArrowDown', ' ', 'PageDown', 'Enter'].includes(e.key)) { e.preventDefault(); next(); }
+    else if (['ArrowLeft', 'ArrowUp', 'PageUp', 'Backspace'].includes(e.key)) { e.preventDefault(); prev(); }
+    else if (e.key === 'Home') show(0);
+    else if (e.key === 'End') show(slides.length - 1);
+    else if (e.key === 'f' || e.key === 'F') { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen(); }
+  });
+  addEventListener('click', next);
+  addEventListener('resize', fit);
+  addEventListener('hashchange', () => show((parseInt(location.hash.slice(1), 10) || 1) - 1));
+  fit();
+  show(Math.max(0, (parseInt(location.hash.slice(1), 10) || 1) - 1));
+})();
+</script>
+</body>
+</html>

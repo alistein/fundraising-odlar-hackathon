@@ -327,3 +327,6 @@ Append-only. Format: `## [YYYY-MM-DD] ingest|query|decision|lint | Title`.
 
 ## [2026-11-18] decision | Roadmap: Kazakhstan case line
 - Central Asia step on the roadmap now carries one red fact line: Shymkent 2024, fake page, ~6,000 transfers, 32M tenge (Tengrinews, Sep 2024; see market-global).
+
+## [2026-11-18] decision | Backup pitch player in the product repo
+- presentation/pitch-deck/build-player.py builds product/public/pitch/index.html: one slide at a time, fragments, animations, demo video with sound, F for fullscreen. Served at /pitch/index.html after deploy; also opens offline from disk. Tested locally.
