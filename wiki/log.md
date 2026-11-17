@@ -236,3 +236,4 @@ Append-only. Format: `## [YYYY-MM-DD] ingest|query|decision|lint | Title`.
 
 ## [2026-11-17] decision | Mascot eyes follow the caret
 - On the home checker, the big mascot's eyes track the caret while the link input is focused (down toward the input, left/right with the caret); they return to centre on blur and scan while checking. `Mascot` gained a `gaze` prop; transform only.
+- Follow-up: the file button got a green (`--primary`) border and icon so it reads as a control next to the filled search button.
