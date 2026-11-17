@@ -22,7 +22,8 @@ Changed 2026-11-17: myGov replaces clinic confirmation; clinic reports are an op
 
 | # | Step | What happens | Threat addressed |
 |---|---|---|---|
-| 1 | Organiser registers the campaign | Story, patient, clinic named, one declared card; gets a public SF code | Fake campaign |
+| 1 | Organiser registers the campaign | Creator wizard `/campaigns/new` (no login, mock demo organiser): story, patient, clinic named, one declared card; gets a public SF code | Fake campaign |
+| 1b | Documents + AI gate | Organiser uploads medical documents (forgery check on upload), then the AI gate checks: documents present and clean, story not cloned, card not reused or seen in scams, pressure tactics (when the model is on). Fail stops the campaign | Fake campaign, forged documents |
 | 2 | MyGov gate | Organiser confirms identity through the mock myGov consent screen (FIN + name); the campaign goes live | Fake campaign |
 | 3 | Documents are checked | Uploaded certificates and invoices tested for editing, reuse and AI generation | Forged documents |
 | 4 | Donations go to the clinic | Money routed to the clinic's account, never a personal card | Diverted funds |

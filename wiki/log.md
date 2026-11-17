@@ -237,3 +237,13 @@ Append-only. Format: `## [YYYY-MM-DD] ingest|query|decision|lint | Title`.
 ## [2026-11-17] decision | Mascot eyes follow the caret
 - On the home checker, the big mascot's eyes track the caret while the link input is focused (down toward the input, left/right with the caret); they return to centre on blur and scan while checking. `Mascot` gained a `gaze` prop; transform only.
 - Follow-up: the file button got a green (`--primary`) border and icon so it reads as a control next to the filled search button.
+
+## [2026-11-17] decision | Core is the platform; campaign creator built
+- Decision: core business = campaigns created on Safefund; the link checker is a free extra tool for posts elsewhere. Recorded in decisions; notes added to product-overview and roadmap.
+- Creator wizard at `/campaigns/new` (header button "Kampaniya yarat"): 1 details → 2 medical documents (forgery check on upload) → 3 AI gate (`POST /api/campaigns/[id]/ai-gate`, `lib/gate.ts`) → 4 MyGov consent → live. Resumes from `?kampaniya=<id>`.
+- AI gate fails on: no documents, flagged document, story cloned from another campaign, card declared elsewhere or seen in scam appeals; warns on pressure tactics or implausible claims when the model is on (no key locally, so rules only).
+- MyGov opens only after the AI gate (API, `/mygov` page and campaign button). Creation works without login as the seeded demo organiser (mock auth).
+- New columns `campaigns.ai_status`, `ai_signals`, `ai_checked_at`; seed marks demo campaigns as AI-passed. Live DB push + reseed pending approval.
+- Live DB pushed and reseeded. Full creator flow verified in the browser: details → clean invoice → AI gate pass → MyGov (`3QW9L4T` / Rəşad Hüseynov) → live with AI and MyGov badges. Gate also verified to fail on no documents and on a copied story; MyGov refuses before the AI gate.
+- Decision (same day): the creator does **not** collect a card number; payouts go through Safefund. Card field removed from the form and API.
+- Three test campaigns (Kamal ×2, Səbinə) remain on the live DB until the next reseed.

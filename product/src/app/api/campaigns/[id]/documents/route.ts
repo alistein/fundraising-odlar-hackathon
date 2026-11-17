@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm";
 import { db, schema } from "@/db";
 import { handler } from "@/lib/api";
-import { HttpError, requireRole } from "@/lib/auth";
+import { HttpError, organiserOrDemo } from "@/lib/auth";
 import { compareWithCampaign, fileSignals, readFile } from "@/lib/checker/ai";
 import { inspectDocument } from "@/lib/checker/document";
 import { analyseImage } from "@/lib/checker/forensics";
@@ -15,13 +15,15 @@ const MAX_BYTES = 5 * 1024 * 1024;
 // tamper signals, encrypted, and only the ciphertext is stored.
 export const POST = handler(
   async (req: Request, ctx: RouteContext<"/api/campaigns/[id]/documents">) => {
-    const user = await requireRole("organiser");
+    const user = await organiserOrDemo();
     const { id } = await ctx.params;
 
     const [campaign] = await db.select().from(schema.campaigns).where(eq(schema.campaigns.id, id));
     if (!campaign) throw new HttpError(404, "Kampaniya tapılmadı");
     if (campaign.organiserId !== user.id)
       throw new HttpError(403, "Bu kampaniya sizə aid deyil");
+    if (campaign.status !== "pending" || campaign.aiCheckedAt)
+      throw new HttpError(409, "Sənədlər AI yoxlamasından əvvəl yüklənir");
 
     const file = (await req.formData()).get("file");
     if (!(file instanceof File)) throw new HttpError(400, "Fayl seçilməyib");

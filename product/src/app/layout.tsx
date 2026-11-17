@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist_Mono, Nunito_Sans } from "next/font/google";
 import Link from "next/link";
+import { Add01Icon } from "@hugeicons/core-free-icons";
+import { Icon } from "@/components/icon";
 import { Mascot } from "@/components/mascot";
 import { Button } from "@/components/ui/button";
 import { Toaster } from "@/components/ui/sonner";
@@ -38,7 +40,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               <Mascot size={34} listen />
               <span className="max-sm:hidden">safefund</span>
             </Link>
-            <div />
+            <div className="flex justify-end">
+              <Button asChild size="sm">
+                <Link href="/campaigns/new">
+                  <Icon icon={Add01Icon} size={16} />
+                  <span className="max-sm:hidden">Kampaniya yarat</span>
+                </Link>
+              </Button>
+            </div>
           </div>
         </header>
         <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-10 sm:px-6 sm:py-14">{children}</main>

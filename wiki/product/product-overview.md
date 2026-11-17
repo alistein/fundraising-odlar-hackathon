@@ -2,6 +2,8 @@
 
 An AI scam and forgery detector for donation appeals in Azerbaijan, backed by a registry of clinic-verified campaigns.
 
+> **2026-11-17 (later):** core business is campaigns created on Safefund (creator: details → documents → AI gate → myGov gate → live). The checker is a free extra tool for posts on other platforms. → [[decisions]]
+
 > **Pivot, 2026-11-17:** the scam checker is now the product; the verified-campaign platform is the ground truth behind it. Before the pivot the platform was the product and the checker a side page. Reason and details: [[decisions]].
 
 **In one sentence:** paste any "help this child" post, link, card number or document and learn in seconds whether it is a clinic-verified campaign, a clone or a forgery — because real campaigns are confirmed by the clinic, paid straight to the clinic, and recorded on a public ledger.

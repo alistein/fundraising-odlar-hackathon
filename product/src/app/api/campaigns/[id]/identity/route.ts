@@ -29,6 +29,9 @@ export const POST = handler(
     if (!campaign) throw new HttpError(404, "Kampaniya tapılmadı");
     if (campaign.status === "rejected") throw new HttpError(409, "Kampaniya rədd edilib");
     if (campaign.identityVerifiedAt) throw new HttpError(409, "Şəxsiyyət artıq təsdiqlənib");
+    // Gate 2 opens only after gate 1.
+    if (campaign.aiStatus !== "pass" && campaign.aiStatus !== "warn")
+      throw new HttpError(409, "Əvvəlcə AI yoxlamasından keçin");
 
     const result = lookupFin(body.fin, body.firstName, body.lastName);
     if (result.outcome !== "found") throw new HttpError(422, REFUSED[result.outcome]);

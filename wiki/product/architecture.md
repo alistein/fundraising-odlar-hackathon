@@ -47,6 +47,7 @@ Stack, code layout and API surface of the MVP in `product/`. Scaffolded 2026-11-
 | `GET /api/ledger/verify` | public | Working |
 | `GET /api/stats` | public | Working |
 | `POST /api/mock/mygov` | public, mock | Working |
+| `POST /api/campaigns/[id]/ai-gate` | public (mock demo organiser) | Working |
 | `POST /api/campaigns/[id]/report` | public (clinic report, unconfirmed until we email the clinic) | Working |
 | `POST /api/campaigns/[id]/identity` | public (auth mocked) | Working |
 | `POST /api/campaigns/[id]/documents` | the campaign's organiser | Working (branch `checker`) — forgery signals, reuse check, AES-256-GCM, ciphertext stored |

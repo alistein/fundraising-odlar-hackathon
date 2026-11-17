@@ -23,6 +23,17 @@ export class HttpError extends Error {
   }
 }
 
+// MOCK: campaigns are created without logging in. A visitor acts as the seeded
+// demo organiser unless a session says otherwise.
+export const DEMO_ORGANISER_ID = "org-1";
+export async function organiserOrDemo(): Promise<User> {
+  const user = await getSession();
+  if (user?.role === "organiser") return user;
+  const [demo] = await db.select().from(schema.users).where(eq(schema.users.id, DEMO_ORGANISER_ID));
+  if (!demo) throw new HttpError(500, "Demo təşkilatçı tapılmadı");
+  return demo;
+}
+
 export async function requireRole(...roles: User["role"][]): Promise<User> {
   const user = await getSession();
   if (!user) throw new HttpError(401, "Daxil olmamısınız");

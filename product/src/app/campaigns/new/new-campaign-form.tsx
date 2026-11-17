@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 import { setMascotMood } from "@/components/mascot";
@@ -25,8 +24,13 @@ function Field({ label, id, children }: { label: string; id: string; children: R
   );
 }
 
-export function NewCampaignForm({ clinics }: { clinics: { id: string; name: string }[] }) {
-  const router = useRouter();
+export function NewCampaignForm({
+  clinics,
+  onCreated,
+}: {
+  clinics: { id: string; name: string }[];
+  onCreated: (id: string) => void;
+}) {
   const [busy, setBusy] = useState(false);
   const [clinicId, setClinicId] = useState(clinics[0]?.id ?? "");
 
@@ -45,7 +49,6 @@ export function NewCampaignForm({ clinics }: { clinics: { id: string; name: stri
         diagnosis: f.get("diagnosis"),
         targetAzn: Number(f.get("targetAzn")),
         clinicId,
-        declaredCard: f.get("declaredCard") || undefined,
       }),
     });
     const data = await res.json();
@@ -56,9 +59,8 @@ export function NewCampaignForm({ clinics }: { clinics: { id: string; name: stri
       return;
     }
     setMascotMood("happy");
-    toast.success("Klinikaya göndərildi");
-    router.push(`/campaigns/${data.campaign.id}`);
-    router.refresh();
+    toast.success("Kampaniya yaradıldı");
+    onCreated(data.campaign.id);
   }
 
   return (
@@ -99,18 +101,8 @@ export function NewCampaignForm({ clinics }: { clinics: { id: string; name: stri
           </Select>
         </Field>
       </div>
-      <Field label="Kart nömrəsi" id="declaredCard">
-        <Input
-          id="declaredCard"
-          name="declaredCard"
-          inputMode="numeric"
-          autoComplete="off"
-          pattern="[0-9 ]{16,19}"
-          placeholder="0000 0000 0000 0000"
-        />
-      </Field>
       <Button size="lg" disabled={busy} className="mt-3 w-full">
-        Təsdiqə göndər
+        Davam et
       </Button>
     </form>
   );

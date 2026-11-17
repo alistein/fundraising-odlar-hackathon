@@ -5,6 +5,7 @@ import {
   Hospital01Icon,
   HourglassIcon,
   IdentityCardIcon,
+  Robot01Icon,
 } from "@hugeicons/core-free-icons";
 import { desc, eq } from "drizzle-orm";
 import Link from "next/link";
@@ -67,6 +68,12 @@ export default async function CampaignPage({ params }: PageProps<"/campaigns/[id
       <article className="min-w-0">
         <div className="flex items-center gap-2">
           <StatusBadge status={c.status} />
+          {(c.aiStatus === "pass" || c.aiStatus === "warn") && (
+            <Badge variant="verified">
+              <Icon icon={Robot01Icon} size={14} />
+              AI
+            </Badge>
+          )}
           {c.identityVerifiedAt && (
             <Badge variant="verified">
               <Icon icon={IdentityCardIcon} size={14} />
@@ -171,12 +178,19 @@ export default async function CampaignPage({ params }: PageProps<"/campaigns/[id
               MyGov təsdiqi gözlənilir
             </p>
           )}
-          {!c.identityVerifiedAt && c.status !== "rejected" && (
+          {c.status === "pending" && (
             <Button asChild variant="outline" size="lg" className="mt-3 w-full">
-              <Link href={`/mygov?kampaniya=${c.id}`}>
-                <Icon icon={IdentityCardIcon} size={20} />
-                MyGov ilə təsdiqlə
-              </Link>
+              {c.aiStatus === "pass" || c.aiStatus === "warn" ? (
+                <Link href={`/mygov?kampaniya=${c.id}`}>
+                  <Icon icon={IdentityCardIcon} size={20} />
+                  MyGov ilə təsdiqlə
+                </Link>
+              ) : (
+                <Link href={`/campaigns/new?kampaniya=${c.id}`}>
+                  <Icon icon={Robot01Icon} size={20} />
+                  Yaratmağa davam et
+                </Link>
+              )}
             </Button>
           )}
           {c.status !== "rejected" && (

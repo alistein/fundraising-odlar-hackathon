@@ -30,6 +30,8 @@ async function main() {
 
   // Organiser identity confirmed through the mock MyGov (synthetic FIN of "Aysel Məmmədova", lib/mygov.ts).
   const identity = { identityVerifiedAt: new Date(), identityFinHash: finHash("5AZ7K2P") };
+  // Gate 1 (AI) passed when these demo campaigns were created.
+  const aiPassed = { aiStatus: "pass" as const, aiSignals: ["Fırıldaq əlaməti tapılmadı"], aiCheckedAt: new Date() };
 
   // Synthetic card numbers, used only as demo identifiers.
   const LEYLA_CARD = "4169738812345678";
@@ -50,6 +52,7 @@ async function main() {
       clinicId: "clinic-1",
       status: "verified",
       ...identity,
+      ...aiPassed,
       confirmedCostQepik: 2_500_000,
       confirmedAt: new Date(),
     },
@@ -67,6 +70,7 @@ async function main() {
       clinicId: "clinic-1",
       status: "verified",
       ...identity,
+      ...aiPassed,
       confirmedCostQepik: 3_200_000,
       confirmedAt: new Date(),
     },
@@ -84,6 +88,7 @@ async function main() {
       clinicId: "clinic-2",
       status: "verified",
       ...identity,
+      ...aiPassed,
       confirmedCostQepik: 4_000_000,
       confirmedAt: new Date(),
       closedAt: new Date(),
@@ -101,6 +106,7 @@ async function main() {
       organiserId: "org-1",
       clinicId: "clinic-2",
       status: "pending",
+      ...aiPassed,
       declaredRouteHash: routeHash(LEYLA_CARD),
       declaredRouteLast4: LEYLA_CARD.slice(-4),
     },

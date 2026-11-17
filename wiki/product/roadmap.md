@@ -1,5 +1,7 @@
 # Roadmap
 
+> **2026-11-17 (later):** the core is now the **Platform** — campaigns created on Safefund through AI gate → myGov gate. The link checker (Tool) is a free extra for posts elsewhere. The stage table below predates this; see [[decisions]].
+
 Safefund in two stages, Tool and then Platform, followed by identity checks (FIN code / myGov) and, last, clinic verification. Decided 2026-11-17 ([[decisions]]).
 
 ## Stages
