@@ -4,9 +4,6 @@ import Link from "next/link";
 import { Mascot } from "@/components/mascot";
 import { Button } from "@/components/ui/button";
 import { Toaster } from "@/components/ui/sonner";
-import { UserMenu } from "@/components/user-menu";
-import { db, schema } from "@/db";
-import { getSession } from "@/lib/auth";
 import "./globals.css";
 
 // Brand face: warm, rounded humanist sans (open-licence stand-in for GoFundMe Sans).
@@ -23,12 +20,7 @@ export const metadata: Metadata = {
   description: "Klinika tərəfindən təsdiqlənmiş tibbi ianə kampaniyaları",
 };
 
-export default async function RootLayout({ children }: LayoutProps<"/">) {
-  const [user, users] = await Promise.all([
-    getSession(),
-    db.select({ id: schema.users.id, name: schema.users.name }).from(schema.users),
-  ]);
-
+export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="az" className={`${nunito.variable} ${geistMono.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
@@ -46,19 +38,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
               <Mascot size={34} listen />
               <span className="max-sm:hidden">safefund</span>
             </Link>
-            <div className="flex items-center justify-end gap-2">
-              {user?.role === "organiser" && (
-                <Button asChild variant="outline" size="sm" className="max-sm:hidden">
-                  <Link href="/campaigns/new">Kampaniya yarat</Link>
-                </Button>
-              )}
-              {user?.role === "clinic" && (
-                <Button asChild variant="outline" size="sm" className="max-sm:hidden">
-                  <Link href="/clinic">Təsdiq gözləyənlər</Link>
-                </Button>
-              )}
-              <UserMenu users={users} current={user ? { id: user.id, name: user.name } : null} />
-            </div>
+            <div />
           </div>
         </header>
         <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-10 sm:px-6 sm:py-14">{children}</main>
