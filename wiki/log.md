@@ -264,3 +264,9 @@ Append-only. Format: `## [YYYY-MM-DD] ingest|query|decision|lint | Title`.
 - Steps are stored in `campaigns.ai_signals` (no schema change). Rows from before steps existed re-run the gate.
 - Follow-up: the creator's step indicator has connector lines between the circles; each fills green (left to right) as the step before it completes.
 - Follow-up: header buttons use the standard button size (h-10, px-5) instead of the small one; on phones "Kampaniya yarat" is a round 40px "+" button.
+
+## [2026-11-17] decision | MyGov consent: simulated steps and success modal
+- After "Razıyam, təsdiqlə" the consent screen plays four simulated MyGov steps: secure connection → identity card found (FIN masked to the last 2 characters) → name check → confirmation sent to Safefund (the only real call). A failure marks the step red with a retry button.
+- Success opens a modal "MyGov tərəfindən təsdiqləndi" with the happy mascot, the campaign title and "Kampaniya canlıdır" (or "AI nəticəsi yoxlanılır" when the AI gate failed); "Kampaniyaya keç" goes to the campaign.
+- shadcn Dialog added and aligned to the tokens (Hugeicons close icon, foreground scrim). Identity API now also returns `live`.
+- Tested on Leyla (SF-3307), which is now confirmed until the next reseed.

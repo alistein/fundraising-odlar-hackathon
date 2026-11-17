@@ -29,7 +29,7 @@ export const POST = handler(
     // Mock: any FIN and name are confirmed.
     lookupFin(body.fin, body.firstName, body.lastName);
 
-    await db
+    const [updated] = await db
       .update(schema.campaigns)
       .set({
         identityVerifiedAt: new Date(),
@@ -39,7 +39,8 @@ export const POST = handler(
           ? { status: "verified" as const, confirmedAt: new Date() }
           : {}),
       })
-      .where(eq(schema.campaigns.id, id));
-    return Response.json({ verified: true });
+      .where(eq(schema.campaigns.id, id))
+      .returning({ status: schema.campaigns.status });
+    return Response.json({ verified: true, live: updated?.status === "verified" });
   },
 );
