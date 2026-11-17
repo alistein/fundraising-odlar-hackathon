@@ -223,3 +223,6 @@ Append-only. Format: `## [YYYY-MM-DD] ingest|query|decision|lint | Title`.
 - New `clinic_reports` table and `POST /api/campaigns/[id]/report`; "Klinika olaraq bildir" form on campaign pages (clinic, own email, reason).
 - Live DB pushed and reseeded: SF-2210 carries a confirmed report from Demo Mərkəzi Klinika (score 0). SF-4821 95; Leyla card 40 before myGov, 95 after.
 - Updated product-flow, scam-checker, architecture, jury-qa. Deck, pitch, business-model still argue for clinic verification: listed in open-questions.
+
+## [2026-11-17] decision | Recent campaigns on the home page
+- Home page order: checker → categories → "Son kampaniyalar" (newest 6, blocked campaigns left out) with a "Hamısı" link to `/campaigns`. Campaign card shared via `components/campaign-grid.tsx`.
