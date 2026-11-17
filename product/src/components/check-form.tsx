@@ -26,6 +26,7 @@ import { Mascot, type MascotMood, type MascotTone, setMascotMood } from "@/compo
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import type { CheckEvent, Report, Step, StepId, StepStatus, Tone } from "@/lib/checker/pipeline";
 import { cn } from "@/lib/utils";
 
@@ -55,6 +56,10 @@ const TONE: Record<Tone, { face: MascotTone; mood: MascotMood; notify: (m: strin
   warn: { face: "warning", mood: "alert", notify: toast.warning },
   danger: { face: "danger", mood: "alert", notify: toast.error },
 };
+
+// Lift on hover, press in on pointer-down; transform only, off under reduced motion.
+const ICON_BUTTON =
+  "size-14 shrink-0 rounded-full shadow-medium transition-[transform,box-shadow] duration-200 ease-(--ease-default) hover:-translate-y-0.5 hover:shadow-strong active:translate-y-0 active:scale-95 active:duration-100 disabled:translate-y-0 motion-reduce:transition-none motion-reduce:hover:translate-y-0";
 
 // Only links are checked from the box; codes and card numbers are not entered by hand.
 function isLink(value: string): boolean {
@@ -158,50 +163,66 @@ export function CheckForm() {
     <div className="flex flex-col items-center gap-8">
       <Mascot size={112} listen mood={busy ? "thinking" : "idle"} />
       <h1 className="display text-4xl sm:text-6xl">Elanı yoxla</h1>
-      <form
-        onSubmit={submit}
-        className="flex w-full items-center gap-2 rounded-full border border-input bg-background p-2 shadow-medium transition-[border-color,box-shadow] duration-150 focus-within:border-ring focus-within:ring-3 focus-within:ring-ring/20"
-      >
-        <input
-          type="text"
-          inputMode="url"
-          value={q}
-          onChange={(e) => setQ(e.target.value)}
-          aria-label="Elanın linki"
-          placeholder="Elanın linki"
-          spellCheck={false}
-          autoComplete="off"
-          className="h-12 min-w-0 flex-1 bg-transparent pl-4 text-lg outline-none placeholder:text-muted-foreground"
-        />
-        <Button
-          size="icon"
-          aria-label="Yoxla"
-          disabled={busy || !isLink(q)}
-          className="size-12 shrink-0 rounded-full"
-        >
-          <Icon icon={Search01Icon} size={22} />
-        </Button>
-        <input
-          ref={fileInput}
-          type="file"
-          accept="application/pdf,image/jpeg,image/png"
-          onChange={checkFile}
-          className="sr-only"
-          tabIndex={-1}
-          aria-hidden
-        />
-        <Button
-          type="button"
-          variant="outline"
-          size="icon"
-          aria-label="Şəkil və ya sənəd"
-          disabled={busy}
-          onClick={() => fileInput.current?.click()}
-          className="size-12 shrink-0 rounded-full"
-        >
-          <Icon icon={File01Icon} size={22} />
-        </Button>
-      </form>
+      <TooltipProvider delayDuration={250}>
+        <form onSubmit={submit} className="flex w-full items-center gap-2 sm:gap-3">
+          <input
+            type="text"
+            inputMode="url"
+            value={q}
+            onChange={(e) => setQ(e.target.value)}
+            aria-label="Elanın linki"
+            placeholder="Elanın linki"
+            spellCheck={false}
+            autoComplete="off"
+            className="h-14 min-w-0 flex-1 rounded-full border border-input bg-background px-6 text-lg shadow-medium outline-none transition-[border-color,box-shadow] duration-150 placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/20"
+          />
+          <Tooltip>
+            {/* Wrapped so the tooltip still shows while the button is disabled. */}
+            <TooltipTrigger asChild>
+              <span className="inline-flex shrink-0 rounded-full">
+                <Button
+                  size="icon"
+                  aria-label="Yoxla"
+                  disabled={busy || !isLink(q)}
+                  className={ICON_BUTTON}
+                >
+                  <Icon icon={Search01Icon} size={22} />
+                </Button>
+              </span>
+            </TooltipTrigger>
+            <TooltipContent side="bottom" sideOffset={8}>
+              Yoxla
+            </TooltipContent>
+          </Tooltip>
+          <input
+            ref={fileInput}
+            type="file"
+            accept="application/pdf,image/jpeg,image/png"
+            onChange={checkFile}
+            className="sr-only"
+            tabIndex={-1}
+            aria-hidden
+          />
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                type="button"
+                variant="outline"
+                size="icon"
+                aria-label="Şəkil və ya sənəd"
+                disabled={busy}
+                onClick={() => fileInput.current?.click()}
+                className={ICON_BUTTON}
+              >
+                <Icon icon={File01Icon} size={22} />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="bottom" sideOffset={8}>
+              Şəkil və ya sənəd
+            </TooltipContent>
+          </Tooltip>
+        </form>
+      </TooltipProvider>
 
       {started && (
         <section

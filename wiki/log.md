@@ -230,3 +230,6 @@ Append-only. Format: `## [YYYY-MM-DD] ingest|query|decision|lint | Title`.
 ## [2026-11-17] decision | Checker input is link-only
 - Home checker: one pill row — link input, search icon button, file icon button. Codes and card numbers are no longer typed into the box (team: they can't be detected from a post link). Search stays disabled until the text is a link. Files still go through the file button.
 - The API still accepts any text; the link fetch itself is SAFEFUN-6 (Emil).
+
+## [2026-11-17] decision | Checker buttons outside the input, with tooltips
+- Link input is its own pill; search and file are separate round icon buttons beside it, lifting on hover and pressing in on pointer-down (transform only, off under reduced motion). shadcn Tooltip added: "Yoxla", "Şəkil və ya sənəd" (shows on the disabled search button too).
